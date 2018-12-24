@@ -92,7 +92,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        dd($book);
     }
 
     /**
@@ -168,7 +168,7 @@ class BookController extends Controller
     {
         //dd($book);
         $book->delete();
-        return 'S-a sters';
-        //return redirect()->route('books.index');
+        return response('S-a sters', 200)
+            ->header('Content-Type', 'text/plain');
     }
 }

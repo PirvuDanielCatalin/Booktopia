@@ -1,0 +1,14 @@
+.panel {
+    display: inline-block;
+    width: 46.8%;
+    padding: 4rem;
+    margin: 1rem;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none !important;
+    color: black;
+}
+.panel:hover {
+    border: 1px solid #656565;
+    color: black;
+}

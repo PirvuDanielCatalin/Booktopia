@@ -4,12 +4,12 @@
     @include('layouts._head')
 </head>
 <body>
-    <div id="app">
-        @include('layouts._navbar')
+<div id="app">
+    @include('layouts._navbar')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>
