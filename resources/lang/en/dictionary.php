@@ -7,7 +7,8 @@ return [
     'actions' => [
         'show' => 'Show',
         'edit' => 'Edit',
-        'delete' => 'Delete'
+        'delete' => 'Delete',
+        'checkout' => 'Checkout',
     ],
     'control-panel' => [
         'users' => 'Manage users',
@@ -21,9 +22,19 @@ return [
         'description' => 'Description',
         'photo' => 'Photo',
         'price' => 'Price',
+        'quantity' => 'Quantity',
         'actions' => [
-            'add' => 'Add a new book'
+            'add' => 'Add a new book',
+            'add-to-cart' => 'Add to cart',
+            'see-details' => 'See details'
+        ]
+    ],
+    'user' => [
+        'name' => 'Name',
+        'email' => 'Email',
+        'role' => 'Role',
+        'actions' => [
+            'update-users-roles' => 'Update users roles'
         ],
     ],
-
 ];

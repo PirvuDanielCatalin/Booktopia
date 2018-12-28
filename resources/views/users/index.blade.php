@@ -14,7 +14,52 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-
+                        <div class="alert alert-success"></div>
+                        <div class="pb-3">
+                            <div class="text-left col-md-4 d-inline-block">
+                                <div class="input-group search-bar-div">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-success d-inline-block update-users-roles-btn">
+                                @lang('dictionary.user.actions.update-users-roles')
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="tbl-user-id">ID:</th>
+                                    <th class="tbl-user-name">@lang('dictionary.user.name')</th>
+                                    <th class="tbl-user-email">@lang('dictionary.user.email')</th>
+                                    <th class="tbl-user-roles">@lang('dictionary.user.role')</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($users as $user)
+                                    <tr class="tbl-user-info">
+                                        <td class="tbl-user-id">{{ $user->id }}</td>
+                                        <td class="tbl-user-name">{{ $user->name }}</td>
+                                        <td class="tbl-user-email">{{ $user->email }}</td>
+                                        <td class="tbl-user-roles">
+                                            <select class="form-control" id="roleSelect">
+                                                @foreach($roles as $role)
+                                                    <option value="{{ $role->id }}" {{ ($role->id == $users_roles[$user->id]->id) ? 'selected' : '' }}>
+                                                        {{ $role->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

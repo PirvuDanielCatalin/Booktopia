@@ -11,6 +11,11 @@ use Session;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'])->except('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,6 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::paginate(10);
-        //dd($books);
         return view('books.index', ['books' => $books]);
     }
 
@@ -79,7 +83,7 @@ class BookController extends Controller
 
             $book->price = $request->price;
             $book->save();
-            Session::flash('succes', 'Cartea a fost salvată cu succes!');
+            Session::flash('succes', 'The book was successfully created!');
             return redirect()->route('books.index');
         }
     }
@@ -92,7 +96,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        dd($book);
+        return view('books.show', ['book' => $book]);
     }
 
     /**
@@ -153,7 +157,7 @@ class BookController extends Controller
 
             $book->price = $request->price;
             $book->save();
-            Session::flash('succes', 'Cartea a fost modificată cu succes!');
+            Session::flash('succes', 'The book was successfully updated!!');
             return redirect()->route('books.index');
         }
     }
@@ -166,9 +170,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //dd($book);
         $book->delete();
-        return response('S-a sters', 200)
+        return response('The book was deleted!', 200)
             ->header('Content-Type', 'text/plain');
     }
 }

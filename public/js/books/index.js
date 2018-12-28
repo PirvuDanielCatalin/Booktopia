@@ -12,11 +12,9 @@ $(function () {
             success: function ($response) {
                 console.log($response);
                 window.location.replace("/books/create");
-                //$('.success-msg').show().delay(2000).hide(500);
             },
             error: function () {
-                console.log('Eroare la stergere');
-                //$('.error-msg').show().delay(2000).hide(500);
+                console.log('Eroare la stergere!');
             }
         });
     })

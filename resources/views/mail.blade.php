@@ -8,9 +8,9 @@
     <title>Booktopia Mail Format</title>
 </head>
 <body>
-    <h1>
-        <!-- Mesaj -->
-        {{ $text }}
-    </h1>
+<h1>
+    <!-- Mesaj -->
+    {{ $text }}
+</h1>
 </body>
 </html>

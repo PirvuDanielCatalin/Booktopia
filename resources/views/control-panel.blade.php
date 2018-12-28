@@ -20,11 +20,11 @@
                         <a class="card panel" href="{{ route('books.index') }}">
                             @lang('dictionary.control-panel.books')
                         </a>
-                    <!--
-                         <a class="card panel">
-                             @lang('dictionary.control-panel.categories')
-                            </a>
-                     -->
+                        <!--
+                        <a class="card panel">
+                            @lang('dictionary.control-panel.categories')
+                        </a>
+                        -->
                     </div>
                 </div>
             </div>

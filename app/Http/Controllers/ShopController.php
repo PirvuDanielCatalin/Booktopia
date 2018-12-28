@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Book;
 use Auth;
 use Mail;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'])->only(['control-panel']);
+    }
+
     public function index()
     {
-        return view('shop');
+        $books = Book::paginate(12);
+        return view('shop-products', ['books' => $books]);
     }
 
     public function control_panel()
@@ -20,13 +27,25 @@ class ShopController extends Controller
         return view('control-panel');
     }
 
+    public function shopping_cart(Request $request)
+    {
+        $session = get_object_vars(json_decode(base64_decode($request->input('session'))));
+        $products = [];
+        foreach (array_keys($session) as $product) {
+            $id = preg_replace('/\D/', '', $product); // Extract the book did from session key
+            $products[$id]['book'] = Book::find($id);
+            $products[$id]['quantity'] = intval($session[$product]);
+        }
+        //dd($products);
+        return view('shopping-cart', ['products' => $products]);
+    }
+
     public function contactemail(Request $request)
     {
-        //dd($request->all());
         $subject = (isset($request->subject)) ? $request->subject : '';
         $email = (isset($request->email)) ? $request->email : '';
         $text = (isset($request->text)) ? $request->text : '';
-        //dd($subject, $email, $text);
+
         Mail::send('mail', ['text' => $text], function ($message) use ($subject, $email) {
             $message->subject($subject)
                 ->from($email)
@@ -34,5 +53,4 @@ class ShopController extends Controller
         });
         return back();
     }
-
 }
