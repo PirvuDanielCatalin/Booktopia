@@ -1,0 +1,37 @@
+.search-bar-div {
+    margin-left: -20px;
+}
+
+.shopping-cart-div {
+    padding: 7px;
+    width: max-content;
+    float: right;
+    cursor: pointer;
+}
+
+.shopping-cart-products-nr {
+    padding: 2px;
+    position: absolute;
+    top: -6px;
+    right: 135px;
+    color: red;
+}
+
+.search-bar {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.leaflet-map-div {
+    margin: 0 20px;
+}
+
+#leaflet-map {
+    height: 250px;
+}
+
+.footer-info-div {
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+}

@@ -1,0 +1,31 @@
+.book-image {
+    height: 450px;
+    line-height: 450px;
+    text-align: center;
+}
+
+.book-info {
+    font-size: 16px;
+    padding: 1rem;
+    font-family: consolas;
+}
+
+.book-title {
+    font-size: 20px;
+}
+
+.add-product-div {
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+span {
+    font-size: 60px;
+    cursor: pointer;
+    width: min-content;
+    display: contents;
+}
+
+.star-selected {
+    color: gold;
+}

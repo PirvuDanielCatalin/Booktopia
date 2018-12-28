@@ -1,0 +1,24 @@
+.book-thumbnail-div {
+    height: 200px;;
+    line-height: 200px;
+    text-align: center;
+    border: 1px solid;
+    margin-bottom: 1rem;
+}
+
+.book-thumbnail-img {
+    width: 100%;
+}
+
+.book-price,
+.book-details-btn,
+.book-title {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.book-title {
+    padding: 1rem 0;
+    height: 75px;
+    position: relative;
+}

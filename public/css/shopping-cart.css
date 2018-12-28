@@ -1,0 +1,49 @@
+.no-products-h {
+    padding: 1rem;
+}
+
+.no-products-redirect {
+    text-decoration: none;
+    color: black;
+}
+
+.tbl-book-id {
+    width: 5%;
+}
+
+.tbl-book-title {
+    width: 35%;
+}
+
+.tbl-book-price {
+    width: 15%;
+}
+
+.tbl-book-quantity {
+    width: 25%;
+}
+
+.tbl-book-quantity input {
+    width: 70%;
+}
+
+.products-total-price-div {
+    width: fit-content;
+    padding: 1rem;
+    float: right;
+}
+
+.products-total-price-div * {
+    width: fit-content;
+    display: inline-block;
+    padding: 5px;
+}
+
+.products-total-price-value-div {
+    font-size: 25px;
+}
+
+.products-total-price-value {
+    font-size: 20px;
+}
+

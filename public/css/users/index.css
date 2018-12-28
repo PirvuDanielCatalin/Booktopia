@@ -1,0 +1,11 @@
+.alert {
+    display: none;
+}
+
+th, td {
+    vertical-align: middle !important;
+}
+
+.update-users-roles-btn {
+    float: right;
+}
