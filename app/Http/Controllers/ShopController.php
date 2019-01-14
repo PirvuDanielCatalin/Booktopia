@@ -8,12 +8,14 @@ use App\Models\Book;
 use Auth;
 use Mail;
 use Illuminate\Http\Request;
+use Session;
 
 class ShopController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin'])->only(['control-panel']);
+        $this->middleware('CountPeople')->except('contactemail');
     }
 
     public function index()
@@ -32,11 +34,10 @@ class ShopController extends Controller
         $session = get_object_vars(json_decode(base64_decode($request->input('session'))));
         $products = [];
         foreach (array_keys($session) as $product) {
-            $id = preg_replace('/\D/', '', $product); // Extract the book did from session key
+            $id = preg_replace('/\D/', '', $product); // Extract the book id from session key
             $products[$id]['book'] = Book::find($id);
             $products[$id]['quantity'] = intval($session[$product]);
         }
-        //dd($products);
         return view('shopping-cart', ['products' => $products]);
     }
 

@@ -62,7 +62,7 @@
                             <div class="col-md-4 leaflet-map-div">
                                 <!-- Leaflet Maps -->
                                 <div id="leaflet-map"></div>
-                            <!-- <img src="{{ public_path('images/LogoBooktopia.png') }}"> -->
+                            <!-- <img src="{{ asset("images")."/LogoBooktopia.png" }}"> -->
                             </div>
                             <div class="row col-md-4">
                                 <form class="row" action="{{ route('contact-email') }}" method="post">

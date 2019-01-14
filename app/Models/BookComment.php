@@ -8,19 +8,15 @@ class BookComment extends Model
 {
     protected $table = 'books_comments';
 
+    // BookComment(FK) M - 1 User
     public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function comment()
-    {
-        return $this->belongsTo('App\Models\Comment');
-    }
-
+    // BookComment(FK) M - 1 Book
     public function book()
     {
         return $this->belongsTo('App\Models\Book');
     }
-
 }

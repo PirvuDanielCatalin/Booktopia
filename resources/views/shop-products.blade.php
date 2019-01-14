@@ -9,11 +9,14 @@
 @endsection
 
 @section('books-content')
+{{--
+    @for($i=1;$i<101;$i++)
+--}}
     @foreach($books as $book)
         <div class="col-md-2 card book-div">
             <div class="book-title"><b>{{ $book->title }}</b></div>
             <div class="book-thumbnail-div">
-                <img src="{{ public_path('images/' . $book->photo) }}" alt="CoverPhoto" class="book-thumbnail-img">
+                <img src="{{ asset("images")."/".$book->photo }}" alt="CoverPhoto" class="book-thumbnail-img">
             </div>
             <div class="book-price"><b>@lang('dictionary.book.price'):</b> {{ $book->price }} lei</div>
             <a href="{{ route('books.show', $book) }}" class="book-details-btn">
@@ -23,6 +26,7 @@
             </a>
         </div>
     @endforeach
+ {{--   @endfor--}}
     <div class="col-md-12" style="height: 30px">
         <div class="float-right">
             {{ $books->links() }}

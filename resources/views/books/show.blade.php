@@ -12,7 +12,7 @@
     <div class="col-md-4 card">
         <div class="book-image-div card">
             <!-- Book Cover -->
-            <img src="{{ public_path('images/') . $book->photo }}" alt="CoverPhoto" class="book-image">
+            <img src="{{ asset("images")."/".$book->photo }}" alt="CoverPhoto" class="book-image">
         </div>
         <div class="rating-bar-div card text-center">
             <!-- Rating -->
@@ -46,5 +46,4 @@
         </div>
     </div>
     <div class="col-md-12"><!-- Comments --></div>
-
 @endsection

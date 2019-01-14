@@ -14,7 +14,7 @@ $(function () {
 });
 
 function configRating() {
-    $('.star').on('mouseover', function () {
+    $('.star').on('click', function () {
         $('.star').removeClass('star-selected');
         var count = $(this).attr('name');
         for (var i = 0; i < count; i++) {

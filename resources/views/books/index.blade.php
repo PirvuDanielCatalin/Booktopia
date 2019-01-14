@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('scripts')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js" defer></script>
     <script src="{{ asset('js/books/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/books/index.css') }}">
 @endsection
 
@@ -19,22 +21,18 @@
                                 {{ session('succes') }}
                             </div>
                         @endif
-                        <div class="row inside-nav">
-                            <div class="input-group search-bar-div col-md-4">
-                                <input type="text" class="form-control" placeholder="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-info" type="button"><i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="offset-md-6 col-md-2 add-book-btn">
-                                <a href="{{ route('books.create') }}">
-                                    <button class="btn btn-outline-primary">
-                                        <i class="fas fa-plus"></i> @lang('dictionary.book.actions.add')</button>
-                                </a>
-                            </div>
+                        <div class="pb-3">
+                            <button type="button" class="btn btn-outline-secondary d-inline-block exportExcel-books-btn">
+                                <i class="fas fa-file-export"></i> @lang('dictionary.book.actions.exportExcel-books')
+                            </button>
+                            {{--<button type="button" class="btn btn-outline-secondary d-inline-block exportPDF-books-btn">
+                                <i class="fas fa-file-export"></i> @lang('dictionary.book.actions.exportPDF-books')
+                            </button>--}}
+                            <button class="btn btn-outline-primary add-book-btn">
+                                <i class="fas fa-plus"></i> @lang('dictionary.book.actions.add')
+                            </button>
                         </div>
-                        <table class="table table-responsive">
+                        <table class="table table-hover" id="books-datatable">
                             <thead>
                             <tr>
                                 <th><!-- Show Button --></th>
@@ -43,7 +41,7 @@
                                 <th>@lang('dictionary.book.author')</th>
                                 <th>@lang('dictionary.book.publishing_house')</th>
                                 <th>@lang('dictionary.book.description')</th>
-                                <th>@lang('dictionary.book.photo')</th>
+                                {{--<th>@lang('dictionary.book.photo')</th>--}}
                                 <th>@lang('dictionary.book.price')</th>
                                 <th><!-- Edit Button --></th>
                                 <th><!-- Delete Button --></th>
@@ -64,8 +62,9 @@
                                     <td>{{ $book->author }}</td>
                                     <td>{{ $book->publishing_house }}</td>
                                     <td id="book-description">{{ $book->description }}</td>
-                                    <td><img class="book-thumbnail" src="{{ public_path('images/') . $book->photo }}">
-                                    </td>
+                                    {{--<td>
+                                        <img class="book-thumbnail" src="{{ asset("images")."/".$book->photo }}">
+                                    </td>--}}
                                     <td>{{ $book->price }}</td>
                                     <td>
                                         <a href="{{ route('books.edit', $book) }}">
@@ -85,9 +84,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <div style="float: right">
-                            {{ $books->links() }}
-                        </div>
                     </div>
                     <div class="modal fade" id="deleteBookModal" tabindex="-1" role="dialog"
                          aria-labelledby="deleteBookModalLabel" aria-hidden="true">

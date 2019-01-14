@@ -1,4 +1,16 @@
 $(function () {
+    $('#books-datatable').DataTable();
+
+    $('.exportExcel-books-btn').on('click', function () {
+        window.location = '/books/exportExcel';
+    });
+    $('.exportPDF-books-btn').on('click', function () {
+        window.location = '/books/exportPDF';
+    });
+    $('.add-book-btn').on('click', function () {
+        window.location = '/books/create';
+    });
+
     $('.modal-openner').on('click', function () {
         $('#confirmDeleteBook').attr('book-id', $(this).attr('book-id'))
     });
@@ -11,7 +23,7 @@ $(function () {
             url: "/books/" + bookId,
             success: function ($response) {
                 console.log($response);
-                window.location.replace("/books/create");
+                window.location.replace("/books");
             },
             error: function () {
                 console.log('Eroare la stergere!');

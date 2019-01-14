@@ -1,6 +1,11 @@
 $(function () {
     setTotalPrice();
 
+    $('.products-total-price-checkout-btn').on('click',function () {
+        if($(this).attr('user-logged') == 'false')
+            window.location = '/login';
+    });
+
     $('#paymentDoneBtn').on('click', function () {
         sessionStorage.clear();
         $('.shopping-cart-div').click();

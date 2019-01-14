@@ -18,36 +18,37 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // User M - M Role ==> User 1 - M UserRole(FK)
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role','users_roles');
+        return $this->belongsToMany('App\Models\Role', 'users_roles');
     }
 
+    // User 1 - 1 Profile(FK)
     public function profile()
     {
         return $this->hasOne('App\Models\Profile');
     }
 
-    public function comments()
-    {
-        return $this->belongsToMany('App\Models\Comment','books_comments');
-    }
-
+    // User 1 - M BookComment(FK)
     public function bookcomments()
     {
         return $this->hasMany('App\Models\BookComment');
     }
 
+    // User 1 - M Buy(FK)
     public function buys()
     {
         return $this->hasMany('App\Models\Buy');
     }
 
+    // User 1 - M Rating(FK)
     public function ratings()
     {
         return $this->hasMany('App\Models\Rating');
     }
 
+    // User 1 - M Requirement(FK)
     public function requirements()
     {
         return $this->hasMany('App\Models\Requirement');
@@ -55,10 +56,24 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        foreach ($this->roles as $role){
-            if($role->name == 'Admin')
+        foreach ($this->roles as $role) {
+            if ($role->name == 'Admin')
                 return true;
         }
         return false;
+    }
+
+    public function assignRole($role_name)
+    {
+        $new_role = Role::where('name', $role_name)->first();
+        //dd($new_role);
+        // Diferit de null daca rolul (stringul primit ca parametru) este un rol existent
+        if ($new_role != null) {
+            $roles = Role::all();
+            foreach ($roles as $role)
+                $this->roles()->detach($role);
+            $this->roles()->attach($new_role);
+        }
+        return $this;
     }
 }

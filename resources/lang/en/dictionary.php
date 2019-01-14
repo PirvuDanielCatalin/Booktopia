@@ -26,7 +26,9 @@ return [
         'actions' => [
             'add' => 'Add a new book',
             'add-to-cart' => 'Add to cart',
-            'see-details' => 'See details'
+            'see-details' => 'See details',
+            'exportExcel-books' => 'Export books (XLSX)',
+            'exportPDF-books' => 'Export books (PDF)',
         ]
     ],
     'user' => [
@@ -34,7 +36,9 @@ return [
         'email' => 'Email',
         'role' => 'Role',
         'actions' => [
-            'update-users-roles' => 'Update users roles'
+            'update-users-roles' => 'Update users roles',
+            'exportExcel-users' => 'Export users (XLSX)',
+            'exportPDF-users' => 'Export users (PDF)',
         ],
     ],
 ];

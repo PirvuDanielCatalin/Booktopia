@@ -1,6 +1,16 @@
+@media (min-width: 768px) {
+    .book-div {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.29%;
+        flex: 0 0 16.29%;
+        max-width: 16.29%;
+        margin: 2px 2px;
+    }
+}
+
 .book-thumbnail-div {
     height: 200px;;
-    line-height: 200px;
+    line-height: 195px;
     text-align: center;
     border: 1px solid;
     margin-bottom: 1rem;
@@ -8,6 +18,7 @@
 
 .book-thumbnail-img {
     width: 100%;
+    height: 100%;
 }
 
 .book-price,

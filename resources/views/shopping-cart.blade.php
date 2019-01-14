@@ -9,10 +9,10 @@
 @endsection
 
 @section('books-content')
-    <div class="col-md-12 card">
+    <div class="col-md-12">
         <h3>Your shopping cart:</h3>
     </div>
-    <div class="col-md-12 card">
+    <div class="col-md-12">
         @if(empty($products))
             <h5 class="no-products-h">
                 You don't have any product in the shopping cart!<br>
@@ -55,7 +55,8 @@
                     <div class="products-total-price-value-div"><b>Total:</b></div>
                     <div class="products-total-price-value"><b></b></div>
                     <button type="button" class="btn btn-outline-secondary btn-lg products-total-price-checkout-btn"
-                            data-toggle="modal" data-target="#ToBeContinuedModal">
+                            data-toggle="modal" data-target="#ToBeContinuedModal"
+                            user-logged="{{ (Auth::user()) ? 'true' : 'false' }}">
                         <b>@lang('dictionary.actions.checkout')</b></button>
                 </div>
             </div>

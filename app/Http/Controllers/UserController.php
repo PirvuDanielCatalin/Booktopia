@@ -7,12 +7,15 @@ use App\Models\User;
 use App\Models\Role;
 use Session;
 use DB;
+use App\Exports\UsersExport;
+use Excel;
 
 class UserController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin']);
+        $this->middleware('CountPeople')->only('index');
     }
 
     public function index()
@@ -28,13 +31,19 @@ class UserController extends Controller
     public function update_roles(Request $request)
     {
         $users_roles = $request->all();
-        foreach($users_roles as $userId => $roleId) {
-            DB::table('users_roles')
-                ->where('user_id', $userId)
-                ->update(['role_id' => $roleId]);
+        foreach($users_roles as $userId => $roleName) {
+            User::find($userId)->assignRole($roleName);
         }
         return response('The users roles were successfully updated!', 200)
             ->header('Content-Type', 'text/plain');
     }
 
+    public function exportExcel()
+    {
+        return Excel::download(new UsersExport, 'Users.xlsx');
+    }
+    public function exportPDF()
+    {
+        return Excel::download(new UsersExport, 'Users.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
 }

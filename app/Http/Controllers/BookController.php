@@ -8,12 +8,16 @@ use Validator;
 use Purifier;
 use Image;
 use Session;
+use DB;
+use App\Exports\BooksExport;
+use Excel;
 
 class BookController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin'])->except('show');
+        $this->middleware('CountPeople')->only(['index','create','show','edit']);
     }
 
     /**
@@ -23,7 +27,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(10);
+        $books = Book::all();
         return view('books.index', ['books' => $books]);
     }
 
@@ -65,24 +69,26 @@ class BookController extends Controller
         if ($validator->fails()) {
             return back()->with('errors', $validator->errors());
         } else {
-            $book = new Book();
-            $book->title = $request->title;
-            $book->author = $request->author;
-            $book->publishing_house = $request->publishing_house;
-            $book->description = $request->description;
+
+            $book = Book::create([
+                'title' => $request->title,
+                'author' => $request->author,
+                'publishing_house' => $request->publishing_house,
+                'description' => $request->description,
+                'photo' => '',
+                'price' => $request->price,
+                'inShop' => 1,
+            ]);
 
             if ($request->has('photo')) {
                 $image = $request->file('photo');
-                $filename = $book->title . '.' . $image->getClientOriginalExtension();
+                $filename = $book->id . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/');
                 Image::make($image)->resize(400, 400)->save($location . $filename);
                 $book->photo = $filename;
-            } else {
-                $book->photo = '';
+                $book->save();
             }
 
-            $book->price = $request->price;
-            $book->save();
             Session::flash('succes', 'The book was successfully created!');
             return redirect()->route('books.index');
         }
@@ -139,17 +145,18 @@ class BookController extends Controller
         if ($validator->fails()) {
             return back()->with('errors', $validator->errors());
         } else {
-            $photo = $book->photo;
+
             $book->title = $request->title;
             $book->author = $request->author;
             $book->publishing_house = $request->publishing_house;
             $book->description = $request->description;
 
+            $photo = $book->photo;
             if ($request->has('photo')) {
                 if ($photo != '')
                     unlink(public_path('images/') . $photo);
                 $image = $request->file('photo');
-                $filename = $book->title . '.' . $image->getClientOriginalExtension();
+                $filename = $book->id . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/');
                 Image::make($image)->resize(400, 400)->save($location . $filename);
                 $book->photo = $filename;
@@ -157,6 +164,7 @@ class BookController extends Controller
 
             $book->price = $request->price;
             $book->save();
+
             Session::flash('succes', 'The book was successfully updated!!');
             return redirect()->route('books.index');
         }
@@ -173,5 +181,14 @@ class BookController extends Controller
         $book->delete();
         return response('The book was deleted!', 200)
             ->header('Content-Type', 'text/plain');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new BooksExport, 'Books.xlsx');
+    }
+    public function exportPDF()
+    {
+        return Excel::download(new BooksExport, 'Books.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 }

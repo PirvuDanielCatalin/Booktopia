@@ -1,4 +1,13 @@
 $(function () {
+    $('#users-datatable').DataTable();
+
+    $('.exportExcel-users-btn').on('click', function () {
+        window.location = '/users/exportExcel';
+    });
+    $('.exportPDF-users-btn').on('click', function () {
+        window.location = '/users/exportPDF';
+    });
+
     $('.update-users-roles-btn').on('click', function () {
         let $data = {};
         $('.tbl-user-info').toArray().forEach(function (info) {

@@ -15,16 +15,14 @@
                 <div class="card">
                     <div class="card-body">
                         <a class="card panel" href="{{ route('users.index') }}">
-                            @lang('dictionary.control-panel.users')
+                            <i class="fas fa-3x fa-users"></i><br>@lang('dictionary.control-panel.users')
                         </a>
                         <a class="card panel" href="{{ route('books.index') }}">
-                            @lang('dictionary.control-panel.books')
+                            <i class="fas fa-3x fa-book"></i><br>@lang('dictionary.control-panel.books')
                         </a>
-                        <!--
-                        <a class="card panel">
+                        {{--<a class="card panel">
                             @lang('dictionary.control-panel.categories')
-                        </a>
-                        -->
+                        </a>--}}
                     </div>
                 </div>
             </div>

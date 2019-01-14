@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('scripts')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js" defer></script>
     <script src="{{ asset('js/users/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/users/index.css') }}">
 @endsection
 
@@ -16,22 +18,18 @@
                     <div class="card-body">
                         <div class="alert alert-success"></div>
                         <div class="pb-3">
-                            <div class="text-left col-md-4 d-inline-block">
-                                <div class="input-group search-bar-div">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="button" class="btn btn-outline-info d-inline-block exportExcel-users-btn">
+                                <i class="fas fa-file-export"></i> @lang('dictionary.user.actions.exportExcel-users')
+                            </button>
+                            <button type="button" class="btn btn-outline-info d-inline-block exportPDF-users-btn">
+                                <i class="fas fa-file-export"></i> @lang('dictionary.user.actions.exportPDF-users')
+                            </button>
                             <button type="button" class="btn btn-outline-success d-inline-block update-users-roles-btn">
-                                @lang('dictionary.user.actions.update-users-roles')
+                                <i class="far fa-save"></i> @lang('dictionary.user.actions.update-users-roles')
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="users-datatable">
                                 <thead>
                                 <tr>
                                     <th class="tbl-user-id">ID:</th>
@@ -49,7 +47,7 @@
                                         <td class="tbl-user-roles">
                                             <select class="form-control" id="roleSelect">
                                                 @foreach($roles as $role)
-                                                    <option value="{{ $role->id }}" {{ ($role->id == $users_roles[$user->id]->id) ? 'selected' : '' }}>
+                                                    <option value="{{ $role->name }}" {{ ($role->id == $users_roles[$user->id]->id) ? 'selected' : '' }}>
                                                         {{ $role->name }}
                                                     </option>
                                                 @endforeach
