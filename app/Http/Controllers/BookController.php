@@ -17,7 +17,7 @@ class BookController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin'])->except('show');
-        $this->middleware('CountPeople')->only(['index','create','show','edit']);
+        $this->middleware('CountPeople')->only(['index', 'create', 'show', 'edit']);
     }
 
     /**
@@ -49,22 +49,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:101|unique:books,title',
-            'author' => 'required|string|max:101',
-            'publishing_house' => 'required|string|max:101',
-            'description' => 'required|string|min:30|max:2000',
-            'photo' => /*'required|*/
-                'image',
-            'price' => 'required|numeric',
-        ], [
-            'required' => '!Câmpul este obligatoriu; ',
-            'min' => '!Descrierea trebuie să conțină cel puțin :min caractere; ',
-            'max' => '!Câmpul trebuie să conțină cel mult :max caractere; ',
-            'unique' => '!Titlul este deja folosit; ',
-            'image' => '!Câmpul trebuie să fie o imagine; ',
-            'numeric' => '!Câmpul trebuie să fie un număr; ',
-        ]);
+        $validator = Validator::make($request->all(),
+            [
+                'title' => 'required|string|max:101|unique:books,title',
+                'author' => 'required|string|max:101',
+                'publishing_house' => 'required|string|max:101',
+                'description' => 'required|string|min:30|max:2000',
+                'photo' => 'image',
+                'price' => 'required|numeric|min:1',
+            ], [
+                'required' => 'The :attribute field is required! ',
+                'string' => 'The :attribute field must be a string! ',
+                'min' => [
+                    'string' => 'The :attribute field must have at least :min characters! ',
+                    'numeric' => 'The :attribute field must be at least :min! '
+                ],
+                'max' => [
+                    'string' => 'The :attribute field may not be greater than :max characters!  ',
+                ],
+                'unique' => 'The :attribute field value has already been used! ',
+                'image' => 'The :attribute field must be an image! ',
+                'numeric' => 'The :attribute field must be a number! ',
+            ]);
 
         if ($validator->fails()) {
             return back()->with('errors', $validator->errors());
@@ -132,14 +138,20 @@ class BookController extends Controller
             'description' => 'required|string|min:30|max:2000',
             'photo' => /*'required|*/
                 'image',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:1',
         ], [
-            'required' => '!Câmpul este obligatoriu; ',
-            'min' => '!Descrierea trebuie să conțină cel puțin :min caractere; ',
-            'max' => '!Câmpul trebuie să conțină cel mult :max caractere; ',
-            'unique' => '!Titlul este deja folosit; ',
-            'image' => '!Câmpul trebuie să fie o imagine; ',
-            'numeric' => '!Câmpul trebuie să fie un număr; ',
+            'required' => 'The :attribute field is required! ',
+            'string' => 'The :attribute field must be a string! ',
+            'min' => [
+                'string' => 'The :attribute field must have at least :min characters! ',
+                'numeric' => 'The :attribute field must be at least :min! '
+            ],
+            'max' => [
+                'string' => 'The :attribute field may not be greater than :max characters!  ',
+            ],
+            'unique' => 'The :attribute field value has already been used! ',
+            'image' => 'The :attribute field must be an image! ',
+            'numeric' => 'The :attribute field must be a number! ',
         ]);
 
         if ($validator->fails()) {
@@ -187,6 +199,7 @@ class BookController extends Controller
     {
         return Excel::download(new BooksExport, 'Books.xlsx');
     }
+
     public function exportPDF()
     {
         return Excel::download(new BooksExport, 'Books.pdf', \Maatwebsite\Excel\Excel::DOMPDF);

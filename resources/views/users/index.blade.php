@@ -18,12 +18,13 @@
                     <div class="card-body">
                         <div class="alert alert-success"></div>
                         <div class="pb-3">
+                            {{-- Export PDF si XLS pt useri
                             <button type="button" class="btn btn-outline-info d-inline-block exportExcel-users-btn">
                                 <i class="fas fa-file-export"></i> @lang('dictionary.user.actions.exportExcel-users')
                             </button>
                             <button type="button" class="btn btn-outline-info d-inline-block exportPDF-users-btn">
                                 <i class="fas fa-file-export"></i> @lang('dictionary.user.actions.exportPDF-users')
-                            </button>
+                            </button>--}}
                             <button type="button" class="btn btn-outline-success d-inline-block update-users-roles-btn">
                                 <i class="far fa-save"></i> @lang('dictionary.user.actions.update-users-roles')
                             </button>

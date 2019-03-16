@@ -20,9 +20,9 @@
                         <a class="card panel" href="{{ route('books.index') }}">
                             <i class="fas fa-3x fa-book"></i><br>@lang('dictionary.control-panel.books')
                         </a>
-                        {{--<a class="card panel">
-                            @lang('dictionary.control-panel.categories')
-                        </a>--}}
+                        <a class="card panel" href="{{ route('categories.index') }}">
+                            <i class="fab fa-3x fa-elementor"></i><br>@lang('dictionary.control-panel.categories')
+                        </a>
                     </div>
                 </div>
             </div>

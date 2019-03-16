@@ -1,0 +1,26 @@
+.form-div {
+    margin-bottom: 15px;
+    display: inline-flex;
+}
+
+.category-btn {
+    padding: 3rem;
+    margin: 0.68rem;
+    width: 31%;
+    font-size: 2vw;
+    background: white;
+    border: 1px solid #cabbbb;
+}
+
+.category-btn:hover {
+    border: 1px solid black;
+}
+
+.add-label {
+    display: inline-block;
+    height: 37px;
+    line-height: 37px;
+    margin-right: 5px;
+    margin-bottom: 0;
+
+}

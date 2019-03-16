@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -12,6 +13,7 @@ class CategoryController extends Controller
         $this->middleware(['auth', 'isAdmin']);
         $this->middleware('CountPeople')->only(['index','create','show','edit']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,18 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(12);
         return view('categories.index', ['categories' => $categories]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -41,29 +33,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-    }
+        $category = Category::create([
+            'name' => $request->name,
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
+        Session::flash('succes', 'The category was successfully created!');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -75,7 +50,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        dd($request->all(), $category);
     }
 
     /**
@@ -86,6 +61,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        dd($category);
     }
 }
