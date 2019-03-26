@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buy extends Model
 {
+    public $timestamps = false;
+
     // Buy(FK) M - 1 User
     public function users()
     {

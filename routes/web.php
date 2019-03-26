@@ -24,7 +24,3 @@ Route::resource('books', 'BookController');
 
 // Categories
 Route::resource('categories', 'CategoryController');
-
-
-
-

@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requirement extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+        'increment', 'status'
+    ];
+
     // Requirement(FK) M - 1 User
     public function users()
     {

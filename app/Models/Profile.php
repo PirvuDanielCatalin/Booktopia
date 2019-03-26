@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+
+    ];
+
     // Profile(FK) 1 - 1 User
     public function user()
     {
