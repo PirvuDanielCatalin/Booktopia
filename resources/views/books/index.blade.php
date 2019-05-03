@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('scripts')
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js" defer></script>
-    <script src="{{ asset('js/books/index.js') }}" defer></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js" defer></script>
+    <script type="text/javascript"
+            src="{{ asset('js/books/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/books/index.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('css/books/index.css') }}">
 @endsection
 
 @section('content')
@@ -22,12 +26,6 @@
                             </div>
                         @endif
                         <div class="pb-3">
-                            <button type="button" class="btn btn-outline-secondary d-inline-block exportExcel-books-btn">
-                                <i class="fas fa-file-export"></i> @lang('dictionary.book.actions.exportExcel-books')
-                            </button>
-                            {{--<button type="button" class="btn btn-outline-secondary d-inline-block exportPDF-books-btn">
-                                <i class="fas fa-file-export"></i> @lang('dictionary.book.actions.exportPDF-books')
-                            </button>--}}
                             <button class="btn btn-outline-primary add-book-btn">
                                 <i class="fas fa-plus"></i> @lang('dictionary.book.actions.add')
                             </button>
@@ -35,16 +33,15 @@
                         <table class="table table-hover" id="books-datatable">
                             <thead>
                             <tr>
-                                <th><!-- Show Button --></th>
+                                <th>{{-- Show Button --}}</th>
                                 <th>ID</th>
                                 <th>@lang('dictionary.book.title')</th>
                                 <th>@lang('dictionary.book.author')</th>
                                 <th>@lang('dictionary.book.publishing_house')</th>
-                                <th>@lang('dictionary.book.description')</th>
-                                {{--<th>@lang('dictionary.book.photo')</th>--}}
+                                <th>@lang('dictionary.book.photo')</th>
                                 <th>@lang('dictionary.book.price')</th>
-                                <th><!-- Edit Button --></th>
-                                <th><!-- Delete Button --></th>
+                                <th>{{-- Edit Button--}}</th>
+                                <th>{{-- Delete Button --}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,10 +58,10 @@
                                     <td>{{ $book->title }}</td>
                                     <td>{{ $book->author }}</td>
                                     <td>{{ $book->publishing_house }}</td>
-                                    <td id="book-description">{{ $book->description }}</td>
-                                    {{--<td>
-                                        <img class="book-thumbnail" src="{{ asset("images")."/".$book->photo }}">
-                                    </td>--}}
+                                    <td>
+                                        <img class="book-thumbnail"
+                                             src="{{ asset("images/books-covers")."/".$book->photo }}">
+                                    </td>
                                     <td>{{ $book->price }}</td>
                                     <td>
                                         <a href="{{ route('books.edit', $book) }}">

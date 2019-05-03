@@ -15,7 +15,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin']);
-        $this->middleware('CountPeople')->only('index');
+        // $this->middleware('CountPeople')->only('index');
     }
 
     public function index()
@@ -28,22 +28,17 @@ class UserController extends Controller
         return view('users.index', ['users' => $users, 'roles' => $roles, 'users_roles' => $users_roles]);
     }
 
-    public function update_roles(Request $request)
+    public function get_user_role(Request $request)
     {
-        $users_roles = $request->all();
-        foreach($users_roles as $userId => $roleName) {
-            User::find($userId)->assignRole($roleName);
-        }
-        return response('The users roles were successfully updated!', 200)
-            ->header('Content-Type', 'text/plain');
+        return User::find($request->user_id)->with('roles')->where('users.id', '=', $request->user_id)->first();
     }
 
-    public function exportExcel()
+    public function update_role(Request $request)
     {
-        return Excel::download(new UsersExport, 'Users.xlsx');
-    }
-    public function exportPDF()
-    {
-        return Excel::download(new UsersExport, 'Users.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        $user = User::find($request->user_id);
+        $user->assignRole($request->new_role);
+
+        return response("The role for user " . $user->name . " was successfully updated!", 200)
+            ->header('Content-Type', 'text/plain');
     }
 }

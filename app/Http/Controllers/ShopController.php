@@ -15,18 +15,18 @@ class ShopController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin'])->only(['control-panel']);
-        $this->middleware('CountPeople')->except('contactemail');
+        //$this->middleware('CountPeople')->except('contactemail');
     }
 
     public function index()
     {
         $books = Book::paginate(12);
-        return view('shop-products', ['books' => $books]);
+        return view('general.shop-products', ['books' => $books]);
     }
 
     public function control_panel()
     {
-        return view('control-panel');
+        return view('general.control-panel');
     }
 
     public function shopping_cart(Request $request)
@@ -38,7 +38,7 @@ class ShopController extends Controller
             $products[$id]['book'] = Book::find($id);
             $products[$id]['quantity'] = intval($session[$product]);
         }
-        return view('shopping-cart', ['products' => $products]);
+        return view('general.shopping-cart', ['products' => $products]);
     }
 
     public function contactemail(Request $request)

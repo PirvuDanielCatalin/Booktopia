@@ -1,11 +1,28 @@
-.alert {
+th, td {
+    vertical-align: middle !important;
+    cursor: pointer;
+}
+
+.card-body {
+    display: flex;
+}
+
+.big-view {
+    width: 70%;
+    padding: 10px;
+}
+
+.small-view {
+    width: 30%;
+    padding: 25px;
+    border-left: 1px solid #d6d6d6;
+}
+
+.users_page_right_panel {
     display: none;
 }
 
-th, td {
-    vertical-align: middle !important;
-}
-
-.update-users-roles-btn {
-    /*float: right;*/
+.users_page_right_panel_img {
+    width: 100%;
+    height: 100%;
 }

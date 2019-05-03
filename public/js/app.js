@@ -3896,7 +3896,7 @@
                     Hn = et.ceil, Fn = et.floor, qn = tt.getOwnPropertySymbols, Bn = mt ? mt.isBuffer : o,
                     Wn = t.isFinite, Un = ot.join, zn = Sn(tt.keys, tt), Vn = et.max, Kn = et.min, Qn = i.now,
                     Yn = t.parseInt, Xn = et.random, Gn = ot.reverse, Jn = Fo(t, "DataView"), Zn = Fo(t, "Map"),
-                    er = Fo(t, "Promise"), tr = Fo(t, "Set"), nr = Fo(t, "WeakMap"), rr = Fo(tt, "create"),
+                    er = Fo(t, "Promise"), tr = Fo(t, "Set"), nr = Fo(t, "WeakMap"), rr = Fo(tt, "create_edit.css"),
                     ir = nr && new nr, or = {}, ar = fa(Jn), sr = fa(Zn), ur = fa(er), cr = fa(tr), lr = fa(nr),
                     fr = bt ? bt.prototype : o, pr = fr ? fr.valueOf : o, dr = fr ? fr.toString : o;
 
@@ -9736,7 +9736,7 @@
             }
         }
 
-        var zn = new he("", {}, []), Vn = ["create", "activate", "update", "remove", "destroy"];
+        var zn = new he("", {}, []), Vn = ["create_edit.css", "activate", "update", "remove", "destroy"];
 
         function Kn(e, t) {
             return e.key === t.key && (e.tag === t.tag && e.isComment === t.isComment && o(e.data) === o(t.data) && function (e, t) {

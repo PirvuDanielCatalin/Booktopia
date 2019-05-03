@@ -1,11 +1,13 @@
-@extends('shop')
+@extends('general.shop')
 
 @section('shop-scripts')
-    <script src="{{ asset('js/shopping-cart.js') }}" defer></script>
+    <script type="text/javascript"
+            src="{{ asset('js/general/shopping-cart.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/shopping-cart.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('css/general/shopping-cart.css') }}">
 @endsection
 
 @section('books-content')

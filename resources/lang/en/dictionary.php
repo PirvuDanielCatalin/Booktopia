@@ -8,12 +8,16 @@ return [
         'show' => 'Show',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'save' => 'Save',
+        'update' => 'Update',
         'checkout' => 'Checkout',
+        'cancel' => 'Cancel',
     ],
     'control-panel' => [
         'users' => 'Manage users',
         'books' => 'Manage books',
         'categories' => 'Manage products categories',
+        'offers' => 'Manage offers',
     ],
     'book' => [
         'title' => 'Title',
@@ -39,6 +43,26 @@ return [
             'update-users-roles' => 'Update users roles',
             'exportExcel-users' => 'Export users (XLSX)',
             'exportPDF-users' => 'Export users (PDF)',
+        ],
+    ],
+    'category' => [
+        'categories' => 'Categories',
+        'name' => 'Name',
+        'actions' => [
+            'add' => 'Add Category',
+            'delete' => 'Delete Category',
+
+        ],
+    ],
+    'offer' => [
+        'offers' => 'Offers',
+        'name' => 'Name',
+        'old-price' => 'Old Price',
+        'new-price' => 'New Price',
+        'sale' => 'Sale',
+        'actions' => [
+            'add' => 'Add Offer',
+            'delete' => 'Delete Offer',
         ],
     ],
 ];

@@ -66,12 +66,13 @@ class User extends Authenticatable
     public function assignRole($role_name)
     {
         $new_role = Role::where('name', $role_name)->first();
-        //dd($new_role);
-        // Diferit de null daca rolul (stringul primit ca parametru) este un rol existent
+        
         if ($new_role != null) {
             $roles = Role::all();
+
             foreach ($roles as $role)
                 $this->roles()->detach($role);
+
             $this->roles()->attach($new_role);
         }
         return $this;

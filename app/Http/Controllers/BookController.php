@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Validator;
-use Purifier;
 use Image;
 use Session;
 use DB;
-use App\Exports\BooksExport;
-use Excel;
 
 class BookController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin'])->except('show');
-        $this->middleware('CountPeople')->only(['index', 'create', 'show', 'edit']);
+        //$this->middleware('CountPeople')->only(['index', 'create', 'show', 'edit']);
     }
 
     /**
@@ -38,17 +36,19 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $categories = Category::all();
+        return view('books.create', ['categories' => $categories]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $validator = Validator::make($request->all(),
             [
                 'title' => 'required|string|max:101|unique:books,title',
@@ -89,7 +89,7 @@ class BookController extends Controller
             if ($request->has('photo')) {
                 $image = $request->file('photo');
                 $filename = $book->id . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/');
+                $location = public_path('images/books-covers/');
                 Image::make($image)->resize(400, 400)->save($location . $filename);
                 $book->photo = $filename;
                 $book->save();
@@ -103,7 +103,7 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function show(Book $book)
@@ -114,19 +114,20 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Book $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function edit(Book $book)
     {
-        return view('books.edit', ['book' => $book]);
+        $categories = Category::all();
+        return view('books.edit', ['book' => $book, 'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Book $book
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Book $book)
@@ -166,10 +167,10 @@ class BookController extends Controller
             $photo = $book->photo;
             if ($request->has('photo')) {
                 if ($photo != '')
-                    unlink(public_path('images/') . $photo);
+                    unlink(public_path('images/books-covers/') . $photo);
                 $image = $request->file('photo');
                 $filename = $book->id . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/');
+                $location = public_path('images/books-covers/');
                 Image::make($image)->resize(400, 400)->save($location . $filename);
                 $book->photo = $filename;
             }
@@ -185,7 +186,7 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function destroy(Book $book)
@@ -195,13 +196,14 @@ class BookController extends Controller
             ->header('Content-Type', 'text/plain');
     }
 
-    public function exportExcel()
+    /**
+     * @param Request $request
+     */
+    public function drag_and_drop_upload(Request $request)
     {
-        return Excel::download(new BooksExport, 'Books.xlsx');
-    }
-
-    public function exportPDF()
-    {
-        return Excel::download(new BooksExport, 'Books.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        $file = $request->file('file')->getRealPath();
+        $directory = public_path('images/helpers/');
+        $imgname = 'DraggedAndDropped.jpg';
+        Image::make($file)->resize(200, 200)->save($directory . $imgname);
     }
 }

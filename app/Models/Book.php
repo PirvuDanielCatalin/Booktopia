@@ -16,7 +16,7 @@ class Book extends Model
     // Book M - M Category ==> Book 1 - M BookCategory(FK)
     public function categories()
     {
-        return $this->belongsToMany('App\Models\Category','books_categories');
+        return $this->belongsToMany('App\Models\Category', 'books_categories');
     }
     //endregion
 

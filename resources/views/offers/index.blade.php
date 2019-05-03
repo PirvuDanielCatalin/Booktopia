@@ -6,7 +6,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/users/index.js') }}" defer></script>
+            src="{{ asset('js/offers/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/users/index.css') }}">
+          href="{{ asset('css/offers/index.css') }}">
 @endsection
 
 @section('content')
@@ -25,13 +25,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="big-view">
+                            <div class="pb-3">
+                                <button class="btn btn-outline-primary add-book-btn">
+                                    <i class="fas fa-plus"></i> @lang('dictionary.book.actions.add')
+                                </button>
+                            </div>
                             <div class="table-responsive">
-                                <table class="table table-hover" id="users-datatable">
+                                <table class="table table-hover" id="offers-datatable">
                                     <thead>
                                     <tr>
                                         <th class="tbl-user-id">ID:</th>
                                         <th class="tbl-user-name">@lang('dictionary.user.name')</th>
-                                        <th class="tbl-user-email">@lang('dictionary.user.email')</th>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('scripts')
-    <script src="{{ asset('js/control-panel.js') }}" defer></script>
+    <script type="text/javascript"
+            src="{{ asset('js/general/control-panel.js') }}" defer></script>
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/control-panel.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('css/general/control-panel.css') }}">
 @endsection
 
 @section('content')
@@ -22,6 +24,9 @@
                         </a>
                         <a class="card panel" href="{{ route('categories.index') }}">
                             <i class="fab fa-3x fa-elementor"></i><br>@lang('dictionary.control-panel.categories')
+                        </a>
+                        <a class="card panel" href="{{ route('offers.index') }}">
+                            <i class="fas fa-3x fa-comments-dollar"></i><br>@lang('dictionary.control-panel.offers')
                         </a>
                     </div>
                 </div>

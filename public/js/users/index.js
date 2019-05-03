@@ -1,32 +1,57 @@
 $(function () {
     $('#users-datatable').DataTable();
 
-    $('.exportExcel-users-btn').on('click', function () {
+    /*$('.exportExcel-users-btn').on('click', function () {
         window.location = '/users/exportExcel';
     });
     $('.exportPDF-users-btn').on('click', function () {
         window.location = '/users/exportPDF';
-    });
+    });*/
 
-    $('.update-users-roles-btn').on('click', function () {
-        let $data = {};
-        $('.tbl-user-info').toArray().forEach(function (info) {
-            let $userId = $(info).find('.tbl-user-id').text();
-            let $roleId = $(info).find('.tbl-user-roles #roleSelect').val();
-            $data[$userId] = $roleId;
-        });
+    $('.tbl-user-info').on('click', function () {
+        $data = {};
+        $data['user_id'] = $(this).find('.tbl-user-id').text();
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: "POST",
-            url: "/users/update-roles",
+            url: "/users/get-user-role",
             data: $data,
             success: function (response) {
-                $('.alert').text(response).show().delay(5000).hide(500);
-                console.log(response);
+                $('.small-view .form input[type=hidden]').val(response.id);
+                $('.small-view .form input[name=name]').val(response.name);
+                $('.small-view .form input[name=email]').val(response.email);
+                $('.small-view .form select#roleSelect option').toArray().forEach(function (elem) {
+                    if ($(elem).text().trim() === response.roles[0].name)
+                        $(elem).attr('selected', true);
+                });
+
+                $('.users_page_right_panel_img').hide('slow');
+                $('.users_page_right_panel').show('slow');
             },
             error: function () {
-                $('.alert').text('Error on updating users roles!').show().delay(5000).hide(500);
-                console.log('Error on updating users roles!');
+                toastr.warning('Error on getting user role!');
+            }
+        });
+    });
+
+    $('.update-user-role-btn').on('click', function () {
+        let $data = {};
+        $data['user_id'] = $('.small-view .form input[type=hidden]').val();
+        $data['new_role'] = $('.small-view .form select#roleSelect').val();
+
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            url: "/users/update-role",
+            data: $data,
+            success: function (response) {
+                toastr.success(response);
+
+                $('.users_page_right_panel').hide();
+                $('.users_page_right_panel_img').show();
+            },
+            error: function () {
+                toastr.warning("Error on updating user role!");
             }
         });
     });

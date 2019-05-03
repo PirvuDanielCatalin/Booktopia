@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('scripts')
-    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" defer></script>
-    <script src="{{ asset('js/shop.js') }}" defer></script>
+    <script type="text/javascript"
+            src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" defer></script>
+    <script type="text/javascript"
+            src="{{ asset('js/general/shop.js') }}" defer></script>
     @yield('shop-scripts')
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
-    <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('css/general/shop.css') }}">
     @yield('shop-styles')
 @endsection
 
@@ -20,7 +24,9 @@
                     <div class="card-header row search-bar">
                         <div class="text-left col-md-4">
                             <div class="input-group search-bar-div">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button">
                                         <i class="fas fa-search"></i>
@@ -60,30 +66,42 @@
                                 </div>
                             </div>
                             <div class="col-md-4 leaflet-map-div">
-                                <!-- Leaflet Maps -->
                                 <div id="leaflet-map"></div>
-                            <!-- <img src="{{ asset("images")."/LogoBooktopia.png" }}"> -->
+                                {{--                                <img src="{{ asset("images")."/LogoBooktopia.png" }}">--}}
                             </div>
                             <div class="row col-md-4">
                                 <form class="row" action="{{ route('contact-email') }}" method="post">
                                     @csrf
                                     <div class="col-md-6">
                                         <label for="subject">Subject</label>
-                                        <input name="subject" type="text" class="form-control" required
-                                               placeholder="Ex: Webpage Bug">
+                                        <input class="form-control"
+                                               name="subject"
+                                               placeholder="Ex: Webpage Bug"
+                                               required
+                                               type="text">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email">Email</label>
-                                        <input name="email" type="text" class="form-control" required
-                                               pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" placeholder="Ex: name@domain.com">
+                                        <input class="form-control"
+                                               name="email"
+                                               pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+                                               placeholder="Ex: name@domain.com"
+                                               required
+                                               type="text">
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label for="text">Text</label>
-                                        <textarea name="text" class="form-control" rows="2" required minlength="10"
-                                                  maxlength="2000"></textarea>
+                                        <textarea class="form-control"
+                                                  maxlength="2000"
+                                                  minlength="10"
+                                                  name="text"
+                                                  required
+                                                  rows="2"></textarea>
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <input type="submit" class="btn btn-success btn-block" value="Send Email">
+                                        <input class="btn btn-success btn-block"
+                                               type="submit"
+                                               value="Send Email">
                                     </div>
                                 </form>
                             </div>
