@@ -9,7 +9,6 @@
 </head>
 <body>
 <h1>
-    <!-- Mesaj -->
     {{ $text }}
 </h1>
 </body>

@@ -12,7 +12,9 @@ $(function () {
     });
 
     $('.modal-openner').on('click', function () {
-        $('#confirmDeleteBook').attr('book-id', $(this).attr('book-id'))
+        $('#confirmDeleteBook').attr('book-id', $(this).attr('book-id'));
+        let bookTitle = $(this).closest('tr').find('td').eq(2).text();
+        $('#deleteBookModal .modal-body').text("Are you sure you want to delete book " + bookTitle + " ?");
     });
 
     $('#confirmDeleteBook').on('click', function () {

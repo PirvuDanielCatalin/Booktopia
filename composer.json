@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "~5.0",
         "maatwebsite/excel": "^3.1",
-        "mews/purifier": "^2.1"
+        "mews/purifier": "^2.1",
+      "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

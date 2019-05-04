@@ -50,63 +50,117 @@
                         <div class="row">
                             <div class="col-md-4 row">
                                 <div class="col-md-12 footer-info-div">
-                                    <h5 class="d-inline"><b>Program:</b></h5>
+                                    <h5 class="d-inline">
+                                        <b>@lang('dictionary.general.footer.program')</b>
+                                    </h5>
                                 </div>
                                 <div class="col-md-12 footer-info-div">
                                     <h6>
-                                        Monday - Saturday: &emsp;8:00 - 18:00<br>
-                                        Sunday: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Closed
+                                        @lang('dictionary.general.footer.program-data')
                                     </h6>
                                 </div>
                                 <div class="col-md-12 footer-info-div">
-                                    <h5 class="d-inline"><b>Email:</b></h5>
+                                    <h5 class="d-inline">
+                                        <b>@lang('dictionary.general.footer.adress')</b>
+                                    </h5>
                                 </div>
                                 <div class="col-md-12 footer-info-div">
-                                    <h6 class="d-inline">booktopia.contact@gmail.com</h6>
+                                    <h6 class="d-inline">
+                                        @lang('dictionary.general.footer.adress-data')
+                                    </h6>
+                                </div>
+                                <div class="col-md-12 footer-info-div">
+                                    <h5 class="d-inline">
+                                        <b>@lang('dictionary.general.footer.phone')</b>
+                                    </h5>
+                                </div>
+                                <div class="col-md-12 footer-info-div">
+                                    <h6 class="d-inline">
+                                        @lang('dictionary.general.footer.phone-data')
+                                    </h6>
+                                </div>
+                                <div class="col-md-12 footer-info-div">
+                                    <h5 class="d-inline">
+                                        <b>@lang('dictionary.general.footer.email')</b>
+                                    </h5>
+                                </div>
+                                <div class="col-md-12 footer-info-div">
+                                    <h6 class="d-inline">
+                                        @lang('dictionary.general.footer.email-data')
+                                    </h6>
                                 </div>
                             </div>
                             <div class="col-md-4 leaflet-map-div">
-                                <div id="leaflet-map"></div>
-                                {{--                                <img src="{{ asset("images")."/LogoBooktopia.png" }}">--}}
+                                <div id="leaflet-map" class="mt-2"></div>
+                                <button data-toggle="modal"
+                                        data-target="#findNearestShopModal"
+                                        class="btn btn-info btn-block mt-2"
+                                        id="find-the-nearest-shop-btn">
+                                    <i class="fas fa-search-location"></i> @lang('dictionary.general.find-the-nearest-shop')
+                                </button>
+                                {{-- <img src="{{ asset("images")."/LogoBooktopia.png" }}">--}}
                             </div>
                             <div class="row col-md-4">
                                 <form class="row" action="{{ route('contact-email') }}" method="post">
                                     @csrf
                                     <div class="col-md-6">
-                                        <label for="subject">Subject</label>
+                                        <label for="subject">@lang('dictionary.general.footer.subject')</label>
                                         <input class="form-control"
                                                name="subject"
-                                               placeholder="Ex: Webpage Bug"
+                                               placeholder="example"
                                                required
                                                type="text">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="email">Email</label>
+                                        <label for="email">@lang('dictionary.general.footer.email')</label>
                                         <input class="form-control"
                                                name="email"
                                                pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
-                                               placeholder="Ex: name@domain.com"
+                                               placeholder="name@domain.com"
                                                required
                                                type="text">
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <label for="text">Text</label>
+                                        <label for="text">@lang('dictionary.general.footer.text')</label>
                                         <textarea class="form-control"
                                                   maxlength="2000"
                                                   minlength="10"
                                                   name="text"
                                                   required
-                                                  rows="2"></textarea>
+                                                  rows="6"></textarea>
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <input class="btn btn-success btn-block"
-                                               type="submit"
-                                               value="Send Email">
+                                        <button type="submit" class="btn btn-success btn-block">
+                                            <i class="far fa-paper-plane"></i> @lang('dictionary.general.send-email')
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div aria-hidden="true"
+         aria-labelledby="findNearestShopModalLabel"
+         class="modal fade"
+         id="findNearestShopModal"
+         role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="findNearestShopModalLabel">
+                        @lang('dictionary.general.find-the-nearest-shop')
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="leaflet-map-modal"></div>
+                    <button class="btn btn-light btn-block">@lang('dictionary.actions.find')</button>
                 </div>
             </div>
         </div>

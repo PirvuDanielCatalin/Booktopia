@@ -47,7 +47,7 @@ class ShopController extends Controller
         $email = (isset($request->email)) ? $request->email : '';
         $text = (isset($request->text)) ? $request->text : '';
 
-        Mail::send('mail', ['text' => $text], function ($message) use ($subject, $email) {
+        Mail::send('helpers.email_format', ['text' => $text], function ($message) use ($subject, $email) {
             $message->subject($subject)
                 ->from($email)
                 ->to('booktopia.contact@gmail.com', 'Booktopia');

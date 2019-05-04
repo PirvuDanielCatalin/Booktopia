@@ -1,3 +1,7 @@
+th, td {
+    vertical-align: middle !important;
+}
+
 .no-products-h {
     padding: 1rem;
 }

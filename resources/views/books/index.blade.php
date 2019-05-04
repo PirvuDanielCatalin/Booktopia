@@ -72,8 +72,10 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <button class="modal-openner btn btn-outline-danger" data-toggle="modal"
-                                                data-target="#deleteBookModal" book-id="{{ $book->id }}">
+                                        <button class="modal-openner btn btn-outline-danger"
+                                                data-toggle="modal"
+                                                data-target="#deleteBookModal"
+                                                book-id="{{ $book->id }}">
                                             <i class="far fa-trash-alt"></i> @lang('dictionary.actions.delete')
                                         </button>
                                     </td>
@@ -82,23 +84,33 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal fade" id="deleteBookModal" tabindex="-1" role="dialog"
-                         aria-labelledby="deleteBookModalLabel" aria-hidden="true">
+                    <div aria-hidden="true"
+                         aria-labelledby="deleteBookModalLabel"
+                         class="modal fade"
+                         id="deleteBookModal"
+                         role="dialog"
+                         tabindex="-1">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteBookModalLabel">Delete Book</h5>
+                                    <h5 class="modal-title" id="deleteBookModalLabel">
+                                        @lang('dictionary.book.actions.delete')
+                                    </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure you want to delete book ........ ?
+
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            data-dismiss="modal">
+                                        @lang('dictionary.actions.cancel')
+                                    </button>
                                     <button type="button" class="btn btn-success" book-id="" id="confirmDeleteBook">
-                                        Delete
+                                        @lang('dictionary.actions.delete')
                                     </button>
                                 </div>
                             </div>

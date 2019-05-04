@@ -3,6 +3,22 @@
 return [
     'general' => [
         'shopping-cart' => 'Shopping Cart',
+        'find-the-nearest-shop' => 'Find the nearest shop',
+        'send-email' => 'Send Email',
+        'like-these?' => 'You might like these as well...',
+        'footer' => [
+            'program' => 'Program',
+            'program-data' => 'Monday - Saturday: &emsp;8:00 - 18:00<br>
+                               Sunday: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Closed',
+            'email' => 'Email',
+            'email-data' => 'booktopia.contact@gmail.com',
+            'adress' => 'Adress',
+            'adress-data' =>'Bulevardul Vasile Milea 4, Bucuresti',
+            'phone' => 'Phone',
+            'phone-data' => '+40314 257 513  ||  +40314 257 510',
+            'subject' => 'Subject',
+            'text' => 'Text',
+        ],
     ],
     'actions' => [
         'show' => 'Show',
@@ -12,6 +28,8 @@ return [
         'update' => 'Update',
         'checkout' => 'Checkout',
         'cancel' => 'Cancel',
+        'send' => 'Send',
+        'find' => 'Find'
     ],
     'control-panel' => [
         'users' => 'Manage users',
@@ -29,7 +47,10 @@ return [
         'quantity' => 'Quantity',
         'actions' => [
             'add' => 'Add a new book',
+            'delete' => 'Delete book',
             'add-to-cart' => 'Add to cart',
+            'add-to-wishlist' => 'Add to wishlist',
+            'give-me-a-sample' => 'Give me a sample',
             'see-details' => 'See details',
             'exportExcel-books' => 'Export books (XLSX)',
             'exportPDF-books' => 'Export books (PDF)',
@@ -52,6 +73,12 @@ return [
             'add' => 'Add Category',
             'delete' => 'Delete Category',
 
+        ],
+    ],
+    'comment'=>[
+        'comments' => 'Comments',
+        'actions' => [
+            'add' => 'Add a comment',
         ],
     ],
     'offer' => [

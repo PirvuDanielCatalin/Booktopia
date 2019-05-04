@@ -1,13 +1,17 @@
-.book-image {
-    height: 450px;
-    line-height: 450px;
-    text-align: center;
+.rating-bar-div span {
+    font-size: 60px;
+    cursor: pointer;
+    display: contents;
+}
+
+.star-selected {
+    color: gold;
 }
 
 .book-info {
     font-size: 16px;
-    padding: 1rem;
-    font-family: consolas;
+    padding: 1rem 0;
+    font-family: consolas, serif;
 }
 
 .book-title {
@@ -19,13 +23,52 @@
     padding-left: 1rem;
 }
 
-span {
-    font-size: 60px;
-    cursor: pointer;
-    width: min-content;
-    display: contents;
+.give-me-a-sample-btn, .add-to-wishlist-btn {
+    width: 47%;
 }
 
-.star-selected {
-    color: gold;
+.carousel-slide {
+    display: flex;
+}
+
+.carousel-slide-item {
+    width: 25%;
+    padding: 0.7rem;
+}
+
+.comment-textarea-div {
+    display: flex;
+}
+
+.comment-div {
+    display: flex;
+    margin-top: 10px;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.comment-div .comment-approvals {
+    text-align: center;
+    width: 5%;
+}
+
+.comment-div .comment-approvals .like-dislike-btns {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.comment-div .comment-text {
+    width: 85%;
+}
+
+.comment-div .comment-cmd-panel {
+    width: 10%;
+    text-align: center;
+}
+
+.comment-div .comment-cmd-panel .edit-delete-btns {
+    display: flex;
+    flex-direction: column;
 }
