@@ -92,4 +92,21 @@ return [
             'delete' => 'Delete Offer',
         ],
     ],
+    'profile' =>[
+        'profiles' => 'Profiles',
+        'wishlist' => 'Wishlist',
+        'wallet' => 'Booktopia points',
+        'purchase_history' => 'Purchase history',
+        'first_name' => 'First Name',
+        'last_name' => 'Last Name',
+        'phone' => 'Phone',
+        'adress' => 'Adress',
+        'photo' => 'Photo',
+    ],
+    'invoice' => [
+        'date' => 'Date',
+        'billing_address' => 'Billing address',
+        'delivery_address' => 'Delivery address',
+        'total_price' => 'Total price',
+    ],
 ];

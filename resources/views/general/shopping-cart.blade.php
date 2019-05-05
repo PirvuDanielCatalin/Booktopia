@@ -10,7 +10,7 @@
           href="{{ asset('css/general/shopping-cart.css') }}">
 @endsection
 
-@section('books-content')
+@section('scontent')
     <div class="col-md-12">
         <h3>Your shopping cart:</h3>
     </div>

@@ -30,3 +30,6 @@ Route::resource('categories', 'CategoryController');
 // Offers
 Route::post('offers/get-offer', 'OfferController@get_offer')->name('offers.get-offer');
 Route::resource('offers', 'OfferController');
+
+// Profiles
+Route::resource('profiles', 'ProfileController');

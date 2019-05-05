@@ -9,7 +9,7 @@ class Invoice extends Model
     public $timestamps = false;
 
     protected $fillable = [
-
+        'date', 'billing_address', 'delivery_address'
     ];
 
     // Invoice 1 - M Buy(FK)

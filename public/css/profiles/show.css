@@ -1,0 +1,77 @@
+.profile-photo-div {
+
+}
+
+.profile-photo {
+
+}
+
+.wallet-points-div {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 0.5rem;
+}
+
+.profile-info {
+    padding: 0.5rem;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info input {
+    margin: 0.5rem auto;
+    border: 0;
+    border-bottom: 1px solid #b9b9b9;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.carousel-slide {
+    display: flex;
+}
+
+.carousel-slide-item {
+    width: 20%;
+    padding: 1rem;
+}
+
+.wishlist-div > div:first-child,
+.purchase-history-div > div:first-child {
+    cursor: pointer;
+}
+
+.purchase-history-sliding-panel {
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.purchase-history-sliding-panel .tr {
+    display: flex;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.purchase-history-sliding-panel .data-tr {
+    border: 1px solid #dedddd;
+    margin: 0 5px 5px 5px;
+    border-radius: 5px;
+}
+
+.purchase-history-sliding-panel .tr .frst-clmn {
+    width: 25%;
+}
+
+.purchase-history-sliding-panel .tr .scnd-clmn {
+    width: 25%;
+}
+
+.purchase-history-sliding-panel .tr .thrd-clmn {
+    width: 50%;
+}
+
+.purchase-history-sliding-panel .data-tr .iframe-div {
+    border: 1px solid blue;
+    margin: 1rem 1rem 0 1rem;
+}

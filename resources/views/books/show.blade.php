@@ -14,7 +14,7 @@
           href="{{ asset('css/books/show.css') }}">
 @endsection
 
-@section('books-content')
+@section('scontent')
     <div class="col-md-4 card border-0">
         <div class="book-image-div h-100 card">
             <img alt="CoverPhoto"
@@ -22,7 +22,6 @@
                  src="{{ asset("images/books-covers")."/".$book->photo }}">
         </div>
         <div class="rating-bar-div card text-center">
-            <!-- Rating -->
             <span class="star" name="1">☆</span>
             <span class="star" name="2">☆</span>
             <span class="star" name="3">☆</span>
@@ -62,7 +61,6 @@
 
         </div>
     </div>
-
     <div class="col-md-12 card">
         <div class="mt-4 book-info book-title"><b>@lang('dictionary.general.like-these?')</b></div>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -134,7 +132,6 @@
             </div>
         </div>
     </div>
-
     <div class="col-md-12 card border-0">
         <div class="mt-2 book-info book-title">
             <b>@lang('dictionary.comment.comments')</b>

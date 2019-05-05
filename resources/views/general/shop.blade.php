@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="card-body row">
-                        @yield('books-content')
+                        @yield('scontent')
                     </div>
                     <div class="card-footer">
                         <div class="row">

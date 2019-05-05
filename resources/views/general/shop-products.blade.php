@@ -10,7 +10,7 @@
           href="{{ asset('css/general/shop-products.css') }}">
 @endsection
 
-@section('books-content')
+@section('scontent')
     @foreach($books as $book)
         <div class="col-md-2 card book-div">
             <div class="book-title"><b>{{ $book->title }}</b></div>

@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Models\User;
 use App\Models\Book;
-use Auth;
-use Mail;
 use Illuminate\Http\Request;
-use Session;
+use Mail;
 
 class ShopController extends Controller
 {
