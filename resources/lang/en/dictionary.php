@@ -6,6 +6,8 @@ return [
         'find-the-nearest-shop' => 'Find the nearest shop',
         'send-email' => 'Send Email',
         'like-these?' => 'You might like these as well...',
+        'filters-panel' => 'Filters Panel',
+        'currency' => 'RON',
         'footer' => [
             'program' => 'Program',
             'program-data' => 'Monday - Saturday: &emsp;8:00 - 18:00<br>
@@ -29,7 +31,8 @@ return [
         'checkout' => 'Checkout',
         'cancel' => 'Cancel',
         'send' => 'Send',
-        'find' => 'Find'
+        'find' => 'Find',
+        'use' => 'Use',
     ],
     'control-panel' => [
         'users' => 'Manage users',
@@ -104,9 +107,12 @@ return [
         'photo' => 'Photo',
     ],
     'invoice' => [
+        'payment_method'=>'Payment method',
         'date' => 'Date',
         'billing_address' => 'Billing address',
         'delivery_address' => 'Delivery address',
         'total_price' => 'Total price',
+        'cancel_order_possible' => 'Mesaj cand se poate anula comanda!',
+        'cancel_order_notpossible' => 'Mesaj cand NU se poate anula comanda!',
     ],
 ];

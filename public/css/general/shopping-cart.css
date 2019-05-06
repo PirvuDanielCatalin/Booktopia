@@ -11,6 +11,10 @@ th, td {
     color: black;
 }
 
+.table {
+    margin-bottom: 0;
+}
+
 .tbl-book-id {
     width: 5%;
 }
@@ -31,23 +35,39 @@ th, td {
     width: 70%;
 }
 
-.products-total-price-div {
-    width: fit-content;
-    padding: 1rem;
-    float: right;
+.products-total-price-div,
+.user-points-div {
+    padding: 0.5rem 1rem 0 0;
+    text-align: end;
 }
 
-.products-total-price-div * {
-    width: fit-content;
+.products-total-price-div *,
+.user-points-div * {
     display: inline-block;
     padding: 5px;
 }
 
-.products-total-price-value-div {
-    font-size: 25px;
+.products-total-price-value-div,
+.products-total-price-value,
+.user-points-value-div,
+.user-points-value {
+    font-size: 1.5em;
+    vertical-align: middle;
 }
 
-.products-total-price-value {
-    font-size: 20px;
+.products-total-price-checkout-btn {
+    float: right;
+    clear: both;
+    margin: 1rem;
+    width: 20%;
 }
 
+form {
+    clear: both;
+    display: none;
+}
+
+form input[type=radio] {
+    width: 50px;
+    height: 30px;
+}

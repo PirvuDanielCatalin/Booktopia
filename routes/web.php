@@ -33,3 +33,6 @@ Route::resource('offers', 'OfferController');
 
 // Profiles
 Route::resource('profiles', 'ProfileController');
+
+//Invoices
+Route::resource('invoices', 'InvoiceController');

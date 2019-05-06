@@ -40,7 +40,6 @@
                                 <i class="fas fa-shopping-cart"></i>
                                 <b>@lang('dictionary.general.shopping-cart')</b>
                             </div>
-
                         </div>
                     </div>
                     <div class="card-body row">

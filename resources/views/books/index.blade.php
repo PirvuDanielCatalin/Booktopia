@@ -4,12 +4,16 @@
     <script type="text/javascript"
             src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js" defer></script>
     <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script type="text/javascript"
             src="{{ asset('js/books/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
           href="{{ asset('css/books/index.css') }}">
 @endsection
@@ -21,9 +25,15 @@
                 <div class="card">
                     <div class="card-body">
                         @if( session('succes') )
-                            <div class="alert alert-success">
+                            <div class="alert alert-success d-none">
                                 {{ session('succes') }}
                             </div>
+                            <script defer>
+                                window.onload = function () {
+                                    let alert = document.querySelector('.alert').innerHTML.trim();
+                                    toastr.success(alert);
+                                };
+                            </script>
                         @endif
                         <div class="pb-3">
                             <button class="btn btn-outline-primary add-book-btn">

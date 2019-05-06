@@ -26,6 +26,13 @@
     padding: 0 10px;
     width: 100%;
 }
+.profile-info input:focus {
+    outline: none;
+}
+
+.profile-info input:disabled {
+    background: white;
+}
 
 .carousel-slide {
     display: flex;

@@ -1,19 +1,12 @@
-@media (min-width: 768px) {
-    .book-div {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 16.29%;
-        flex: 0 0 16.29%;
-        max-width: 16.29%;
-        margin: 2px 2px;
-    }
+.book-div {
+    margin: 0.9rem;
 }
 
 .book-thumbnail-div {
-    height: 200px;;
-    line-height: 195px;
-    text-align: center;
-    border: 1px solid;
-    margin-bottom: 1rem;
+    border: 1px solid #ababab;
+    margin-bottom: 0.5rem;
+    border-radius: 2px;
+    height: 100%;
 }
 
 .book-thumbnail-img {
@@ -22,14 +15,53 @@
 }
 
 .book-price,
+.book-new-price,
 .book-details-btn,
 .book-title {
-    margin-bottom: 1rem;
     text-align: center;
+    text-decoration: none !important;
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 5px;
 }
 
-.book-title {
-    padding: 1rem 0;
-    height: 75px;
-    position: relative;
+.book-new-price{
+    text-decoration: line-through !important;
+    color: orangered;
+}
+
+.filter-title {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.filter-panel {
+    border-top: 1px solid #c7c7c7;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.filter-panel-title {
+    padding: 1rem 0.7rem;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.filter-panel-item {
+    padding: 0.5rem 0.7rem;
+    border-top: 1px solid #c1bdbd;
+    font-size: 1.3em;
+}
+
+.filter-panel-item label {
+    margin: 0;
+    width: 100%;
+}
+
+.filter-panel-item label input {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
 }

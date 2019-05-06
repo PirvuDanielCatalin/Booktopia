@@ -1,0 +1,68 @@
+.invoice-div {
+    display: flex;
+    padding: 1rem;
+}
+
+.invoice-div-title {
+    width: 15%;
+}
+
+.invoice-input {
+    float: right;
+    border: 0;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.invoice-products-panel .card-header {
+    cursor: pointer;
+}
+
+.invoice-products-panel .card-body {
+    display: none;
+}
+
+.products-table-row {
+    display: table;
+    border-bottom: 1px solid #b3b3b3;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.product-name,
+.product-img,
+.product-quantity,
+.product-price {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.product-name {
+    width: 35%;
+}
+
+.product-img {
+    width: 25%;
+}
+
+.product-img img {
+    height: 20%;
+    border: 1px solid #d0d0d0;
+}
+
+.product-quantity,
+.product-price {
+    width: 20%;
+}
+
+.invoice-div:last-child .left-panel {
+
+}
+
+.invoice-div:last-child .right-panel {
+
+}
+
+.invoice-div:last-child .left-panel .col-md-12.row .col-md-6:last-child,
+.invoice-div:last-child .right-panel .col-md-12.row .col-md-6:last-child {
+    border-bottom: 1px solid #c7c7c7;
+}

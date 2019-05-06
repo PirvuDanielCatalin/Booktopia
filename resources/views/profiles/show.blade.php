@@ -48,19 +48,30 @@
         </div>
         <div class="profile-info">
             <b>@lang('dictionary.profile.first_name')</b>
-            <input type="text" class="profile-info-input" value="{{ $profile->first_name }}">
+            <input class="profile-info-input"
+                   disabled
+                   type="text"
+                   value="{{ $profile->first_name }}">
         </div>
         <div class="profile-info">
             <b>@lang('dictionary.profile.last_name')</b>
-            <input type="text" class="profile-info-input" value="{{ $profile->last_name }}">
+            <input class="profile-info-input"
+                   disabled
+                   type="text"
+                   value="{{ $profile->last_name }}">
         </div>
         <div class="profile-info">
             <b>@lang('dictionary.profile.phone')</b>
-            <input type="text" class="profile-info-input" value="{{ $profile->phone }}">
+            <input class="profile-info-input"
+                   disabled type="text"
+                   value="{{ $profile->phone }}">
         </div>
         <div class="profile-info">
             <b>@lang('dictionary.profile.adress')</b>
-            <input type="text" class="profile-info-input" value="{{ $profile->adress }}">
+            <input class="profile-info-input"
+                   disabled
+                   type="text"
+                   value="{{ $profile->adress }}">
         </div>
     </div>
     <div class="col-md-12 card mb-1 wishlist-div">

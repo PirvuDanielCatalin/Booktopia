@@ -16,7 +16,7 @@ class ShopController extends Controller
 
     public function index()
     {
-        $books = Book::paginate(12);
+        $books = Book::paginate(1);
         return view('general.shop-products', ['books' => $books]);
     }
 
