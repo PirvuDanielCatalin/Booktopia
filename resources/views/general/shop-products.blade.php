@@ -167,7 +167,7 @@
                 </div>
             @endforeach
         @endfor
-        <div class="col-md-12" style="height: 30px">
+        <div class="col-md-12">
             <div class="float-right">
                 {{ $books->links() }}
             </div>

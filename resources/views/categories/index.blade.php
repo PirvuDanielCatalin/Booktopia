@@ -21,15 +21,15 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="big-view">
-                            <div class="header pl-4 pr-4 mb-2">
+                            <div class="header mb-2">
                                 <h2 class="d-inline-block">@lang('dictionary.category.categories')</h2>
                                 <button class="btn btn-outline-primary float-right add-category-btn">
                                     <i class="fas fa-plus"></i> @lang('dictionary.category.actions.add')
                                 </button>
                             </div>
-                            <div class="categories-container col-md-12">
+                            <div class="row categories-container">
                                 @foreach($categories as $category)
-                                    <button class="btn category-btn"
+                                    <button class="btn col-md-3 category-btn"
                                             category-id="{{ $category->id }}">
                                         {{ $category->name }}
                                     </button>
@@ -66,7 +66,9 @@
                                         </div>
                                         <div class="col-md-12 form-input p-2">
                                             <div class="books-panel">
-                                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                                <br><br><br><br><br><br><br><br><br><br><br><br>
+                                                <br><br><br><br><br><br><br><br><br><br><br><br>
+                                                <br><br><br><br><br><br><br><br><br><br><br><br>
                                             </div>
                                         </div>
                                         <div class="col-md-12 form-input p-2">
@@ -110,7 +112,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

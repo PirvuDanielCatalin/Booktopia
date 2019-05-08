@@ -34,5 +34,11 @@ Route::resource('offers', 'OfferController');
 // Profiles
 Route::resource('profiles', 'ProfileController');
 
-//Invoices
+// Invoices
 Route::resource('invoices', 'InvoiceController');
+
+// Requirements
+Route::resource('requirements', 'RequirementController');
+
+// Stocks
+Route::resource('stocks', 'StockController');

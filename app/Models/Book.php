@@ -52,5 +52,11 @@ class Book extends Model
     {
         return $this->hasOne('App\Models\Stock');
     }
+
+    // Book 1 - 1 Offer(FK)
+    public function offer()
+    {
+        return $this->hasOne('App\Models\Offer');
+    }
     //endregion
 }

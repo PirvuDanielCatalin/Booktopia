@@ -15,7 +15,7 @@ return [
             'email' => 'Email',
             'email-data' => 'booktopia.contact@gmail.com',
             'adress' => 'Adress',
-            'adress-data' =>'Bulevardul Vasile Milea 4, Bucuresti',
+            'adress-data' => 'Bulevardul Vasile Milea 4, Bucuresti',
             'phone' => 'Phone',
             'phone-data' => '+40314 257 513  ||  +40314 257 510',
             'subject' => 'Subject',
@@ -33,12 +33,17 @@ return [
         'send' => 'Send',
         'find' => 'Find',
         'use' => 'Use',
+        'accept' => 'Accept',
+        'deny' => 'Deny',
     ],
     'control-panel' => [
+        'shop' => 'Go to Shop',
         'users' => 'Manage users',
         'books' => 'Manage books',
         'categories' => 'Manage products categories',
         'offers' => 'Manage offers',
+        'stocks' => 'Manage stocks',
+        'requirements' => 'Manage requirements',
     ],
     'book' => [
         'title' => 'Title',
@@ -78,7 +83,7 @@ return [
 
         ],
     ],
-    'comment'=>[
+    'comment' => [
         'comments' => 'Comments',
         'actions' => [
             'add' => 'Add a comment',
@@ -95,7 +100,7 @@ return [
             'delete' => 'Delete Offer',
         ],
     ],
-    'profile' =>[
+    'profile' => [
         'profiles' => 'Profiles',
         'wishlist' => 'Wishlist',
         'wallet' => 'Booktopia points',
@@ -107,7 +112,7 @@ return [
         'photo' => 'Photo',
     ],
     'invoice' => [
-        'payment_method'=>'Payment method',
+        'payment_method' => 'Payment method',
         'date' => 'Date',
         'billing_address' => 'Billing address',
         'delivery_address' => 'Delivery address',
@@ -115,4 +120,15 @@ return [
         'cancel_order_possible' => 'Mesaj cand se poate anula comanda!',
         'cancel_order_notpossible' => 'Mesaj cand NU se poate anula comanda!',
     ],
+    'requirement' => [
+        'requirements' => 'Requirements',
+        'partner-id' => 'Partner ID',
+        'partner-name' => 'Partner Name',
+        'book-id' => 'Book ID',
+        'book-title' => 'Book Title',
+    ],
+    'stock' => [
+        'stocks' => 'Stocks',
+        'plus-minus-quantity' => 'Added value',
+    ]
 ];

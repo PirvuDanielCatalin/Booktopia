@@ -2,25 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Offer;
+use App\Requirement;
 use Illuminate\Http\Request;
 
-class OfferController extends Controller
+class RequirementController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware(['auth', 'isAdmin']);
-        //$this->middleware('CountPeople')->only(['index','create','show','edit']);
-    }
-
-    public function get_offer(Request $request)
-    {
-        return Book::find($request->book_id)->with('offer');
-        //return Offer::find($request->offer_id);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +14,7 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::all();
-        $books = Book::all();
-        return view('offers.index', ['offers' => $offers, 'books' => $books]);
+        return view('requirements.index');
     }
 
     /**
@@ -46,7 +30,7 @@ class OfferController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -57,10 +41,10 @@ class OfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Offer $offer
+     * @param  \App\Requirement  $requirement
      * @return \Illuminate\Http\Response
      */
-    public function show(Offer $offer)
+    public function show(Requirement $requirement)
     {
         //
     }
@@ -68,10 +52,10 @@ class OfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Offer $offer
+     * @param  \App\Requirement  $requirement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Offer $offer)
+    public function edit(Requirement $requirement)
     {
         //
     }
@@ -79,11 +63,11 @@ class OfferController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Offer $offer
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Requirement  $requirement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Offer $offer)
+    public function update(Request $request, Requirement $requirement)
     {
         //
     }
@@ -91,10 +75,10 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Offer $offer
+     * @param  \App\Requirement  $requirement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Offer $offer)
+    public function destroy(Requirement $requirement)
     {
         //
     }

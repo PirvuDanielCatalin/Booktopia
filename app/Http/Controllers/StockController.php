@@ -3,24 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use App\Models\Offer;
+use App\Stock;
 use Illuminate\Http\Request;
 
-class OfferController extends Controller
+class StockController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware(['auth', 'isAdmin']);
-        //$this->middleware('CountPeople')->only(['index','create','show','edit']);
-    }
-
-    public function get_offer(Request $request)
-    {
-        return Book::find($request->book_id)->with('offer');
-        //return Offer::find($request->offer_id);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +15,8 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::all();
         $books = Book::all();
-        return view('offers.index', ['offers' => $offers, 'books' => $books]);
+        return view('stocks.index', ['books' => $books]);
     }
 
     /**
@@ -57,10 +43,10 @@ class OfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Offer $offer
+     * @param \App\Stock $stock
      * @return \Illuminate\Http\Response
      */
-    public function show(Offer $offer)
+    public function show(Stock $stock)
     {
         //
     }
@@ -68,10 +54,10 @@ class OfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Offer $offer
+     * @param \App\Stock $stock
      * @return \Illuminate\Http\Response
      */
-    public function edit(Offer $offer)
+    public function edit(Stock $stock)
     {
         //
     }
@@ -80,10 +66,10 @@ class OfferController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Offer $offer
+     * @param \App\Stock $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Offer $offer)
+    public function update(Request $request, Stock $stock)
     {
         //
     }
@@ -91,10 +77,10 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Offer $offer
+     * @param \App\Stock $stock
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Offer $offer)
+    public function destroy(Stock $stock)
     {
         //
     }
