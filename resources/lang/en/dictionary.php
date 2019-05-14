@@ -8,6 +8,7 @@ return [
         'like-these?' => 'You might like these as well...',
         'filters-panel' => 'Filters Panel',
         'currency' => 'RON',
+        'required-field' => 'This field is required!',
         'footer' => [
             'program' => 'Program',
             'program-data' => 'Monday - Saturday: &emsp;8:00 - 18:00<br>
@@ -53,6 +54,21 @@ return [
         'photo' => 'Photo',
         'price' => 'Price',
         'quantity' => 'Quantity',
+        'placeholders' => [
+            'title' => 'Ex: title example',
+            'author' => 'Ex: author example',
+            'publishing_house' => 'Ex: publishing house example',
+            'description' => 'Ex: description example',
+            'price' => 'Ex: 99.99 Ron',
+        ],
+        'tooltips'=>[
+            'photo' => "This field is not required. You can change the cover photo later.",
+            'description' => "This field is required and need to have at least 30 characters",
+        ],
+        'drag-and-drop' => [
+            'first-part' => 'To select a book cover browse through your files',
+            'second-part' => 'or drag and drop in the area on the right',
+        ],
         'actions' => [
             'add' => 'Add a new book',
             'delete' => 'Delete book',
@@ -62,7 +78,15 @@ return [
             'see-details' => 'See details',
             'exportExcel-books' => 'Export books (XLSX)',
             'exportPDF-books' => 'Export books (PDF)',
-        ]
+            'import-from-CSV' => 'Import from CSV',
+        ],
+        'forms' => [
+            'create' => 'Create new book',
+            'edit' => 'Edit book',
+        ],
+        'add-success' => 'The book was successfully created!',
+        'edit-success' => 'The book was successfully updated!',
+        'delete-success' => 'The book was deleted!',
     ],
     'user' => [
         'name' => 'Name',

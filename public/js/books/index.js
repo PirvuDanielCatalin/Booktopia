@@ -10,6 +10,9 @@ $(function () {
     $('.add-book-btn').on('click', function () {
         window.location = '/books/create';
     });
+    $('.import-books-btn').on('click', function () {
+        window.location = '/books/import-from-CSV';
+    });
 
     $('.modal-openner').on('click', function () {
         $('#confirmDeleteBook').attr('book-id', $(this).attr('book-id'));
@@ -24,11 +27,11 @@ $(function () {
             type: "DELETE",
             url: "/books/" + bookId,
             success: function ($response) {
-                console.log($response);
-                window.location.replace("/books");
+                toastr.success($response);
+                window.location = "/books";
             },
             error: function () {
-                console.log('Eroare la stergere!');
+                toastr.error('Error trying to delete book!');
             }
         });
     })

@@ -4,7 +4,7 @@
             {{ config('app.name', 'Booktopia') }}
         </a>
         @auth
-            @if(Auth::user()->isAdmin())
+            @if(Auth::user()->isAdmin() || Auth::user()->isPartner())
                 <a class="navbar-brand" href="{{ url('/control-panel') }}">Control Panel</a>
             @endif
         @endauth

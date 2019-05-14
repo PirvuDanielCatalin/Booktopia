@@ -36,6 +36,11 @@
                             </script>
                         @endif
                         <div class="pb-3">
+                            @if(Auth::user()->isAdmin())
+                                <button class="btn btn-outline-secondary import-books-btn">
+                                    <i class="fas fa-file-upload"></i> @lang('dictionary.book.actions.import-from-CSV')
+                                </button>
+                            @endif
                             <button class="btn btn-outline-primary add-book-btn">
                                 <i class="fas fa-plus"></i> @lang('dictionary.book.actions.add')
                             </button>
@@ -50,8 +55,10 @@
                                 <th>@lang('dictionary.book.publishing_house')</th>
                                 <th>@lang('dictionary.book.photo')</th>
                                 <th>@lang('dictionary.book.price')</th>
-                                <th>{{-- Edit Button--}}</th>
-                                <th>{{-- Delete Button --}}</th>
+                                @if(Auth::user()->isAdmin())
+                                    <th>{{-- Edit Button--}}</th>
+                                    <th>{{-- Delete Button --}}</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -69,26 +76,33 @@
                                     <td>{{ $book->author }}</td>
                                     <td>{{ $book->publishing_house }}</td>
                                     <td>
-                                        <img class="book-thumbnail"
-                                             src="{{ asset("images/books-covers")."/".$book->photo }}">
+                                        @if(isset($book->photo))
+                                            <img class="book-thumbnail"
+                                                 src="{{ asset("images/books-covers")."/".$book->photo }}">
+                                        @else
+                                            <img class="book-thumbnail"
+                                                 src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                        @endif
                                     </td>
                                     <td>{{ $book->price }}</td>
-                                    <td>
-                                        <a href="{{ route('books.edit', $book) }}">
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary">
-                                                <i class="far fa-edit"></i> @lang('dictionary.actions.edit')
+                                    @if(Auth::user()->isAdmin())
+                                        <td>
+                                            <a href="{{ route('books.edit', $book) }}">
+                                                <button type="button"
+                                                        class="btn btn-outline-secondary">
+                                                    <i class="far fa-edit"></i> @lang('dictionary.actions.edit')
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button class="modal-openner btn btn-outline-danger"
+                                                    data-toggle="modal"
+                                                    data-target="#deleteBookModal"
+                                                    book-id="{{ $book->id }}">
+                                                <i class="far fa-trash-alt"></i> @lang('dictionary.actions.delete')
                                             </button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <button class="modal-openner btn btn-outline-danger"
-                                                data-toggle="modal"
-                                                data-target="#deleteBookModal"
-                                                book-id="{{ $book->id }}">
-                                            <i class="far fa-trash-alt"></i> @lang('dictionary.actions.delete')
-                                        </button>
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

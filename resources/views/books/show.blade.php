@@ -17,9 +17,16 @@
 @section('scontent')
     <div class="col-md-4 card border-0">
         <div class="book-image-div h-100 card">
-            <img alt="CoverPhoto"
-                 class="book-image h-100"
-                 src="{{ asset("images/books-covers")."/".$book->photo }}">
+            @if(isset($book->photo))
+                <img alt="CoverPhoto"
+                     class="book-image h-100"
+                     src="{{ asset("images/books-covers")."/".$book->photo }}">
+            @else
+                <img alt="CoverPhoto"
+                     class="book-image h-100"
+                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+            @endif
+
         </div>
         <div class="rating-bar-div card text-center">
             <span class="star" name="1">☆</span>

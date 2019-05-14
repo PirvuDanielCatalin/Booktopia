@@ -1,4 +1,6 @@
 $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+
     initPanelSliding();
     initImageDragAndDrop();
     initAutoSizeTextArea();
@@ -6,16 +8,12 @@ $(function () {
 });
 
 function initPanelSliding() {
-    $($('form .card-body')[0]).show();
+    $('form .card-body').slideDown('slow');
 
     $('form .card-header').on('click', function () {
         $el = $(this).closest('.card').find('.card-body');
 
         if ($el.css('display') !== 'block') {
-            // $('form .card-body').slideUp();
-            // $('form .card-header .caret-up').addClass('d-none');
-            // $('form .card-header .caret-down').removeClass('d-none');
-
             $el.slideDown();
             $(this).find('.caret-up').removeClass('d-none');
             $(this).find('.caret-down').addClass('d-none');

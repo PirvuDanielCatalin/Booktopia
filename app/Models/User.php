@@ -63,6 +63,15 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isPartner()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name == 'Partener')
+                return true;
+        }
+        return false;
+    }
+
     public function assignRole($role_name)
     {
         $new_role = Role::where('name', $role_name)->first();

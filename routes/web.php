@@ -7,6 +7,9 @@ Auth::routes();
 Route::get('/notAdmin', function () {
     return view('helpers.NotAdmin');
 });
+Route::get('/home', function () {
+    return redirect()->route('shop');
+});
 
 // Shop
 Route::get('/', 'ShopController@index')->name('shop');
@@ -21,6 +24,7 @@ Route::post('users/update-role', 'UserController@update_role')->name('users.upda
 
 // Books
 Route::post('books/drag-and-drop-upload', 'BookController@drag_and_drop_upload')->name('books.drag-and-drop-upload');
+Route::get('books/import-from-CSV', 'BookController@import_from_CSV')->name('books.import-from-CSV');
 Route::resource('books', 'BookController');
 
 // Categories

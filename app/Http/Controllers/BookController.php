@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Validator;
 use Image;
 use Session;
 use DB;
+use Auth;
 
 class BookController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isAdmin'])->except('show');
-        //$this->middleware('CountPeople')->only(['index', 'create', 'show', 'edit']);
+        $this->middleware('auth')->except('show');
+        $this->middleware('isAdminOrPartner')->except('show');
+        $this->middleware('isAdmin')->only(['edit', 'update', 'destroy']);
     }
 
     /**
@@ -48,7 +51,6 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $validator = Validator::make($request->all(),
             [
                 'title' => 'required|string|max:101|unique:books,title',
@@ -81,9 +83,7 @@ class BookController extends Controller
                 'author' => $request->author,
                 'publishing_house' => $request->publishing_house,
                 'description' => $request->description,
-                'photo' => '',
                 'price' => $request->price,
-                'inShop' => 1,
             ]);
 
             if ($request->has('photo')) {
@@ -95,7 +95,10 @@ class BookController extends Controller
                 $book->save();
             }
 
-            Session::flash('succes', 'The book was successfully created!');
+            $book->inShop = (Auth::user()->isAdmin()) ? 1 : 0;
+            $book->save();
+
+            Session::flash('succes', Lang::get('dictionary.book.add-success'));
             return redirect()->route('books.index');
         }
     }
@@ -132,28 +135,28 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:101',
-            'author' => 'required|string|max:101',
-            'publishing_house' => 'required|string|max:101',
-            'description' => 'required|string|min:30|max:2000',
-            'photo' => /*'required|*/
-                'image',
-            'price' => 'required|numeric|min:1',
-        ], [
-            'required' => 'The :attribute field is required! ',
-            'string' => 'The :attribute field must be a string! ',
-            'min' => [
-                'string' => 'The :attribute field must have at least :min characters! ',
-                'numeric' => 'The :attribute field must be at least :min! '
-            ],
-            'max' => [
-                'string' => 'The :attribute field may not be greater than :max characters!  ',
-            ],
-            'unique' => 'The :attribute field value has already been used! ',
-            'image' => 'The :attribute field must be an image! ',
-            'numeric' => 'The :attribute field must be a number! ',
-        ]);
+        $validator = Validator::make($request->all(),
+            [
+                'title' => 'required|string|max:101|unique:books,title',
+                'author' => 'required|string|max:101',
+                'publishing_house' => 'required|string|max:101',
+                'description' => 'required|string|min:30|max:2000',
+                'photo' => 'image',
+                'price' => 'required|numeric|min:1',
+            ], [
+                'required' => 'The :attribute field is required! ',
+                'string' => 'The :attribute field must be a string! ',
+                'min' => [
+                    'string' => 'The :attribute field must have at least :min characters! ',
+                    'numeric' => 'The :attribute field must be at least :min! '
+                ],
+                'max' => [
+                    'string' => 'The :attribute field may not be greater than :max characters!  ',
+                ],
+                'unique' => 'The :attribute field value has already been used! ',
+                'image' => 'The :attribute field must be an image! ',
+                'numeric' => 'The :attribute field must be a number! ',
+            ]);
 
         if ($validator->fails()) {
             return back()->with('errors', $validator->errors());
@@ -166,7 +169,7 @@ class BookController extends Controller
 
             $photo = $book->photo;
             if ($request->has('photo')) {
-                if ($photo != '')
+                if ($photo != null)
                     unlink(public_path('images/books-covers/') . $photo);
                 $image = $request->file('photo');
                 $filename = $book->id . '.' . $image->getClientOriginalExtension();
@@ -178,7 +181,7 @@ class BookController extends Controller
             $book->price = $request->price;
             $book->save();
 
-            Session::flash('succes', 'The book was successfully updated!!');
+            Session::flash('succes', Lang::get('dictionary.book.edit-success'));
             return redirect()->route('books.index');
         }
     }
@@ -192,7 +195,7 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return response('The book was deleted!', 200)
+        return response(Lang::get('dictionary.book.delete-success'), 200)
             ->header('Content-Type', 'text/plain');
     }
 
@@ -205,5 +208,44 @@ class BookController extends Controller
         $directory = public_path('images/helpers/');
         $imgname = 'DraggedAndDropped.jpg';
         Image::make($file)->resize(200, 200)->save($directory . $imgname);
+    }
+
+    public function import_from_CSV()
+    {
+        dd("Be careful! You don't wanna import wrong stuff!");
+        $csvFile = file("C:\Users\danut\Downloads\books2.csv");
+        $data = [];
+        foreach ($csvFile as $line) {
+            $data[] = str_getcsv($line);
+        }
+
+        for ($i = 1; $i < sizeof($data); $i++) {
+            //dd($data[$i]);
+            $book = Book::create([
+                'title' => $data[$i][9],
+                'author' => $data[$i][7],
+                'publishing_house' => 'Unknown',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci aperiam, architecto
+                                  consequatur cupiditate dolorem dolores ducimus eligendi esse eveniet id incidunt natus
+                                  perferendis reprehenderit rerum saepe, sequi? Accusamus,
+                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
+                                  enim nemo officia tempora! Culpa dicta ipsa maiores maxime perspiciatis vel!
+                                  Accusantium aperiam expedita facilis in optio quasi quo ratione rerum?',
+                'price' => mt_rand(1, 100000) / 100,
+            ]);
+
+            $url = $data[$i][21];
+            $contents = file_get_contents($url);
+            $extension = substr($url, strrpos($url, '.') + 1);
+            $location = public_path('images/books-covers/');
+            $filename = $book->id . '.' . $extension;
+            Image::make($contents)->resize(250, 400)->save($location . $filename);
+
+            $book->photo = $filename;
+            $book->inShop = 1;
+            $book->save();
+        }
+
+        dd("The file was uploaded! Please check!");
     }
 }
