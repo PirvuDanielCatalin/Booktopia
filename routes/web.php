@@ -46,3 +46,4 @@ Route::resource('requirements', 'RequirementController');
 
 // Stocks
 Route::resource('stocks', 'StockController');
+Route::post('stocks/get-stock','StockController@get_stock')->name('stocks.get-stock');

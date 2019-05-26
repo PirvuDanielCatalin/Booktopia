@@ -23,8 +23,9 @@
                         <b>@lang('dictionary.book.forms.create')</b>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('books.update', $book) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="card title_author_publiching_house_card">
                                 <div class="card-header text-center">
                                     @lang('dictionary.book.title') && @lang('dictionary.book.author')
@@ -155,7 +156,8 @@
                                                     <input id="checkbox{{ $category->id }}"
                                                            name="categories[]"
                                                            type="checkbox"
-                                                           value="{{ $category->name }}">
+                                                           value="{{ $category->name }}"
+                                                            {{ (in_array($category->id, $book_categories)) ? 'checked' : '' }}>
                                                     <label for="checkbox{{ $category->id }}">{{ $category->name }}</label>
                                                 </li>
                                             @endforeach

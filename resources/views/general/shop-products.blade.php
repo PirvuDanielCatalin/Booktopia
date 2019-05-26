@@ -17,7 +17,7 @@
         </div>
         <div class="filter-panel">
             <div class="filter-panel-title">
-                Ceva
+                @lang('dictionary.book.price')
                 <span class="caret-down float-right">
                     <i class="fas fa-caret-down"></i>
                 </span>
@@ -29,20 +29,32 @@
                 <div class="filter-panel-item">
                     <label>
                         <input type="checkbox">
-                        ceva
+                        < 30 @lang('dictionary.general.currency')
                     </label>
                 </div>
                 <div class="filter-panel-item">
                     <label>
                         <input type="checkbox">
-                        ceva
+                        30 - 60 @lang('dictionary.general.currency')
+                    </label>
+                </div>
+                <div class="filter-panel-item">
+                    <label>
+                        <input type="checkbox">
+                        60 - 100 @lang('dictionary.general.currency')
+                    </label>
+                </div>
+                <div class="filter-panel-item">
+                    <label>
+                        <input type="checkbox">
+                        > 100 @lang('dictionary.general.currency')
                     </label>
                 </div>
             </div>
         </div>
         <div class="filter-panel">
             <div class="filter-panel-title">
-                Ceva
+                @lang('dictionary.category.categories')
                 <span class="caret-down float-right">
                     <i class="fas fa-caret-down"></i>
                 </span>
@@ -51,20 +63,17 @@
                 </span>
             </div>
             <div class="filter-panel-div">
-                <div class="filter-panel-item">
-                    <label>
-                        <input type="checkbox">
-                        ceva
-                    </label>
-                </div>
-                <div class="filter-panel-item">
-                    <label>
-                        <input type="checkbox">
-                        ceva
-                    </label>
-                </div>
+                @foreach($categories as $category)
+                    <div class="filter-panel-item">
+                        <label>
+                            <input type="checkbox">
+                            {{ $category->name }}
+                        </label>
+                    </div>
+                @endforeach
             </div>
         </div>
+
     </div>
     <div class="col-md-10 card flex-row flex-wrap">
         <div class="w-100 pt-3 h-auto">

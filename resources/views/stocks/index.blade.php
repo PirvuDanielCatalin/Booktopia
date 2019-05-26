@@ -50,68 +50,47 @@
                             <div class="stocks_page_right_panel">
                                 <div class="form">
                                     <div class="row">
-                                        <input type="hidden" class="stock_id" value="">
                                         <div class="col-md-12 row m-auto p-2">
                                             <button class="btn btn-outline-info w-100 edit-stock-btn">
                                                 <i class="far fa-edit"></i> @lang('dictionary.actions.edit')
                                             </button>
                                         </div>
+                                        <input type="hidden" class="stock_id" value="">
                                         <div class="col-md-12 form-input update-stock-div p-2">
                                             <label for="title">@lang('dictionary.book.title')</label>
-                                            <input type="text" name="title"
-                                                   class="form-control"
-                                                   value="" disabled>
+                                            <input class="form-control"
+                                                   disabled
+                                                   name="title"
+                                                   type="text"
+                                                   value="">
                                         </div>
                                         <div class="col-md-12 form-input update-stock-div p-2">
                                             <label for="quantity">@lang('dictionary.book.quantity')</label>
-                                            <input type="text" name="quantity"
-                                                   class="form-control"
-                                                   value="" disabled>
+                                            <input class="form-control"
+                                                   disabled
+                                                   name="quantity"
+                                                   type="text"
+                                                   value="">
                                         </div>
                                         <div class="col-md-12 form-input update-stock-div p-2">
                                             <label for="plus-minus-quantity">@lang('dictionary.stock.plus-minus-quantity')</label>
-                                            <input type="text" name="plus-minus-quantity"
-                                                   class="form-control"
-                                                   value="" disabled>
+                                            <input class="form-control"
+                                                   data-placement="top"
+                                                   data-toggle="tooltip"
+                                                   disabled
+                                                   min=""
+                                                   name="plus-minus-quantity"
+                                                   placeholder="@lang('dictionary.stock.positive-or-negative-value')"
+                                                   title="@lang('dictionary.stock.tooltips.positive-or-negative-value')"
+                                                   type="number"
+                                                   value="">
                                         </div>
                                         <div class="col-md-12 form-input update-stock-div p-2">
-                                            <button class="btn btn-outline-success update-stock-btn w-100">
+                                            <button class="btn btn-outline-success w-100 update-stock-btn">
                                                 <i class="far fa-save"></i> @lang('dictionary.actions.save')
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div aria-hidden="true"
-                         aria-labelledby="deleteStockModalLabel"
-                         stock-id=""
-                         class="modal fade"
-                         id="deleteStockModal"
-                         role="dialog"
-                         tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteStockModalLabel">
-                                        @lang('dictionary.stock.actions.delete')
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body"></div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-danger"
-                                            data-dismiss="modal"
-                                            type="button">@lang('dictionary.actions.cancel')</button>
-                                    <button stock-id=""
-                                            class="btn btn-success"
-                                            id="confirmStockBtn"
-                                            type="button">
-                                        @lang('dictionary.actions.delete')
-                                    </button>
                                 </div>
                             </div>
                         </div>

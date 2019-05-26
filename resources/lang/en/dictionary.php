@@ -61,7 +61,7 @@ return [
             'description' => 'Ex: description example',
             'price' => 'Ex: 99.99 Ron',
         ],
-        'tooltips'=>[
+        'tooltips' => [
             'photo' => "This field is not required. You can change the cover photo later.",
             'description' => "This field is required and need to have at least 30 characters",
         ],
@@ -85,8 +85,11 @@ return [
             'edit' => 'Edit book',
         ],
         'add-success' => 'The book was successfully created!',
+        'add-error' => 'The book creation failed!',
         'edit-success' => 'The book was successfully updated!',
+        'edit-error' => 'The book update failed!',
         'delete-success' => 'The book was deleted!',
+        'delete-error' => 'The book deletion failed!',
     ],
     'user' => [
         'name' => 'Name',
@@ -104,8 +107,13 @@ return [
         'actions' => [
             'add' => 'Add Category',
             'delete' => 'Delete Category',
-
         ],
+        'add-success' => 'The category was successfully created!',
+        'add-error' => 'The category creation failed!',
+        'edit-success' => 'The category was successfully updated!',
+        'edit-error' => 'The category update failed!',
+        'delete-success' => 'The category was deleted!',
+        'delete-error' => 'The category deletion failed!',
     ],
     'comment' => [
         'comments' => 'Comments',
@@ -153,6 +161,13 @@ return [
     ],
     'stock' => [
         'stocks' => 'Stocks',
-        'plus-minus-quantity' => 'Added value',
+        'plus-minus-quantity' => 'Value to update quantity',
+        'positive-or-negative-value' => 'Positive or negative value',
+        'tooltips' => [
+            'positive-or-negative-value' => 'The value below will be added to the curent quantity, 
+                                             meaning that this value could either decrease or increase the quantity.'
+        ],
+        'update-success' => 'The stock was successfully updated!',
+        'update-error' => 'Error on updating stock!',
     ]
 ];

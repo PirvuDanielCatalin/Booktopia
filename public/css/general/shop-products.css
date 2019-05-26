@@ -57,14 +57,14 @@
 
 .filter-panel-title {
     padding: 1rem 0.7rem;
-    font-size: 1.4em;
+    font-size: 1.1em;
     cursor: pointer;
 }
 
 .filter-panel-item {
     padding: 0.5rem 0.7rem;
     border-top: 1px solid #c1bdbd;
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 .filter-panel-item label {

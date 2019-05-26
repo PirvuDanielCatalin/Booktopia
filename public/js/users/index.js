@@ -1,13 +1,6 @@
 $(function () {
     $('#users-datatable').DataTable();
 
-    /*$('.exportExcel-users-btn').on('click', function () {
-        window.location = '/users/exportExcel';
-    });
-    $('.exportPDF-users-btn').on('click', function () {
-        window.location = '/users/exportPDF';
-    });*/
-
     $('.tbl-user-info').on('click', function () {
         $data = {};
         $data['user_id'] = $(this).find('.tbl-user-id').text();
@@ -29,7 +22,7 @@ $(function () {
                 $('.users_page_right_panel').show('slow');
             },
             error: function () {
-                toastr.warning('Error on getting user role!');
+                toastr.error('Error on getting user role!');
             }
         });
     });
@@ -51,7 +44,7 @@ $(function () {
                 $('.users_page_right_panel_img').show();
             },
             error: function () {
-                toastr.warning("Error on updating user role!");
+                toastr.error("Error on updating user role!");
             }
         });
     });

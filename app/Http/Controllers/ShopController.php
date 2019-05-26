@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -16,8 +17,9 @@ class ShopController extends Controller
 
     public function index()
     {
-        $books = Book::where('inShop','1')->paginate(10);
-        return view('general.shop-products', ['books' => $books]);
+        $books = Book::where('inShop', '1')->paginate(10);
+        $categories = Category::all();
+        return view('general.shop-products', ['books' => $books, 'categories' => $categories]);
     }
 
     public function control_panel()

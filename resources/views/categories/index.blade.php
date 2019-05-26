@@ -60,7 +60,10 @@
                                         <div class="col-md-12 form-input p-2">
                                             <label for="name">@lang('dictionary.category.name')</label>
                                             <input class="form-control"
+                                                   maxlength="51"
+                                                   minlength="1"
                                                    name="name"
+                                                   required
                                                    type="text"
                                                    value="">
                                         </div>
@@ -72,7 +75,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 form-input p-2">
-                                            <button class="btn btn-success w-100">
+                                            <button class="btn btn-success w-100 save-category-btn">
                                                 <i class="far fa-save"></i> @lang('dictionary.actions.save')
                                             </button>
                                         </div>

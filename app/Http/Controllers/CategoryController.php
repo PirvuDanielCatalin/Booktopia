@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Session;
+use Validator;
 
 class CategoryController extends Controller
 {
@@ -28,21 +30,66 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = Category::create([
-            'name' => $request->name,
-        ]);
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|string|min:1|max:51|unique:categories,name',
+            ], [
+                'required' => 'The :attribute field is required! ',
+                'string' => 'The :attribute field must be a string! ',
+                'min' => [
+                    'string' => 'The :attribute field must have at least :min characters! ',
+                    'numeric' => 'The :attribute field must be at least :min! '
+                ],
+                'max' => [
+                    'string' => 'The :attribute field may not be greater than :max characters!  ',
+                ],
+                'unique' => 'The :attribute field value has already been used! ',
+            ]);
+        if ($validator->fails()) {
+            return ['status' => 'error',
+                'message' => Lang::get('dictionary.category.add-error'),
+                'errors' => $validator->errors()];
+        } else {
+            $category = Category::create([
+                'name' => $request->name,
+            ]);
 
-        Session::flash('succes', 'The category was successfully created!');
-        return redirect()->route('categories.index');
+            return ['status' => 'success', 'message' => Lang::get('dictionary.category.add-success')];
+        }
     }
 
     public function update(Request $request, Category $category)
     {
-        dd($request->all(), $category);
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|string|min:1|max:51',
+            ], [
+                'required' => 'The :attribute field is required! ',
+                'string' => 'The :attribute field must be a string! ',
+                'min' => [
+                    'string' => 'The :attribute field must have at least :min characters! ',
+                    'numeric' => 'The :attribute field must be at least :min! '
+                ],
+                'max' => [
+                    'string' => 'The :attribute field may not be greater than :max characters!  ',
+                ]
+            ]);
+        if ($validator->fails()) {
+            return ['status' => 'error',
+                'message' => Lang::get('dictionary.category.edit-error'),
+                'errors' => $validator->errors()];
+        } else {
+
+            $category->name = $request->name;
+            $category->save();
+            return ['status' => 'success', 'message' => Lang::get('dictionary.category.edit-success')];
+        }
     }
 
     public function destroy(Category $category)
     {
-        dd($category);
+        $category->delete();
+        return ['status' => 'success', 'message' => Lang::get('dictionary.category.delete-success')];
+
     }
 }

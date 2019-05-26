@@ -24,14 +24,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        @if( session('succes') )
-                            <div class="alert alert-success d-none">
-                                {{ session('succes') }}
-                            </div>
+                        @if( session('success') )
                             <script defer>
                                 window.onload = function () {
-                                    let alert = document.querySelector('.alert').innerHTML.trim();
-                                    toastr.success(alert);
+                                    toastr.success('{{ session('success') }}');
                                 };
                             </script>
                         @endif
@@ -95,7 +91,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <button class="modal-openner btn btn-outline-danger"
+                                            <button class="modal-opener btn btn-outline-danger"
                                                     data-toggle="modal"
                                                     data-target="#deleteBookModal"
                                                     book-id="{{ $book->id }}">

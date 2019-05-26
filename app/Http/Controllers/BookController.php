@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Validator;
@@ -28,6 +29,7 @@ class BookController extends Controller
      */
     public function index()
     {
+
         $books = Book::all();
         return view('books.index', ['books' => $books]);
     }
@@ -95,10 +97,16 @@ class BookController extends Controller
                 $book->save();
             }
 
+            if ($request->categories)
+                foreach ($request->categories as $category_name) {
+                    $category = Category::where('name', $category_name)->first();
+                    $book->categories()->attach($category);
+                }
+
             $book->inShop = (Auth::user()->isAdmin()) ? 1 : 0;
             $book->save();
 
-            Session::flash('succes', Lang::get('dictionary.book.add-success'));
+            Session::flash('success', Lang::get('dictionary.book.add-success'));
             return redirect()->route('books.index');
         }
     }
@@ -123,7 +131,11 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         $categories = Category::all();
-        return view('books.edit', ['book' => $book, 'categories' => $categories]);
+        $book_categories = [];
+        foreach ($book->categories as $category) {
+            $book_categories[] = $category->id;
+        }
+        return view('books.edit', ['book' => $book, 'book_categories' => $book_categories, 'categories' => $categories]);
     }
 
     /**
@@ -137,7 +149,7 @@ class BookController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'title' => 'required|string|max:101|unique:books,title',
+                'title' => 'required|string|max:101',
                 'author' => 'required|string|max:101',
                 'publishing_house' => 'required|string|max:101',
                 'description' => 'required|string|min:30|max:2000',
@@ -153,7 +165,6 @@ class BookController extends Controller
                 'max' => [
                     'string' => 'The :attribute field may not be greater than :max characters!  ',
                 ],
-                'unique' => 'The :attribute field value has already been used! ',
                 'image' => 'The :attribute field must be an image! ',
                 'numeric' => 'The :attribute field must be a number! ',
             ]);
@@ -178,10 +189,20 @@ class BookController extends Controller
                 $book->photo = $filename;
             }
 
+            $categories = Category::all();
+            foreach ($categories as $category)
+                $book->categories()->detach($category);
+
+            if ($request->categories)
+                foreach ($request->categories as $category_name) {
+                    $category = Category::where('name', $category_name)->first();
+                    $book->categories()->attach($category);
+                }
+
             $book->price = $request->price;
             $book->save();
 
-            Session::flash('succes', Lang::get('dictionary.book.edit-success'));
+            Session::flash('success', Lang::get('dictionary.book.edit-success'));
             return redirect()->route('books.index');
         }
     }
@@ -190,18 +211,22 @@ class BookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Book $book
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function destroy(Book $book)
     {
-        $book->delete();
-        return response(Lang::get('dictionary.book.delete-success'), 200)
-            ->header('Content-Type', 'text/plain');
+        if ($book->photo != null)
+            unlink(public_path('images/books-covers/') . $book->photo);
+
+        try {
+            $book->delete();
+            return ['status' => 'success', 'message' => Lang::get('dictionary.book.delete-success')];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => Lang::get('dictionary.book.delete-error')];
+        }
+
     }
 
-    /**
-     * @param Request $request
-     */
     public function drag_and_drop_upload(Request $request)
     {
         $file = $request->file('file')->getRealPath();
