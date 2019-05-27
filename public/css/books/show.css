@@ -61,6 +61,8 @@
 
 .comment-div .comment-text {
     width: 85%;
+    margin: 0 10px;
+    border-radius: 5px;
 }
 
 .comment-div .comment-cmd-panel {

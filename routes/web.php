@@ -32,6 +32,9 @@ Route::post('categories/get-category', 'CategoryController@get_category')->name(
 Route::post('categories/remove-book', 'CategoryController@remove_book')->name('categories.remove-book');
 Route::resource('categories', 'CategoryController');
 
+// Comments
+Route::resource('comments', 'CommentController');
+
 // Offers
 Route::post('offers/get-offer', 'OfferController@get_offer')->name('offers.get-offer');
 Route::resource('offers', 'OfferController');

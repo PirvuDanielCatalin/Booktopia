@@ -36,6 +36,7 @@ return [
         'use' => 'Use',
         'accept' => 'Accept',
         'deny' => 'Deny',
+        'post' => 'Post',
     ],
     'control-panel' => [
         'shop' => 'Go to Shop',
@@ -123,6 +124,13 @@ return [
         'actions' => [
             'add' => 'Add a comment',
         ],
+        'no-comments'=>'There are no comments on this book yet.',
+        'add-success' => 'The comment was successfully posted!',
+        'add-error' => 'The comment posting failed!',
+        'edit-success' => 'The comment was successfully updated!',
+        'edit-error' => 'The comment update failed!',
+        'delete-success' => 'The comment was deleted!',
+        'delete-error' => 'The comment deletion failed!',
     ],
     'offer' => [
         'offers' => 'Offers',

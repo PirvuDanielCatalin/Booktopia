@@ -149,9 +149,11 @@
     <div class="col-md-12 card border-0">
         <div class="mt-2 book-info book-title">
             <b>@lang('dictionary.comment.comments')</b>
-            <button class="btn btn-outline-secondary float-right add-comment-btn">
-                <i class="far fa-comment"></i> @lang('dictionary.comment.actions.add')
-            </button>
+            @if(Auth::check())
+                <button class="btn btn-outline-secondary float-right add-comment-btn">
+                    <i class="far fa-comment"></i> @lang('dictionary.comment.actions.add')
+                </button>
+            @endif
         </div>
         <div class="comment-textarea-div">
             <textarea class="form-control" rows="5"></textarea>
@@ -159,49 +161,56 @@
                 <i class="far fa-paper-plane"></i> @lang('dictionary.actions.send')
             </button>
         </div>
-        @for($i=1;$i<=5;$i++)
-            <div class="comment-div">
-                <div class="comment-approvals">
-                    <div class="like-dislike-btns">
-                        <button class="btn btn-outline-secondary h-50 like-comment-btn">
-                            <i class="far fa-thumbs-up"></i>
-                        </button>
-                        <div class="comment-approvals-value p-1">25</div>
-                        <button class="btn btn-outline-secondary h-50 dislike-comment-btn">
-                            <i class="far fa-thumbs-down"></i>
-                        </button>
+        @if(sizeof($book->bookcomments))
+            @foreach($book->bookcomments as $bookcomment)
+                <div class="comment-div">
+                    <div class="comment-approvals">
+                        <div class="like-dislike-btns">
+                            <button class="btn btn-outline-secondary h-50 like-comment-btn">
+                                <i class="far fa-thumbs-up"></i>
+                            </button>
+                            <div class="comment-approvals-value p-1">{{ $bookcomment->approvals }}</div>
+                            <button class="btn btn-outline-secondary h-50 dislike-comment-btn">
+                                <i class="far fa-thumbs-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pl-3 pr-3 comment-text">
+                        {{ $bookcomment->text }}
+                    </div>
+                    <div class="comment-cmd-panel" user-id="{{ $bookcomment->user->id }}">
+                        {{ $bookcomment->user->name }}
+                        <div class="d-flex edit-delete-btns">
+                            <button book-comment="{{ $bookcomment->id }}"
+                                    class="btn btn-outline-secondary m-1 save-comment-btn"
+                                    data-placement="top"
+                                    data-toggle="tooltip"
+                                    style="display: none;"
+                                    title="@lang('dictionary.actions.post')">
+                                <i class="far fa-paper-plane"></i>
+                            </button>
+                            <button book-comment="{{ $bookcomment->id }}"
+                                    class="btn btn-outline-secondary m-1 edit-comment-btn"
+                                    data-placement="top"
+                                    data-toggle="tooltip"
+                                    title="@lang('dictionary.actions.edit')">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button book-comment="{{ $bookcomment->id }}"
+                                    class="btn btn-outline-secondary m-1 delete-comment-btn"
+                                    data-placement="top"
+                                    data-toggle="tooltip"
+                                    title="@lang('dictionary.actions.delete')">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="pl-3 pr-3 comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur distinctio dolore molestias
-                    odio placeat sequi? Cupiditate ducimus iusto minus possimus repellat. Ipsum, obcaecati, saepe!
-                    Blanditiis ex fuga quis quisquam. Laborum?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    A aperiam deleniti eius excepturi iure iusto perspiciatis temporibus vel, voluptatum. Eaque esse
-                    facilis itaque laborum magnam maiores perferendis quo recusandae Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit. Accusantium architecto illo ipsa labore laudantium magnam non ratione
-                    tempore tenetur voluptas. Adipisci illo laudantium nostrum perspiciatis placeat sapiente sed ut
-                    voluptatum.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequatur delectus,
-                    deleniti dolores nam quam reiciendis soluta sunt unde! Accusantium atque ea eos eum harum incidunt
-                    necessitatibus nesciunt pariatur suscipit!
-                </div>
-                <div class="comment-cmd-panel">
-                    User cu nume atataicndiucnduncdiuncudinciudnciudniu
-                    <div class="d-flex edit-delete-btns">
-                        <button class="btn btn-outline-secondary m-1"
-                                data-placement="top"
-                                data-toggle="tooltip"
-                                title="@lang('dictionary.actions.edit')">
-                            <i class="far fa-edit"></i>
-                        </button>
-                        <button class="btn btn-outline-secondary m-1"
-                                data-placement="top"
-                                data-toggle="tooltip"
-                                title="@lang('dictionary.actions.delete')">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </div>
+            @endforeach
+        @else
+            <div class="p-3">
+                <b>@lang('dictionary.comment.no-comments')</b>
             </div>
-        @endfor
+        @endif
     </div>
 @endsection

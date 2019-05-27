@@ -72,8 +72,10 @@ class CategoryController extends Controller
                 ],
                 'max' => [
                     'string' => 'The :attribute field may not be greater than :max characters!  ',
-                ]
+                ],
+                'unique' => 'The :attribute field value has already been used! ',
             ]);
+
         if ($validator->fails()) {
             return ['status' => 'error',
                 'message' => Lang::get('dictionary.category.edit-error'),

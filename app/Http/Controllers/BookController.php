@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
-use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Validator;
@@ -29,7 +28,6 @@ class BookController extends Controller
      */
     public function index()
     {
-
         $books = Book::all();
         return view('books.index', ['books' => $books]);
     }
