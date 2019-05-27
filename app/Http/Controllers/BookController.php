@@ -92,10 +92,18 @@ class BookController extends Controller
                 $image = $request->file('photo');
                 $filename = $book->id . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/books-covers/');
-                Image::make($image)->resize(400, 400)->save($location . $filename);
+                Image::make($image)->resize(250, 400)->save($location . $filename);
                 $book->photo = $filename;
                 $book->save();
-            }
+            } else
+                if (file_exists(public_path('images/helpers/DraggedAndDropped.jpg'))) {
+                    $old_path = public_path('images/helpers/DraggedAndDropped.jpg');
+                    $filename = $book->id . '.jpg';
+                    $new_path = public_path('images/books-covers/' . $filename);
+                    rename($old_path, $new_path);
+                    $book->photo = $filename;
+                    $book->save();
+                }
 
             if ($request->categories)
                 foreach ($request->categories as $category_name) {
@@ -114,7 +122,7 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Book $book
+     * @param Book $book
      * @return \Illuminate\Http\Response
      */
     public function show(Book $book)
@@ -125,7 +133,7 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Book $book
+     * @param Book $book
      * @return \Illuminate\Http\Response
      */
     public function edit(Book $book)
@@ -142,7 +150,7 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Book $book
+     * @param Book $book
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Book $book)
@@ -185,9 +193,19 @@ class BookController extends Controller
                 $image = $request->file('photo');
                 $filename = $book->id . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/books-covers/');
-                Image::make($image)->resize(400, 400)->save($location . $filename);
+                Image::make($image)->resize(250, 400)->save($location . $filename);
                 $book->photo = $filename;
-            }
+            } else
+                if (file_exists(public_path('images/helpers/DraggedAndDropped.jpg'))) {
+                    if ($photo != null)
+                        unlink(public_path('images/books-covers/') . $photo);
+                    $old_path = public_path('images/helpers/DraggedAndDropped.jpg');
+                    $filename = $book->id . '.jpg';
+                    $new_path = public_path('images/books-covers/' . $filename);
+                    rename($old_path, $new_path);
+                    $book->photo = $filename;
+                    $book->save();
+                }
 
             $categories = Category::all();
             foreach ($categories as $category)
@@ -210,15 +228,14 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Book $book
+     * @param Book $book
      * @return array|\Illuminate\Http\Response
      */
     public function destroy(Book $book)
     {
-        if ($book->photo != null)
-            unlink(public_path('images/books-covers/') . $book->photo);
-
         try {
+            if ($book->photo != null)
+                unlink(public_path('images/books-covers/') . $book->photo);
             $book->delete();
             return ['status' => 'success', 'message' => Lang::get('dictionary.book.delete-success')];
         } catch (\Exception $e) {
@@ -232,7 +249,7 @@ class BookController extends Controller
         $file = $request->file('file')->getRealPath();
         $directory = public_path('images/helpers/');
         $imgname = 'DraggedAndDropped.jpg';
-        Image::make($file)->resize(200, 200)->save($directory . $imgname);
+        Image::make($file)->resize(250, 400)->save($directory . $imgname);
     }
 
     public function import_from_CSV()

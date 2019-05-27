@@ -42,7 +42,7 @@
 }
 
 .books-panel::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
 }
 
 .books-panel::-webkit-scrollbar-track {
@@ -56,6 +56,14 @@
 
 .books-panel::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(0, 0, 0, 0.6);
+}
+
+.books-panel .book-panel .book-panel-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem;
 }
 
 .edit-category-btn, .delete-category-btn {

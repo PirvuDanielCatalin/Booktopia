@@ -29,6 +29,7 @@ Route::resource('books', 'BookController');
 
 // Categories
 Route::post('categories/get-category', 'CategoryController@get_category')->name('categories.get-category');
+Route::post('categories/remove-book', 'CategoryController@remove_book')->name('categories.remove-book');
 Route::resource('categories', 'CategoryController');
 
 // Offers
@@ -46,4 +47,4 @@ Route::resource('requirements', 'RequirementController');
 
 // Stocks
 Route::resource('stocks', 'StockController');
-Route::post('stocks/get-stock','StockController@get_stock')->name('stocks.get-stock');
+Route::post('stocks/get-stock', 'StockController@get_stock')->name('stocks.get-stock');

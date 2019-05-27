@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
@@ -18,8 +19,7 @@ class CategoryController extends Controller
 
     public function get_category(Request $request)
     {
-
-        return Category::find($request->category_id);
+        return Category::with('books')->where('categories.id', $request->category_id)->first();
     }
 
     public function index()
@@ -62,7 +62,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'name' => 'required|string|min:1|max:51',
+                'name' => 'required|string|min:1|max:51|unique:categories,name,' . $category->id,
             ], [
                 'required' => 'The :attribute field is required! ',
                 'string' => 'The :attribute field must be a string! ',
@@ -88,8 +88,23 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $category->delete();
-        return ['status' => 'success', 'message' => Lang::get('dictionary.category.delete-success')];
+        try {
+            $category->delete();
+            return ['status' => 'success', 'message' => Lang::get('dictionary.category.delete-success')];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => Lang::get('dictionary.category.delete-error')];
+        }
+    }
 
+    public function remove_book(Request $request)
+    {
+        try {
+            $category = Category::find($request->categoryId);
+            $book = Book::find($request->bookId);
+            $book->categories()->detach($category);
+            return ['status' => 'success', 'message' => Lang::get('dictionary.category.remove-success')];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => Lang::get('dictionary.category.remove-error')];
+        }
     }
 }

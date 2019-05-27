@@ -69,9 +69,7 @@
                                         </div>
                                         <div class="col-md-12 form-input p-2">
                                             <div class="books-panel">
-                                                <br><br><br><br><br><br><br><br><br><br><br><br>
-                                                <br><br><br><br><br><br><br><br><br><br><br><br>
-                                                <br><br><br><br><br><br><br><br><br><br><br><br>
+
                                             </div>
                                         </div>
                                         <div class="col-md-12 form-input p-2">
@@ -108,6 +106,39 @@
                                     <button category-id=""
                                             class="btn btn-success"
                                             id="confirmDeleteCategory"
+                                            type="button">
+                                        @lang('dictionary.actions.delete')
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-hidden="true"
+                         aria-labelledby="removeBookFromCategoryModalLabel"
+                         category-id=""
+                         class="modal fade"
+                         id="removeBookFromCategoryModal"
+                         role="dialog"
+                         tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"
+                                        id="removeBookFromCategoryModalLabel">
+                                        @lang('dictionary.category.actions.remove-book')
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body"></div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger"
+                                            data-dismiss="modal"
+                                            type="button">@lang('dictionary.actions.cancel')</button>
+                                    <button category-id=""
+                                            class="btn btn-success"
+                                            id="confirmRemoveBookFromCategory"
                                             type="button">
                                         @lang('dictionary.actions.delete')
                                     </button>

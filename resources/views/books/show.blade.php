@@ -53,6 +53,13 @@
             <b>@lang('dictionary.book.description'):</b><br>{{ $book->description }}
         </div>
         <div class="book-info">
+            <b>@lang('dictionary.category.categories'):</b>&nbsp;
+            @for($i = 0; $i < sizeof($book->categories)-1; $i++)
+                {{ $book->categories[$i]->name }},
+            @endfor
+            {{ $book->categories[sizeof($book->categories)-1]->name }}
+        </div>
+        <div class="book-info">
             <b>@lang('dictionary.book.price'):</b>&nbsp;{{ $book->price }}
         </div>
         <div class="add-product-div">
@@ -187,40 +194,6 @@
                             <i class="far fa-edit"></i>
                         </button>
                         <button class="btn btn-outline-secondary m-1"
-                                data-placement="top"
-                                data-toggle="tooltip"
-                                title="@lang('dictionary.actions.delete')">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-div">
-                <div class="comment-approvals">
-                    <div class="like-dislike-btns">
-                        <button class="btn btn-outline-secondary h-50 like-comment-btn">
-                            <i class="far fa-thumbs-up"></i>
-                        </button>
-                        <div class="comment-approvals-value p-1">25</div>
-                        <button class="btn btn-outline-secondary h-50 dislike-comment-btn">
-                            <i class="far fa-thumbs-down"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="pl-3 pr-3 comment-text">
-                    ore moluatur delectus, deleniti dolores nam quam reiciendis soluta sunt unde! Accusantium atque ea
-                    eos eum harum incidunt necessitatibus nesciunt pariatur suscipit!
-                </div>
-                <div class="comment-cmd-panel">
-                    User cu nume atata
-                    <div class="d-flex edit-delete-btns">
-                        <button class="btn btn-outline-secondary m-1 edit-comment-btn"
-                                data-placement="top"
-                                data-toggle="tooltip"
-                                title="@lang('dictionary.actions.edit')">
-                            <i class="far fa-edit"></i>
-                        </button>
-                        <button class="btn btn-outline-secondary m-1 delete-comment-btn"
                                 data-placement="top"
                                 data-toggle="tooltip"
                                 title="@lang('dictionary.actions.delete')">

@@ -20,11 +20,13 @@ $(function () {
             url: "/books/" + bookId,
             success: function (response) {
                 if (response.status === "success") {
+                    $('#deleteBookModal').modal('toggle');
                     toastr.success(response.message);
                     setTimeout(function () {
                         window.location = "/books";
                     }, 1000);
                 } else if (response.status === "error") {
+                    $('#deleteBookModal').modal('toggle');
                     toastr.error(response.message);
                 }
             },

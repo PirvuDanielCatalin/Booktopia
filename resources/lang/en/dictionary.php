@@ -107,6 +107,7 @@ return [
         'actions' => [
             'add' => 'Add Category',
             'delete' => 'Delete Category',
+            'remove-book' => 'Remove book',
         ],
         'add-success' => 'The category was successfully created!',
         'add-error' => 'The category creation failed!',
@@ -114,6 +115,8 @@ return [
         'edit-error' => 'The category update failed!',
         'delete-success' => 'The category was deleted!',
         'delete-error' => 'The category deletion failed!',
+        'remove-success' => 'The book was removed from category!',
+        'remove-error' => 'Book removal from category failed!',
     ],
     'comment' => [
         'comments' => 'Comments',

@@ -181,7 +181,7 @@
                                             <p class="error-msg">{{ $errors->first('price') }}</p>
                                         @endif
                                         <input class="form-control {{ ($errors->has('price')) ? 'error-form-input' : '' }}"
-                                               min="0.01"
+                                               min="1"
                                                name="price"
                                                step="0.01"
                                                type="number"
