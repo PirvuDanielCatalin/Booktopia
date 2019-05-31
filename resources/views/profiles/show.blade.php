@@ -42,6 +42,7 @@
             <button class="btn btn-outline-success float-right m-1 save-profile-btn"
                     data-placement="top"
                     data-toggle="tooltip"
+                    style="display: none"
                     title="@lang('dictionary.actions.save')">
                 <i class="far fa-save"></i>
             </button>
@@ -51,6 +52,7 @@
             <input class="profile-info-input"
                    disabled
                    type="text"
+                   name="first_name"
                    value="{{ $profile->first_name }}">
         </div>
         <div class="profile-info">
@@ -58,12 +60,15 @@
             <input class="profile-info-input"
                    disabled
                    type="text"
+                   name="last_name"
                    value="{{ $profile->last_name }}">
         </div>
         <div class="profile-info">
             <b>@lang('dictionary.profile.phone')</b>
             <input class="profile-info-input"
-                   disabled type="text"
+                   disabled
+                   type="text"
+                   name="phone"
                    value="{{ $profile->phone }}">
         </div>
         <div class="profile-info">
@@ -71,6 +76,7 @@
             <input class="profile-info-input"
                    disabled
                    type="text"
+                   name="adress"
                    value="{{ $profile->adress }}">
         </div>
     </div>

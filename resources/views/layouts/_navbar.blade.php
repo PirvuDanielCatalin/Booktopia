@@ -41,7 +41,6 @@
                            v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item"
                                href="{{ route('logout') }}"
@@ -49,7 +48,10 @@
                                 {{ __('Logout') }}
                             </a>
                             <a class="dropdown-item"
-                               href="{{ route('profiles.show',['profile' => '1']) }}">My Profile</a>
+                               href="{{ (Auth::user()->profile)
+                               ? route('profiles.show',['profile' => Auth::user()->profile])
+                               : route('profiles.index') }}">
+                                My Profile</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>

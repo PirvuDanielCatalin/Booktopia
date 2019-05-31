@@ -2,6 +2,8 @@
 
 @section('shop-scripts')
     <script type="text/javascript"
+            src="{{ asset('libs/jquery.session.js') }}" defer></script>
+    <script type="text/javascript"
             src="{{ asset('js/general/shopping-cart.js') }}" defer></script>
 @endsection
 
@@ -52,7 +54,7 @@
                             <input class="form-control text-center"
                                    disabled
                                    type="number"
-                                   value="{{ $product['quantity'] * $product['book']->price }}">
+                                   value="{{ round($product['quantity'] * $product['book']->price, 2) }}">
                         </td>
                     </tr>
                 @endforeach
@@ -73,7 +75,7 @@
                 </div>
                 <div class="products-total-price-div">
                     <div class="products-total-price-value-div"><b>Total:</b></div>
-                    <div class="products-total-price-value"><b>Valoarea totala</b></div>
+                    <div class="products-total-price-value"><b></b></div>
                 </div>
                 <button class="btn btn-outline-secondary btn-lg products-total-price-checkout-btn"
                         type="button"
@@ -85,7 +87,7 @@
                     <div class="card billing_address_card">
                         <div class="card-header text-center">
                             @lang('dictionary.invoice.billing_address')
-                            <span class="caret-down d-none float-right">
+                            <span class="caret-down float-right" style="display: none;">
                                 <i class="fas fa-caret-down fa-2x"></i>
                             </span>
                             <span class="caret-up float-right">
@@ -117,10 +119,10 @@
                     <div class="card delivery_address_card">
                         <div class="card-header text-center">
                             @lang('dictionary.invoice.delivery_address')
-                            <span class="caret-down float-right">
+                            <span class="caret-down float-right" style="display: none;">
                                 <i class="fas fa-caret-down fa-2x"></i>
                             </span>
-                            <span class="caret-up d-none float-right">
+                            <span class="caret-up float-right">
                                 <i class="fas fa-sort-up fa-2x"></i>
                             </span>
                         </div>
@@ -149,10 +151,10 @@
                     <div class="card payment_method_card">
                         <div class="card-header text-center">
                             @lang('dictionary.invoice.payment_method')
-                            <span class="caret-down float-right">
+                            <span class="caret-down float-right" style="display: none;">
                                 <i class="fas fa-caret-down fa-2x"></i>
                             </span>
-                            <span class="caret-up d-none float-right">
+                            <span class="caret-up float-right">
                                 <i class="fas fa-sort-up fa-2x"></i>
                             </span>
                         </div>
@@ -180,10 +182,10 @@
                     <div class="card price_card">
                         <div class="card-header text-center">
                             @lang('dictionary.book.price')
-                            <span class="caret-down float-right">
+                            <span class="caret-down float-right" style="display: none;">
                                 <i class="fas fa-caret-down fa-2x"></i>
                             </span>
-                            <span class="caret-up d-none float-right">
+                            <span class="caret-up float-right">
                                 <i class="fas fa-sort-up fa-2x"></i>
                             </span>
                         </div>

@@ -91,6 +91,10 @@ return [
         'edit-error' => 'The book update failed!',
         'delete-success' => 'The book was deleted!',
         'delete-error' => 'The book deletion failed!',
+        'rate-success' => 'The book was rated!',
+        'rate-error' => 'The book rating failed!',
+        'add-to-wishlist-success' => 'The book was added to your wishlist!',
+        'add-to-wishlist-already' => 'The book already exists in your wishlist!',
     ],
     'user' => [
         'name' => 'Name',
@@ -106,8 +110,8 @@ return [
         'categories' => 'Categories',
         'name' => 'Name',
         'actions' => [
-            'add' => 'Add Category',
-            'delete' => 'Delete Category',
+            'add' => 'Add a category',
+            'delete' => 'Delete category',
             'remove-book' => 'Remove book',
         ],
         'add-success' => 'The category was successfully created!',
@@ -123,6 +127,7 @@ return [
         'comments' => 'Comments',
         'actions' => [
             'add' => 'Add a comment',
+            'delete' => 'Delete comment',
         ],
         'no-comments'=>'There are no comments on this book yet.',
         'add-success' => 'The comment was successfully posted!',
@@ -131,6 +136,8 @@ return [
         'edit-error' => 'The comment update failed!',
         'delete-success' => 'The comment was deleted!',
         'delete-error' => 'The comment deletion failed!',
+        'rate-success' => 'The comment was rated!',
+        'rate-error' => 'The comment rating failed!',
     ],
     'offer' => [
         'offers' => 'Offers',
@@ -153,6 +160,8 @@ return [
         'phone' => 'Phone',
         'adress' => 'Adress',
         'photo' => 'Photo',
+        'edit-success' => 'The profile was successfully updated!',
+        'edit-error' => 'The profile update failed!',
     ],
     'invoice' => [
         'payment_method' => 'Payment method',

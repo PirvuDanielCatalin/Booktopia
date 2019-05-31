@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Validator;
@@ -125,7 +126,30 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('books.show', ['book' => $book]);
+        $bookcomments = $book->bookcomments->sortByDesc('approvals')->sortByDesc('date');
+        $rating =
+            (Auth::check() && $book->ratings->first() && $book->ratings->where('user_id', Auth::user()->id)->first())
+                ? $book->ratings->where('user_id', Auth::user()->id)->first()->value
+                : 0;
+
+        $book_categories = [];
+        foreach ($book->categories as $category) {
+            $book_categories[] = $category->name;
+        }
+
+        $suggested_books = Book::with('categories')
+            ->whereRaw("NOT books.id = '" . $book->id . "'")
+            ->join('books_categories', 'books.id', '=', 'books_categories.book_id')
+            ->join('categories', 'books_categories.category_id', '=', 'categories.id')
+            ->whereRaw("categories.name in ('" . implode("', '", $book_categories) . "')")
+            ->get()
+            ->shuffle()
+            ->take(8);
+        return view('books.show',
+            ['book' => $book,
+                'bookcomments' => $bookcomments,
+                'rating' => $rating,
+                'suggested_books' => $suggested_books]);
     }
 
     /**
@@ -239,7 +263,26 @@ class BookController extends Controller
         } catch (\Exception $e) {
             return ['status' => 'error', 'message' => Lang::get('dictionary.book.delete-error')];
         }
+    }
 
+    public function rate(Request $request)
+    {
+        try {
+            $rating = Rating::where('book_id', $request->bookId)->where('user_id', $request->userId)->first();
+            if ($rating) {
+                $rating->value = $request->stars;
+                $rating->save();
+            } else {
+                $rating = Rating::create([
+                    'user_id' => $request->userId,
+                    'book_id' => $request->bookId,
+                    'value' => $request->stars,
+                ]);
+            }
+            return ['status' => 'success', 'message' => Lang::get('dictionary.book.rate-success')];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => Lang::get('dictionary.book.rate-error')];
+        }
     }
 
     public function drag_and_drop_upload(Request $request)

@@ -9,7 +9,7 @@ class Profile extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone', 'adress', 'photo'
+        'first_name', 'last_name', 'phone', 'adress', 'photo', 'wishlist', 'user_id'
     ];
 
     // Profile(FK) 1 - 1 User

@@ -1,16 +1,16 @@
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
-    configRating();
-
     $(".add-to-cart-btn").on('click', function () {
-        let bookId = $(this).closest('.col-md-8').find('input[type=hidden]').val();
-        if (sessionStorage.getItem('book_' + bookId)) {
-            let newValue = (parseInt(sessionStorage.getItem('book_' + bookId)) + 1);
-            sessionStorage.setItem('book_' + bookId, newValue.toString());
+        let bookId = $(this).closest('.col-md-8.card.border-0').find('input[type=hidden]').val();
+        if ($.session.get('book_' + bookId)) {
+            let newValue = parseInt($.session.get('book_' + bookId)) + 1;
+            $.session.set('book_' + bookId, newValue);
+            toastr.info('The product was added in your shopping cart!');
         } else {
-            sessionStorage.setItem('book_' + bookId, '1');
+            $.session.set('book_' + bookId, 1);
             $('.shopping-cart-products-nr').text(Object.keys(sessionStorage).length);
+            toastr.info('The product was added in your shopping cart!');
         }
     });
 
@@ -19,9 +19,33 @@ $(function () {
     });
 
     $(".add-to-wishlist-btn").on('click', function () {
-        alert('AJAX cu adaugare in wishlist')
+        $userId = $('.rating-bar-div').find('input[type=hidden]').val();
+        if($userId){
+            $data = {};
+            $data['bookId'] = $('input[name=book-id]').val();
+            $data['userId'] = $userId;
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: "POST",
+                url: "/profiles/add-to-wishlist",
+                data: $data,
+                success: function (response) {
+                    if (response.status === "success") {
+                        toastr.success(response.message);
+                    } else if (response.status === "error") {
+                        toastr.info(response.message);
+                    }
+                },
+                error: function () {
+                    toastr.error('Error on adding book to wishlist!');
+                }
+            });
+        }else {
+            toastr.warning('You must be logged in to add the book to wishlist!');
+        }
     });
 
+    configRating();
     initComments();
 });
 
@@ -34,7 +58,29 @@ function configRating() {
             $stars.eq(i).addClass('star-selected');
         }
 
-        //// Ajax pt salvarea ratingului
+        $userId = $('.rating-bar-div').find('input[type=hidden]').val();
+        if($userId){
+            $data = {};
+            $data['bookId'] = $('input[name=book-id]').val();
+            $data['userId'] = $userId;
+            $data['stars'] = count;
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: "POST",
+                url: "/books/rate",
+                data: $data,
+                success: function (response) {
+                    if (response.status === "success") {
+                        toastr.success(response.message);
+                    } else if (response.status === "error") {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function () {
+                    toastr.error('Error on rating book!');
+                }
+            });
+        }
     });
 }
 
@@ -123,14 +169,64 @@ function initComments() {
     });
 
     $('.delete-comment-btn').on('click', function () {
-        alert('delete');
+        $('#confirmDeleteComment').attr('book-comment', $(this).attr('book-comment'));
+        let commentText = $(this).closest('.comment-div').find('.comment-text').text();
+        $('#deleteCommentModal .modal-body').text("Are you sure you want to delete comment '" + commentText + "' ?");
     });
 
-    $('.like-comment-btn').on('click', function () {
-        alert('like');
+    $('#confirmDeleteComment').on('click', function () {
+        var commentId = $(this).attr('book-comment');
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "DELETE",
+            url: "/comments/" + commentId,
+            success: function (response) {
+                if (response.status === "success") {
+                    $('#deleteCommentModal').modal('toggle');
+                    toastr.success(response.message);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                } else if (response.status === "error") {
+                    $('#deleteCommentModal').modal('toggle');
+                    toastr.error(response.message);
+                }
+            },
+            error: function () {
+                toastr.error('Error trying to delete comment!');
+            }
+        });
     });
 
-    $('.dislike-comment-btn').on('click', function () {
-        alert('dislike');
+    $('.like-comment-btn, .dislike-comment-btn').on('click', function () {
+        if (!$.cookie('comment_rate_status')) {
+            $data = {};
+            $data['commentId'] = $(this).closest('.comment-div').attr('book-comment');
+            if ($(this).hasClass('like-comment-btn')) {
+                $data['action'] = 'like';
+            } else if ($(this).hasClass('dislike-comment-btn')) {
+                $data['action'] = 'dislike';
+            }
+
+            $.cookie('comment_rate_status', 'rated');
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: "POST",
+                url: "/comments/rate",
+                data: $data,
+                success: function (response) {
+                    if (response.status === "success") {
+                        toastr.success(response.message);
+                        window.location.reload();
+                    } else if (response.status === "error") {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function () {
+                    toastr.error('Error trying to rate comment!');
+                }
+            });
+        }
     });
 }

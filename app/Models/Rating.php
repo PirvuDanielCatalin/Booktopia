@@ -9,7 +9,7 @@ class Rating extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'value'
+        'user_id', 'book_id', 'value'
     ];
 
     // Rating(FK) M - 1 User

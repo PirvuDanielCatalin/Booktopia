@@ -13,11 +13,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-    }
-
-    public function get_comment(Request $request)
-    {
+        $this->middleware('auth')->except('rate');
     }
 
     public function store(Request $request)
@@ -71,8 +67,28 @@ class CommentController extends Controller
         }
     }
 
-    public function destroy(BookComment $bookComment)
+    public function destroy(BookComment $comment)
     {
+        try {
+            $comment->delete();
+            return ['status' => 'success', 'message' => Lang::get('dictionary.comment.delete-success')];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => Lang::get('dictionary.comment.delete-error')];
+        }
+    }
 
+    public function rate(Request $request)
+    {
+        try {
+            $comment = BookComment::find($request->commentId);
+            if ($request->action == 'like')
+                $comment->approvals = $comment->approvals + 1;
+            else if ($request->action == 'dislike')
+                $comment->approvals = $comment->approvals - 1;
+            $comment->save();
+            return ['status' => 'success', 'message' => Lang::get('dictionary.comment.rate-success')];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => Lang::get('dictionary.comment.rate-error')];
+        }
     }
 }

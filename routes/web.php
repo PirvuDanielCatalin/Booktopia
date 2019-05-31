@@ -26,6 +26,7 @@ Route::post('users/update-role', 'UserController@update_role')->name('users.upda
 Route::post('books/drag-and-drop-upload', 'BookController@drag_and_drop_upload')->name('books.drag-and-drop-upload');
 Route::get('books/import-from-CSV', 'BookController@import_from_CSV')->name('books.import-from-CSV');
 Route::resource('books', 'BookController');
+Route::post('books/rate', 'BookController@rate')->name('books.rate');
 
 // Categories
 Route::post('categories/get-category', 'CategoryController@get_category')->name('categories.get-category');
@@ -34,6 +35,7 @@ Route::resource('categories', 'CategoryController');
 
 // Comments
 Route::resource('comments', 'CommentController');
+Route::post('comments/rate', 'CommentController@rate')->name('comments.rate');
 
 // Offers
 Route::post('offers/get-offer', 'OfferController@get_offer')->name('offers.get-offer');
@@ -41,6 +43,7 @@ Route::resource('offers', 'OfferController');
 
 // Profiles
 Route::resource('profiles', 'ProfileController');
+Route::post('profiles/add-to-wishlist', 'ProfileController@add_to_wishlist')->name('profiles.add-to-wishlist');
 
 // Invoices
 Route::resource('invoices', 'InvoiceController');

@@ -12,13 +12,11 @@ $(function () {
     });
 
     $('#paymentDoneBtn').on('click', function () {
-        sessionStorage.clear();
+        $.session.clear();
         $('.shopping-cart-div').click();
     });
 
     initQuantityCmd();
-
-
 });
 
 function setTotalPrice() {
@@ -39,7 +37,7 @@ function initQuantityCmd() {
             $quantity_container.find('input[type=number]').val($quantity - 1);
 
             let $rowTotal = parseFloat($quantity_container.closest('tr').find('.tbl-book-price input[type=number]').val());
-            $quantity_container.closest('tr').find('.tbl-book-price input[type=number]').val($rowTotal - $price);
+            $quantity_container.closest('tr').find('.tbl-book-price input[type=number]').val(Math.round(($rowTotal - $price) * 100) / 100);
 
             setTotalPrice();
         }
@@ -53,7 +51,7 @@ function initQuantityCmd() {
         $quantity_container.find('input[type=number]').val($quantity + 1);
 
         let $rowTotal = parseFloat($quantity_container.closest('tr').find('.tbl-book-price input[type=number]').val());
-        $quantity_container.closest('tr').find('.tbl-book-price input[type=number]').val($rowTotal + $price);
+        $quantity_container.closest('tr').find('.tbl-book-price input[type=number]').val(Math.round(($rowTotal + $price) * 100) / 100);
 
         setTotalPrice();
     });
