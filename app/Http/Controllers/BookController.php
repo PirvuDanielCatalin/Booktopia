@@ -127,6 +127,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $bookcomments = $book->bookcomments->sortByDesc('approvals')->sortByDesc('date');
+
         $rating =
             (Auth::check() && $book->ratings->first() && $book->ratings->where('user_id', Auth::user()->id)->first())
                 ? $book->ratings->where('user_id', Auth::user()->id)->first()->value
@@ -145,6 +146,16 @@ class BookController extends Controller
             ->get()
             ->shuffle()
             ->take(8);
+
+        $books = Book::all()->shuffle();
+        if (sizeof($suggested_books) < 8) {
+            $books = $books->take(8 - sizeof($suggested_books));
+        }
+
+        foreach ($books as $b) {
+            $suggested_books->push($b);
+        }
+
         return view('books.show',
             ['book' => $book,
                 'bookcomments' => $bookcomments,

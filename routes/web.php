@@ -13,9 +13,12 @@ Route::get('/home', function () {
 
 // Shop
 Route::get('/', 'ShopController@index')->name('shop');
-Route::get('/shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
-Route::get('/control-panel', 'ShopController@control_panel')->name('control-panel');
-Route::post('/contact-email', 'ShopController@contactemail')->name('contact-email');
+Route::post('shop/filters', 'ShopController@filters')->name('shop.filters');
+Route::get('shop/filters', 'ShopController@filters')->name('shop.filters');
+Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
+
+Route::get('control-panel', 'ShopController@control_panel')->name('control-panel');
+Route::post('contact-email', 'ShopController@contactemail')->name('contact-email');
 
 // Users
 Route::get('users/index', 'UserController@index')->name('users.index');

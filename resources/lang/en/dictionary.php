@@ -7,8 +7,11 @@ return [
         'send-email' => 'Send Email',
         'like-these?' => 'You might like these as well...',
         'filters-panel' => 'Filters Panel',
+        'apply-filters' => 'Apply filters',
+        'no-product-on-search-criteria' => "We couldn't find something based on your search criteria!",
         'currency' => 'RON',
         'required-field' => 'This field is required!',
+        'we-are-sorry' => 'We are sorry!',
         'footer' => [
             'program' => 'Program',
             'program-data' => 'Monday - Saturday: &emsp;8:00 - 18:00<br>
