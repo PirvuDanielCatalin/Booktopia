@@ -149,11 +149,11 @@
                                         <ul class="ks-cboxtags">
                                             @foreach($categories as $category)
                                                 <li>
-                                                    <input id="checkbox{{ $category->id }}"
+                                                    <input id="checkbox{{ $category->category_id }}"
                                                            name="categories[]"
                                                            type="checkbox"
                                                            value="{{ $category->name }}">
-                                                    <label for="checkbox{{ $category->id }}">{{ $category->name }}</label>
+                                                    <label for="checkbox{{ $category->category_id }}">{{ $category->name }}</label>
                                                 </li>
                                             @endforeach
                                         </ul>

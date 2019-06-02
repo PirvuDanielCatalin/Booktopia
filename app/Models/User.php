@@ -21,37 +21,37 @@ class User extends Authenticatable
     // User M - M Role ==> User 1 - M UserRole(FK)
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role', 'users_roles');
+        return $this->belongsToMany('App\Models\Role', 'users_roles', 'user_id', 'role_id');
     }
 
     // User 1 - 1 Profile(FK)
     public function profile()
     {
-        return $this->hasOne('App\Models\Profile');
+        return $this->hasOne('App\Models\Profile','user_id');
     }
 
     // User 1 - M BookComment(FK)
     public function bookcomments()
     {
-        return $this->hasMany('App\Models\BookComment');
+        return $this->hasMany('App\Models\BookComment','user_id');
     }
 
     // User 1 - M Buy(FK)
     public function buys()
     {
-        return $this->hasMany('App\Models\Buy');
+        return $this->hasMany('App\Models\Buy','user_id');
     }
 
     // User 1 - M Rating(FK)
     public function ratings()
     {
-        return $this->hasMany('App\Models\Rating');
+        return $this->hasMany('App\Models\Rating','user_id');
     }
 
     // User 1 - M Requirement(FK)
     public function requirements()
     {
-        return $this->hasMany('App\Models\Requirement');
+        return $this->hasMany('App\Models\Requirement','user_id');
     }
 
     public function isAdmin()
@@ -75,7 +75,7 @@ class User extends Authenticatable
     public function assignRole($role_name)
     {
         $new_role = Role::where('name', $role_name)->first();
-        
+
         if ($new_role != null) {
             $roles = Role::all();
 

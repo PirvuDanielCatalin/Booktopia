@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
+    protected $primaryKey = 'stock_id';
     public $timestamps = false;
 
     protected $fillable = [
@@ -15,6 +16,6 @@ class Stock extends Model
     // Stock(FK) 1 - 1 Book
     public function book()
     {
-        return $this->belongsTo('App\Models\Book');
+        return $this->belongsTo('App\Models\Book','book_id');
     }
 }

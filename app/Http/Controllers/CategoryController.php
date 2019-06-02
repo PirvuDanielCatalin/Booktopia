@@ -14,12 +14,12 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin']);
-        //$this->middleware('CountPeople')->only(['index','create','show','edit']);
     }
 
     public function get_category(Request $request)
     {
-        return Category::with('books')->where('categories.id', $request->category_id)->first();
+        return Category::with('books')
+            ->where('categories.category_id', $request->category_id)->first();
     }
 
     public function index()

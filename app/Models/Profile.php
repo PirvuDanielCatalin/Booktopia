@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    protected $primaryKey = 'profile_id';
     public $timestamps = false;
 
     protected $fillable = [
@@ -15,6 +16,6 @@ class Profile extends Model
     // Profile(FK) 1 - 1 User
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','user_id');
     }
 }

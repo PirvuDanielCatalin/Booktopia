@@ -30,7 +30,7 @@
                             <div class="row categories-container">
                                 @foreach($categories as $category)
                                     <button class="btn col-md-3 category-btn"
-                                            category-id="{{ $category->id }}">
+                                            category-id="{{ $category->category_id }}">
                                         {{ $category->name }}
                                     </button>
                                 @endforeach

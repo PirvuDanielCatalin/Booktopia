@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -59,10 +60,11 @@ class ShopController extends Controller
 
         if (isset($category_filter) && $category_filter != "")
             $books = $books
-                ->join('books_categories', 'books.id', '=', 'books_categories.book_id')
-                ->join('categories', 'books_categories.category_id', '=', 'categories.id')
+                ->join('books_categories', 'books.book_id', '=', 'books_categories.book_id')
+                ->join('categories', 'books_categories.category_id', '=', 'categories.category_id')
                 ->whereRaw($category_filter);
 
+        //dd($books->toSql());
         $books = $books->inRandomOrder()->paginate(10);
 
         return view('general.shop-products',

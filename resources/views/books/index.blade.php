@@ -67,7 +67,7 @@
                                             </button>
                                         </a>
                                     </td>
-                                    <td>{{ $book->id }}</td>
+                                    <td>{{ $book->book_id }}</td>
                                     <td>{{ $book->title }}</td>
                                     <td>{{ $book->author }}</td>
                                     <td>{{ $book->publishing_house }}</td>
@@ -94,7 +94,7 @@
                                             <button class="modal-opener btn btn-outline-danger"
                                                     data-toggle="modal"
                                                     data-target="#deleteBookModal"
-                                                    book-id="{{ $book->id }}">
+                                                    book-id="{{ $book->book_id }}">
                                                 <i class="far fa-trash-alt"></i> @lang('dictionary.actions.delete')
                                             </button>
                                         </td>

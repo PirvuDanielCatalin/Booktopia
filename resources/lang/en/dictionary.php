@@ -49,6 +49,7 @@ return [
         'offers' => 'Manage offers',
         'stocks' => 'Manage stocks',
         'requirements' => 'Manage requirements',
+        'invoices' => 'Manage invoices',
     ],
     'book' => [
         'title' => 'Title',
@@ -108,6 +109,7 @@ return [
             'exportExcel-users' => 'Export users (XLSX)',
             'exportPDF-users' => 'Export users (PDF)',
         ],
+        'update-role-success'=>'The role for user :user was successfully updated',
     ],
     'category' => [
         'categories' => 'Categories',
@@ -181,6 +183,7 @@ return [
         'partner-name' => 'Partner Name',
         'book-id' => 'Book ID',
         'book-title' => 'Book Title',
+        'add-success' => 'Your request was submitted. Please wait an admin to check it!',
     ],
     'stock' => [
         'stocks' => 'Stocks',

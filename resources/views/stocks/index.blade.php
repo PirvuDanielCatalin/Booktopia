@@ -36,7 +36,7 @@
                                     <tbody>
                                     @foreach($books as $book)
                                         <tr class="tbl-book-info">
-                                            <td class="tbl-book-id">{{ $book->id }}</td>
+                                            <td class="tbl-book-id">{{ $book->book_id }}</td>
                                             <td class="tbl-book-title">{{ $book->title }}</td>
                                         </tr>
                                     @endforeach
@@ -50,12 +50,13 @@
                             <div class="stocks_page_right_panel">
                                 <div class="form">
                                     <div class="row">
-                                        <div class="col-md-12 row m-auto p-2">
+                                        <div class="col-md-12 row m-auto edit-stock-div p-2">
                                             <button class="btn btn-outline-info w-100 edit-stock-btn">
                                                 <i class="far fa-edit"></i> @lang('dictionary.actions.edit')
                                             </button>
                                         </div>
                                         <input type="hidden" class="stock_id" value="">
+                                        <input type="hidden" class="book_id" value="">
                                         <div class="col-md-12 form-input update-stock-div p-2">
                                             <label for="title">@lang('dictionary.book.title')</label>
                                             <input class="form-control"

@@ -20,7 +20,7 @@ $(function () {
 
     $(".add-to-wishlist-btn").on('click', function () {
         $userId = $('.rating-bar-div').find('input[type=hidden]').val();
-        if($userId){
+        if ($userId) {
             $data = {};
             $data['bookId'] = $('input[name=book-id]').val();
             $data['userId'] = $userId;
@@ -40,7 +40,7 @@ $(function () {
                     toastr.error('Error on adding book to wishlist!');
                 }
             });
-        }else {
+        } else {
             toastr.warning('You must be logged in to add the book to wishlist!');
         }
     });
@@ -59,7 +59,7 @@ function configRating() {
         }
 
         $userId = $('.rating-bar-div').find('input[type=hidden]').val();
-        if($userId){
+        if ($userId) {
             $data = {};
             $data['bookId'] = $('input[name=book-id]').val();
             $data['userId'] = $userId;
@@ -199,7 +199,8 @@ function initComments() {
     });
 
     $('.like-comment-btn, .dislike-comment-btn').on('click', function () {
-        if (!$.cookie('comment_rate_status')) {
+        $bookId = $('input[name=book-id]').val();
+        if (!$.cookie('comment_rate_on_book_' + $bookId)) {
             $data = {};
             $data['commentId'] = $(this).closest('.comment-div').attr('book-comment');
             if ($(this).hasClass('like-comment-btn')) {
@@ -208,7 +209,7 @@ function initComments() {
                 $data['action'] = 'dislike';
             }
 
-            $.cookie('comment_rate_status', 'rated');
+            $.cookie('comment_rate_on_book_' + $bookId, 'rated');
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

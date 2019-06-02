@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Rating;
+use App\Models\Requirement;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Validator;
@@ -89,7 +91,7 @@ class BookController extends Controller
 
             if ($request->has('photo')) {
                 $image = $request->file('photo');
-                $filename = $book->id . '.' . $image->getClientOriginalExtension();
+                $filename = $book->book_id . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/books-covers/');
                 Image::make($image)->resize(250, 400)->save($location . $filename);
                 $book->photo = $filename;
@@ -97,7 +99,7 @@ class BookController extends Controller
             } else
                 if (file_exists(public_path('images/helpers/DraggedAndDropped.jpg'))) {
                     $old_path = public_path('images/helpers/DraggedAndDropped.jpg');
-                    $filename = $book->id . '.jpg';
+                    $filename = $book->book_id . '.jpg';
                     $new_path = public_path('images/books-covers/' . $filename);
                     rename($old_path, $new_path);
                     $book->photo = $filename;
@@ -112,6 +114,21 @@ class BookController extends Controller
 
             $book->inShop = (Auth::user()->isAdmin()) ? 1 : 0;
             $book->save();
+
+            $stock = Stock::create([
+                'book_id' => $book->book_id,
+                'amount' => 1
+            ]);
+
+            if(Auth::user()->isPartner())
+            {
+                $requirement = Requirement::create([
+                    'user_id' => Auth::user()->id,
+                    'book_id' => $book->book_id,
+                    'increment' => 0,
+                    'status' => 0,
+                ]);
+            }
 
             Session::flash('success', Lang::get('dictionary.book.add-success'));
             return redirect()->route('books.index');
@@ -139,9 +156,9 @@ class BookController extends Controller
         }
 
         $suggested_books = Book::with('categories')
-            ->whereRaw("NOT books.id = '" . $book->id . "'")
-            ->join('books_categories', 'books.id', '=', 'books_categories.book_id')
-            ->join('categories', 'books_categories.category_id', '=', 'categories.id')
+            ->whereRaw("NOT books.book_id = '" . $book->book_id . "'")
+            ->join('books_categories', 'books.book_id', '=', 'books_categories.book_id')
+            ->join('categories', 'books_categories.category_id', '=', 'categories.category_id')
             ->whereRaw("categories.name in ('" . implode("', '", $book_categories) . "')")
             ->get()
             ->shuffle()
@@ -174,7 +191,7 @@ class BookController extends Controller
         $categories = Category::all();
         $book_categories = [];
         foreach ($book->categories as $category) {
-            $book_categories[] = $category->id;
+            $book_categories[] = $category->category_id;
         }
         return view('books.edit', ['book' => $book, 'book_categories' => $book_categories, 'categories' => $categories]);
     }
@@ -224,7 +241,7 @@ class BookController extends Controller
                 if ($photo != null)
                     unlink(public_path('images/books-covers/') . $photo);
                 $image = $request->file('photo');
-                $filename = $book->id . '.' . $image->getClientOriginalExtension();
+                $filename = $book->book_id . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/books-covers/');
                 Image::make($image)->resize(250, 400)->save($location . $filename);
                 $book->photo = $filename;
@@ -233,7 +250,7 @@ class BookController extends Controller
                     if ($photo != null)
                         unlink(public_path('images/books-covers/') . $photo);
                     $old_path = public_path('images/helpers/DraggedAndDropped.jpg');
-                    $filename = $book->id . '.jpg';
+                    $filename = $book->book_id . '.jpg';
                     $new_path = public_path('images/books-covers/' . $filename);
                     rename($old_path, $new_path);
                     $book->photo = $filename;
@@ -279,7 +296,7 @@ class BookController extends Controller
     public function rate(Request $request)
     {
         try {
-            $rating = Rating::where('book_id', $request->bookId)->where('user_id', $request->userId)->first();
+            $rating = Rating::where('book_id','=', $request->bookId)->where('user_id', $request->userId)->first();
             if ($rating) {
                 $rating->value = $request->stars;
                 $rating->save();
@@ -332,7 +349,7 @@ class BookController extends Controller
             $contents = file_get_contents($url);
             $extension = substr($url, strrpos($url, '.') + 1);
             $location = public_path('images/books-covers/');
-            $filename = $book->id . '.' . $extension;
+            $filename = $book->book_id . '.' . $extension;
             Image::make($contents)->resize(250, 400)->save($location . $filename);
 
             $book->photo = $filename;

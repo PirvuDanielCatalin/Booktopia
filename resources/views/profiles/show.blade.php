@@ -31,7 +31,7 @@
     <div class="col-md-8 card border-0">
         <input name="profile-id"
                type="hidden"
-               value="{{ $profile->id }}">
+               value="{{ $profile->profile_id }}">
         <div class="profile-cmd-div">
             <button class="btn btn-outline-info float-right m-1 edit-profile-btn"
                     data-placement="top"

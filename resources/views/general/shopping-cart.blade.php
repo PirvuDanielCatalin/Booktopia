@@ -35,7 +35,7 @@
                 <tbody>
                 @foreach($products as $product)
                     <tr>
-                        <td class="tbl-book-id">{{ $product['book']->id }}</td>
+                        <td class="tbl-book-id">{{ $product['book']->book_id }}</td>
                         <td class="tbl-book-title">{{ $product['book']->title }}</td>
                         <td class="tbl-book-quantity">
                             <input book-price="{{ $product['book']->price }}"

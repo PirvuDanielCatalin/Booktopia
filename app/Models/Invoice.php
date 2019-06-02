@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+    protected $primaryKey = 'invoice_id';
     public $timestamps = false;
 
     protected $fillable = [
@@ -15,6 +16,6 @@ class Invoice extends Model
     // Invoice 1 - M Buy(FK)
     public function buys()
     {
-        return $this->hasMany('App\Models\Buy');
+        return $this->hasMany('App\Models\Buy','book_id');
     }
 }

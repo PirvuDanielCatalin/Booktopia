@@ -43,7 +43,7 @@
     <div class="col-md-8 card border-0">
         <input name="book-id"
                type="hidden"
-               value="{{ $book->id }}">
+               value="{{ $book->book_id }}">
         <div class="book-info book-title">
             <b>{{ $book->title }}</b>
         </div>
@@ -124,7 +124,7 @@
                                 @endif
                                 <a role="button"
                                    class="btn btn-outline-info btn-block mt-1"
-                                   href="{{ route('books.show', ['book' => explode(".",$suggested_books[$i]->photo)[0]]) }}">SeeBook</a>
+                                   href="{{ route('books.show', ['book' => $book->book_id]) }}">SeeBook</a>
                             </div>
                         @endfor
                     </div>
@@ -149,7 +149,7 @@
         </div>
         @if(sizeof($bookcomments))
             @foreach($bookcomments as $bookcomment)
-                <div class="comment-div" book-comment="{{ $bookcomment->id }}">
+                <div class="comment-div" book-comment="{{ $bookcomment->book_comment_id }}">
                     <div class="comment-approvals">
                         <div class="like-dislike-btns">
                             <button class="btn btn-outline-secondary h-50 like-comment-btn">
@@ -169,7 +169,7 @@
                         @auth
                             @if(Auth::user()->isAdmin() or Auth::user()->id == $bookcomment->user->id)
                                 <div class="d-flex edit-delete-btns">
-                                    <button book-comment="{{ $bookcomment->id }}"
+                                    <button book-comment="{{ $bookcomment->book_comment_id }}"
                                             class="btn btn-outline-secondary m-1 save-comment-btn"
                                             data-placement="top"
                                             data-toggle="tooltip"
@@ -177,7 +177,7 @@
                                             title="@lang('dictionary.actions.post')">
                                         <i class="far fa-paper-plane"></i>
                                     </button>
-                                    <button book-comment="{{ $bookcomment->id }}"
+                                    <button book-comment="{{ $bookcomment->book_comment_id }}"
                                             class="btn btn-outline-secondary m-1 edit-comment-btn"
                                             data-placement="top"
                                             data-toggle="tooltip"
@@ -185,7 +185,7 @@
                                         <i class="far fa-edit"></i>
                                     </button>
                                     <span data-toggle="modal" data-target="#deleteCommentModal" class="m-1">
-                                        <button book-comment="{{ $bookcomment->id }}"
+                                        <button book-comment="{{ $bookcomment->book_comment_id }}"
                                                 class="btn btn-outline-secondary btn-block delete-comment-btn"
                                                 data-placement="top"
                                                 data-toggle="tooltip"

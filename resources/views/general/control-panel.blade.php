@@ -32,10 +32,6 @@
                             <i class="fab fa-3x fa-elementor"></i><br>
                             @lang('dictionary.control-panel.categories')
                         </a>
-                        <a class="card panel" href="{{ route('offers.index') }}">
-                            <i class="fas fa-3x fa-comments-dollar"></i><br>
-                            @lang('dictionary.control-panel.offers')
-                        </a>
                         <a class="card panel" href="{{ route('stocks.index') }}">
                             <i class="fas fa-3x fa-layer-group"></i><br>
                             @lang('dictionary.control-panel.stocks')
@@ -43,6 +39,14 @@
                         <a class="card panel" href="{{ route('requirements.index') }}">
                             <i class="fas fa-3x fa-tasks"></i><br>
                             @lang('dictionary.control-panel.requirements')
+                        </a>
+                        <a class="card panel" href="{{ route('offers.index') }}">
+                            <i class="fas fa-3x fa-comments-dollar"></i><br>
+                            @lang('dictionary.control-panel.offers')
+                        </a>
+                        <a class="card panel" href="{{ route('invoices.index') }}">
+                            <i class="fas fa-3x fa-file-invoice"></i><br>
+                            @lang('dictionary.control-panel.invoices')
                         </a>
                     </div>
                 </div>

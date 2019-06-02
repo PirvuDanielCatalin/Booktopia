@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stat extends Model
 {
+    protected $primaryKey = 'stat_id';
     public $timestamps = false;
 
     protected $fillable = [
