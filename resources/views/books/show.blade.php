@@ -44,6 +44,9 @@
         <input name="book-id"
                type="hidden"
                value="{{ $book->book_id }}">
+        <input name="book-isbn"
+               type="hidden"
+               value="{{ $book->ISBN }}">
         <div class="book-info book-title">
             <b>{{ $book->title }}</b>
         </div>
@@ -78,7 +81,6 @@
             <input class="btn btn-outline-secondary btn-block add-to-cart-btn"
                    type="button"
                    value="@lang('dictionary.book.actions.add-to-cart')">
-
         </div>
     </div>
     <div class="col-md-12 card">
@@ -102,7 +104,7 @@
                                 @endif
                                 <a role="button"
                                    class="btn btn-outline-info btn-block mt-1"
-                                   href="{{ route('books.show', ['book' => explode(".",$suggested_books[$i]->photo)[0]]) }}">SeeBook</a>
+                                   href="{{ route('books.show', ['book' => $suggested_books[$i]->book_id]) }}">SeeBook</a>
                             </div>
                         @endfor
                     </div>
@@ -124,7 +126,7 @@
                                 @endif
                                 <a role="button"
                                    class="btn btn-outline-info btn-block mt-1"
-                                   href="{{ route('books.show', ['book' => $book->book_id]) }}">SeeBook</a>
+                                   href="{{ route('books.show', ['book' => $suggested_books[$i]->book_id]) }}">SeeBook</a>
                             </div>
                         @endfor
                     </div>
@@ -248,6 +250,28 @@
                         <img alt="CoverPhoto"
                              class="book-image h-100"
                              src="{{ asset("images/books-covers")."/".$book->photo }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div aria-hidden="true"
+             aria-labelledby="sampleModalLabel"
+             class="modal fade"
+             id="sampleModal"
+             role="dialog"
+             tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="sampleModalLabel">
+                            Sample
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="viewerCanvas" style="width: 100%; height: 500px"></div>
                     </div>
                 </div>
             </div>

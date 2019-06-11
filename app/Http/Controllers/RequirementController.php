@@ -2,81 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Requirement;
+use App\Models\Requirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RequirementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('requirements.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Requirement  $requirement
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Requirement $requirement)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Requirement  $requirement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Requirement $requirement)
-    {
-        //
+        if (Auth::user()->isAdmin()) {
+            $requirements = Requirement::with(['book', 'user'])
+                ->get();
+        }
+        if (Auth::user()->isPartner()) {
+            $requirements = Requirement::with(['book', 'user'])
+                ->where('requirements.user_id', '=', Auth::user()->id)
+                ->get();
+        }
+        return view('requirements.index', ['requirements' => $requirements]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Requirement  $requirement
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Requirement $requirement
+     * @return void
      */
     public function update(Request $request, Requirement $requirement)
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Requirement  $requirement
-     * @return \Illuminate\Http\Response
+     * @param Requirement $requirement
+     * @return void
      */
     public function destroy(Requirement $requirement)
     {

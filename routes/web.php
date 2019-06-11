@@ -19,6 +19,7 @@ Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart
 
 Route::get('control-panel', 'ShopController@control_panel')->name('control-panel');
 Route::post('contact-email', 'ShopController@contactemail')->name('contact-email');
+Route::get('large-map', 'ShopController@show_large_map')->name('large-map');
 
 // Users
 Route::get('users/index', 'UserController@index')->name('users.index');
@@ -26,6 +27,7 @@ Route::post('users/get-user-role', 'UserController@get_user_role')->name('users.
 Route::post('users/update-role', 'UserController@update_role')->name('users.update-role');
 
 // Books
+Route::get('books/sample', 'BookController@sample')->name('books.sample');
 Route::post('books/drag-and-drop-upload', 'BookController@drag_and_drop_upload')->name('books.drag-and-drop-upload');
 Route::get('books/import-from-CSV', 'BookController@import_from_CSV')->name('books.import-from-CSV');
 Route::resource('books', 'BookController');

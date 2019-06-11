@@ -26,22 +26,30 @@
                     <div class="card-body row">
                         <div class="big-view col-md-8">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="stocks-datatable">
-                                    <thead>
-                                    <tr>
-                                        <th class="tbl-book-id">ID:</th>
-                                        <th class="tbl-book-title">@lang('dictionary.book.title')</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($books as $book)
-                                        <tr class="tbl-book-info">
-                                            <td class="tbl-book-id">{{ $book->book_id }}</td>
-                                            <td class="tbl-book-title">{{ $book->title }}</td>
+                                @if(sizeof($books) > 0)
+                                    <table class="table table-hover" id="stocks-datatable">
+                                        <thead>
+                                        <tr>
+                                            <th class="tbl-book-id">ID:</th>
+                                            <th class="tbl-book-title">@lang('dictionary.book.title')</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($books as $book)
+                                            <tr class="tbl-book-info">
+                                                <td class="tbl-book-id">{{ $book->book_id }}</td>
+                                                <td class="tbl-book-title">{{ $book->title }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="p-3 ">
+                                        <h3>
+                                            <b>@lang('dictionary.stock.no-book-created')</b>
+                                        </h3>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="small-view col-md-4">

@@ -25,7 +25,7 @@ class StockController extends Controller
 
         $requirement_status = Requirement::where('user_id', Auth::user()->id)
             ->where('book_id', $request->book_id)
-            ->where('increment', '>', '0')
+            ->where('increment', '<>', '0')
             ->first();
         return ['book' => $book, 'requirement_status' => $requirement_status];
     }

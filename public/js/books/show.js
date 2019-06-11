@@ -14,8 +14,10 @@ $(function () {
         }
     });
 
-    $(".give-me-a-sample-btn").on('click', function () {
-        alert('Google Books API')
+    $('.give-me-a-sample-btn').on('click', function () {
+        $isbn = $('input[name=book-isbn]').val();
+        var win = window.open('/books/sample?isbn=' + $isbn, '_blank');
+        win.focus();
     });
 
     $(".add-to-wishlist-btn").on('click', function () {

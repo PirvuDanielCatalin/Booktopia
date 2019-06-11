@@ -2,6 +2,10 @@ th, td {
 
 }
 
+.tbl-requirement-info {
+    cursor: pointer;
+}
+
 .tbl-requirement-checkbox input {
     width: 30px;
     height: 25px;

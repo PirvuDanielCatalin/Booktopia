@@ -26,7 +26,8 @@
                     <div class="card-body row">
                         <div class="big-view col-md-8">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="requirements-datatable">
+                                @if(sizeof($requirements) > 0)
+                                    <table class="table table-hover" id="requirements-datatable">
                                     <thead>
                                     <tr>
                                         <th class="tbl-requirement-checkbox"></th>
@@ -37,27 +38,34 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @for($i=1;$i<=5;$i++)
-                                        <tr class="tbl-requirement-info">
+                                    @foreach($requirements as $requirement)
+                                        <tr class="tbl-requirement-info" requirement-id="{{ $requirement->requirement_id }}">
                                             <td class="tbl-requirement-checkbox">
                                                 <input type="checkbox" class="form-check-input">
                                             </td>
                                             <td class="tbl-requirement-partner-id">
-                                                15
+                                                {{ $requirement->user->id }}
                                             </td>
                                             <td class="tbl-requirement-partner-name">
-                                                user name
+                                                {{ $requirement->user->name }}
                                             </td>
                                             <td class="tbl-requirement-book-id">
-                                                12
+                                                {{ $requirement->book->book_id }}
                                             </td>
                                             <td class="tbl-requirement-book-title">
-                                                arme matematice de distrugere
+                                                {{ $requirement->book->title }}
                                             </td>
                                         </tr>
-                                    @endfor
+                                    @endforeach
                                     </tbody>
                                 </table>
+                                    @else
+                                    <div class="p-3 ">
+                                        <h3>
+                                            <b>@lang('dictionary.requirement.no-requirements')</b>
+                                        </h3>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="small-view col-md-4">

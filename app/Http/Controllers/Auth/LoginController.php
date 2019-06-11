@@ -30,6 +30,9 @@ class LoginController extends Controller
 
     protected function authenticated()
     {
+        if (session()->has('url.intended')) {
+            return redirect(session('url.intended'));
+        }
         if (Auth::user()->isAdmin() || Auth::user()->isPartner()) {
             return redirect()->route('control-panel');
         } else {
@@ -45,5 +48,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        if (!session()->has('url.intended')) {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');
     }
 }

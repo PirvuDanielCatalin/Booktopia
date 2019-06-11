@@ -12,8 +12,8 @@ class ShopController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isAdmin'])->only(['control-panel']);
-        //$this->middleware('CountPeople')->except('contactemail');
+        $this->middleware('auth')->only('control_panel');
+        $this->middleware('isAdminOrPartner')->only('control-panel');
     }
 
     public function index()
@@ -64,7 +64,7 @@ class ShopController extends Controller
                 ->join('categories', 'books_categories.category_id', '=', 'categories.category_id')
                 ->whereRaw($category_filter);
 
-        //dd($books->toSql());
+                //->get()->unique('book_id')
         $books = $books->inRandomOrder()->paginate(10);
 
         return view('general.shop-products',
@@ -102,6 +102,12 @@ class ShopController extends Controller
                 ->from($email)
                 ->to('booktopia.contact@gmail.com', 'Booktopia');
         });
+        
         return back();
+    }
+
+    public function show_large_map()
+    {
+        return view('general.large-map');
     }
 }

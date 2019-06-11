@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Auth;
@@ -36,7 +37,8 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        return view('profiles.show', ['profile' => $profile]);
+        $wishlist = Book::whereRaw('books.book_id in ('.$profile->wishlist.')')->get();
+        return view('profiles.show', ['profile' => $profile, 'wishlist' => $wishlist]);
     }
 
     /**

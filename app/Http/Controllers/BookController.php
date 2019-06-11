@@ -120,8 +120,7 @@ class BookController extends Controller
                 'amount' => 1
             ]);
 
-            if(Auth::user()->isPartner())
-            {
+            if (Auth::user()->isPartner()) {
                 $requirement = Requirement::create([
                     'user_id' => Auth::user()->id,
                     'book_id' => $book->book_id,
@@ -156,7 +155,8 @@ class BookController extends Controller
         }
 
         $suggested_books = Book::with('categories')
-            ->whereRaw("NOT books.book_id = '" . $book->book_id . "'")
+            ->where("books.book_id", '<>', $book->book_id)
+            ->where('books.inShop','=',1)
             ->join('books_categories', 'books.book_id', '=', 'books_categories.book_id')
             ->join('categories', 'books_categories.category_id', '=', 'categories.category_id')
             ->whereRaw("categories.name in ('" . implode("', '", $book_categories) . "')")
@@ -296,7 +296,7 @@ class BookController extends Controller
     public function rate(Request $request)
     {
         try {
-            $rating = Rating::where('book_id','=', $request->bookId)->where('user_id', $request->userId)->first();
+            $rating = Rating::where('book_id', '=', $request->bookId)->where('user_id', $request->userId)->first();
             if ($rating) {
                 $rating->value = $request->stars;
                 $rating->save();
@@ -311,6 +311,11 @@ class BookController extends Controller
         } catch (\Exception $e) {
             return ['status' => 'error', 'message' => Lang::get('dictionary.book.rate-error')];
         }
+    }
+
+    public function sample(Request $request)
+    {
+        return view('books.show-sample', ['isbn' => $request->isbn]);
     }
 
     public function drag_and_drop_upload(Request $request)

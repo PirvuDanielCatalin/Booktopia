@@ -91,13 +91,10 @@
                             </div>
                             <div class="col-md-4 leaflet-map-div">
                                 <div id="leaflet-map" class="mt-2"></div>
-                                <button data-toggle="modal"
-                                        data-target="#findNearestShopModal"
-                                        class="btn btn-info btn-block mt-2"
+                                <button class="btn btn-info btn-block mt-2"
                                         id="find-the-nearest-shop-btn">
                                     <i class="fas fa-search-location"></i> @lang('dictionary.general.find-the-nearest-shop')
                                 </button>
-                                {{-- <img src="{{ asset("images")."/LogoBooktopia.png" }}">--}}
                             </div>
                             <div class="row col-md-4">
                                 <form class="row" action="{{ route('contact-email') }}" method="post">
@@ -137,29 +134,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div aria-hidden="true"
-         aria-labelledby="findNearestShopModalLabel"
-         class="modal fade"
-         id="findNearestShopModal"
-         role="dialog"
-         tabindex="-1">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="findNearestShopModalLabel">
-                        @lang('dictionary.general.find-the-nearest-shop')
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="leaflet-map-modal"></div>
-                    <button class="btn btn-light btn-block">@lang('dictionary.actions.find')</button>
                 </div>
             </div>
         </div>

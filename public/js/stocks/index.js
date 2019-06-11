@@ -10,8 +10,8 @@ $(function () {
             url: "/stocks/get-stock",
             data: $data,
             success: function (response) {
-                $('.small-view .form input[type=hidden].stock_id').val(response.book.stock.id);
-                $('.small-view .form input[type=hidden].book_id').val(response.book.id);
+                $('.small-view .form input[type=hidden].stock_id').val(response.book.stock.stock_id);
+                $('.small-view .form input[type=hidden].book_id').val(response.book.book_id);
                 $('.small-view .form input[name=title]').val(response.book.title);
                 $('.small-view .form input[name=quantity]').val(response.book.stock.amount);
                 $('.small-view .form input[name=plus-minus-quantity]').attr('min', -response.book.stock.amount);
@@ -23,14 +23,14 @@ $(function () {
                         'data-placement': "top",
                         'data-toggle': "tooltip",
                         'title': "You already have a request submitted! If you want to edit, go to your request panel from Control Panel"
-                    }).tooltip('enable');
+                    }).tooltip("enable");
                 } else {
                     $('.edit-stock-btn, .update-stock-btn').attr('disabled', false)
                         .parent().attr({
                         'data-placement': "top",
                         'data-toggle': "tooltip",
                         'title': null
-                    }).tooltip('disable');
+                    }).tooltip("disable");
                 }
 
                 $('.stocks_page_right_panel_img').hide('slow');
@@ -55,26 +55,30 @@ $(function () {
         $data['book_id'] = $('.small-view .form input[type=hidden].book_id').val();
         $data['update_quantity'] = $('.small-view .form input[name=plus-minus-quantity]').val();
 
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            type: "PUT",
-            url: "/stocks/" + $data['stock_id'],
-            data: $data,
-            success: function (response) {
-                if (response.status === "success") {
-                    toastr.success(response.message);
+        if($data['update_quantity'] != 0){
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: "PUT",
+                url: "/stocks/" + $data['stock_id'],
+                data: $data,
+                success: function (response) {
+                    if (response.status === "success") {
+                        toastr.success(response.message);
 
-                    $('.stocks_page_right_panel').hide();
-                    $('.stocks_page_right_panel_img').show();
-                    $('.small-view .form input[name=plus-minus-quantity]').val("").attr('disabled', true);
-                } else if (response.status === "error") {
-                    toastr.error(response.message);
+                        $('.stocks_page_right_panel').hide();
+                        $('.stocks_page_right_panel_img').show();
+                        $('.small-view .form input[name=plus-minus-quantity]').val("").attr('disabled', true);
+                    } else if (response.status === "error") {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function () {
+                    toastr.error("Error on updating stock!");
                 }
-            },
-            error: function () {
-                toastr.error("Error on updating stock!");
-            }
-        });
+            });
+        } else {
+            toastr.warning("The quantity must be a positive or negative number different from 0");
+        }
     });
 
     $('#stocks-datatable').DataTable({

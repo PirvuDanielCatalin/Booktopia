@@ -36,13 +36,12 @@ class UserController extends Controller
         return view('users.index', ['users' => $users, 'roles' => $roles, 'users_roles' => $users_roles]);
     }
 
-
     public function update_role(Request $request)
     {
         $user = User::find($request->user_id);
         $user->assignRole($request->new_role);
 
         return ['status' => 'success',
-            'message' => Lang::get('dictionary.category.delete-success', ['user' => $user->name])];
+            'message' => Lang::get('dictionary.user.update-role-success', ['user' => $user->name])];
     }
 }

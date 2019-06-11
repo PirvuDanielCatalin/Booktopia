@@ -109,7 +109,7 @@ return [
             'exportExcel-users' => 'Export users (XLSX)',
             'exportPDF-users' => 'Export users (PDF)',
         ],
-        'update-role-success'=>'The role for user :user was successfully updated',
+        'update-role-success' => 'The role for user :user was successfully updated',
     ],
     'category' => [
         'categories' => 'Categories',
@@ -134,7 +134,7 @@ return [
             'add' => 'Add a comment',
             'delete' => 'Delete comment',
         ],
-        'no-comments'=>'There are no comments on this book yet.',
+        'no-comments' => 'There are no comments on this book yet.',
         'add-success' => 'The comment was successfully posted!',
         'add-error' => 'The comment posting failed!',
         'edit-success' => 'The comment was successfully updated!',
@@ -158,6 +158,7 @@ return [
     'profile' => [
         'profiles' => 'Profiles',
         'wishlist' => 'Wishlist',
+        'no-wishlist' => "You don't have any books in your wishlist!",
         'wallet' => 'Booktopia points',
         'purchase_history' => 'Purchase history',
         'first_name' => 'First Name',
@@ -184,6 +185,7 @@ return [
         'book-id' => 'Book ID',
         'book-title' => 'Book Title',
         'add-success' => 'Your request was submitted. Please wait an admin to check it!',
+        'no-requirements' => 'There are no requirements to check!',
     ],
     'stock' => [
         'stocks' => 'Stocks',
@@ -193,6 +195,7 @@ return [
             'positive-or-negative-value' => 'The value below will be added to the curent quantity, 
                                              meaning that this value could either decrease or increase the quantity.'
         ],
+        'no-book-created' => 'You do not have any book created!',
         'update-success' => 'The stock was successfully updated!',
         'update-error' => 'Error on updating stock!',
     ]

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="position: fixed; width: 100%; z-index: 101">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="position: fixed; width: 100%; z-index: 1001">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Booktopia') }}

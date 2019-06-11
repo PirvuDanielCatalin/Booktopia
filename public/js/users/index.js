@@ -38,7 +38,7 @@ $(function () {
             url: "/users/update-role",
             data: $data,
             success: function (response) {
-                toastr.success(response);
+                toastr.success(response.message);
 
                 $('.users_page_right_panel').hide();
                 $('.users_page_right_panel_img').show();

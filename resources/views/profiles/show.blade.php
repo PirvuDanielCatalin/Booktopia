@@ -93,81 +93,60 @@
             </div>
         </div>
         <div class="wishlist-sliding-panel">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="carousel-slide">
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
+            @if(sizeof($wishlist) != 0)
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="carousel-slide">
+                                @for($i = 0; $i < 5; $i++)
+                                    @if(isset($wishlist[$i]))
+                                        <div class="carousel-slide-item">
+                                            @if(isset($wishlist[$i]->photo))
+                                                <img alt="" class="w-100 rounded"
+                                                     src="{{ asset("images/books-covers")."/".$wishlist[$i]->photo }}">
+                                            @else
+                                                <img alt="" class="w-100 rounded"
+                                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                            @endif
+                                            <a role="button"
+                                               class="btn btn-outline-info btn-block mt-1"
+                                               href="{{ route('books.show', ['book' => $wishlist[$i]->book_id]) }}">SeeBook</a>
+                                        </div>
+                                    @endif
+                                @endfor
                             </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="carousel-slide">
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                            <div class="carousel-slide-item">
-                                <img alt="" class="w-100 rounded"
-                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
-                                <a role="button"
-                                   class="btn btn-outline-info btn-block mt-1"
-                                   href="">SeeBook</a>
-                            </div>
-                        </div>
+                        @if(sizeof($wishlist) > 5)
+                            @for($i = 0; $i < sizeof($wishlist)/5 - 1; $i++)
+                                <div class="carousel-item">
+                                    <div class="carousel-slide">
+                                        @for($j = 0; $j < 5; $j++)
+                                            @if(isset($wishlist[5 * $i + 5 + $j]))
+                                                <div class="carousel-slide-item">
+                                                    @if(isset($wishlist[$i]->photo))
+                                                        <img alt="" class="w-100 rounded"
+                                                             src="{{ asset("images/books-covers")."/".$wishlist[5 * $i + 5 + $j]->photo }}">
+                                                    @else
+                                                        <img alt="" class="w-100 rounded"
+                                                             src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                                    @endif
+                                                    <a role="button"
+                                                       class="btn btn-outline-info btn-block mt-1"
+                                                       href="{{ route('books.show', ['book' => $wishlist[5 * $i + 5 + $j]->book_id]) }}">SeeBook</a>
+                                                </div>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                </div>
+                            @endfor
+                        @endif
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="col-md-12 p-3">
+                    <h3><b>@lang('dictionary.profile.no-wishlist')</b></h3>
+                </div>
+            @endif
         </div>
     </div>
     <div class="col-md-12 card purchase-history-div">

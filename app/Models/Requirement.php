@@ -14,7 +14,7 @@ class Requirement extends Model
     ];
 
     // Requirement(FK) M - 1 User
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\Models\User','user_id');
     }
