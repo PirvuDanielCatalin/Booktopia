@@ -3,7 +3,8 @@
 return [
     'general' => [
         'shopping-cart' => 'Shopping Cart',
-        'find-the-nearest-shop' => 'Find the nearest shop',
+        'see-large-map' => 'See the large map',
+        'find-the-closest-shop' => 'Find the closest shop',
         'send-email' => 'Send Email',
         'like-these?' => 'You might like these as well...',
         'filters-panel' => 'Filters Panel',

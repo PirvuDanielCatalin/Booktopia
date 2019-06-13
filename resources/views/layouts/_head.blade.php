@@ -7,7 +7,7 @@
 <title>{{ config('app.name', 'Booktopia') }}</title>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @yield('scripts')
 
 <!-- Fonts -->

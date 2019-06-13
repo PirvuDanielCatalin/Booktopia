@@ -11,14 +11,14 @@ $(function () {
             url: "/categories/get-category",
             data: $data,
             success: function (response) {
-                $('.categories_page_right_panel .category_id').val(response.id);
+                $('.categories_page_right_panel .category_id').val(response.category_id);
                 $formrows = $('.categories_page_right_panel .col-md-12.form-input.p-2');
                 $formrows.eq(0).show();
                 $formrows.eq(1).find('input').val(response.name).attr('disabled', true);
 
                 $formrows.eq(2).find('.books-panel').empty();
                 response.books.forEach(function (elem) {
-                    $div = $('<div class="d-flex p-2 book-panel" book-id="' + elem.id + '">\n' +
+                    $div = $('<div class="d-flex p-2 book-panel" book-id="' + elem.book_id + '">\n' +
                         '<div class="book-panel-info">\n' +
                         elem.title + '\n' +
                         '</div>\n' +
@@ -36,9 +36,12 @@ $(function () {
                 $('.remove-book-from-category').on('click', function () {
                     let categoryName = $('.categories_page_right_panel .col-md-12.form-input.p-2').eq(1).find('input').val();
                     let categoryId = $('.categories_page_right_panel .category_id').val();
+
                     let bookId = $(this).closest('.book-panel').attr('book-id');
                     let bookName = $(this).closest('.book-panel').find('.book-panel-info').text().trim();
+
                     let question = 'Are you sure you want to remove book ' + bookName + ' from ' + categoryName + ' category?';
+
                     $('#removeBookFromCategoryModal .modal-body').text(question);
                     $('#removeBookFromCategoryModal #confirmRemoveBookFromCategory').attr('category-id', categoryId).attr('book-id', bookId);
                 });
@@ -134,6 +137,7 @@ $(function () {
                 }
             });
         } else {
+            // Update
             let categoryId = $('.categories_page_right_panel .category_id').val();
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -178,11 +182,13 @@ $(function () {
             url: "/categories/" + categoryId,
             success: function (response) {
                 if (response.status === "success") {
+                    $('#deleteCategoryModal').modal('toggle');
                     toastr.success(response.message);
                     setTimeout(function () {
                         window.location = "/categories";
                     }, 1000);
                 } else if (response.status === "error") {
+                    $('#deleteCategoryModal').modal('toggle');
                     toastr.error(response.message);
                 }
             },

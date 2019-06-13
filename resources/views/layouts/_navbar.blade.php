@@ -34,7 +34,8 @@
                     <li class="nav-item dropdown">
                         <a aria-expanded="false"
                            aria-haspopup="true"
-                           class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
                            href="#"
                            id="navbarDropdown"
                            role="button"

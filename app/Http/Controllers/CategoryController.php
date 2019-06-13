@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Validation\Rule;
 use Session;
 use Validator;
 
@@ -62,7 +63,8 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'name' => 'required|string|min:1|max:51|unique:categories,name,' . $category->id,
+                'name' => ['required', 'string', 'min:1', 'max:51',
+                    Rule::unique('categories', 'name')->ignore($category->category_id, 'category_id')]
             ], [
                 'required' => 'The :attribute field is required! ',
                 'string' => 'The :attribute field must be a string! ',

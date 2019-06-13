@@ -13,7 +13,7 @@ $(function () {
                 $('.small-view .form input[type=hidden]').val(response.id);
                 $('.small-view .form input[name=name]').val(response.name);
                 $('.small-view .form input[name=email]').val(response.email);
-                $('.small-view .form select#roleSelect option').toArray().forEach(function (elem) {
+                $('.small-view .form select#roleSelect option').attr('selected', false).toArray().forEach(function (elem) {
                     if ($(elem).text().trim() === response.roles[0].name)
                         $(elem).attr('selected', true);
                 });

@@ -93,7 +93,7 @@
                                 <div id="leaflet-map" class="mt-2"></div>
                                 <button class="btn btn-info btn-block mt-2"
                                         id="find-the-nearest-shop-btn">
-                                    <i class="fas fa-search-location"></i> @lang('dictionary.general.find-the-nearest-shop')
+                                    <i class="fas fa-search-location"></i> @lang('dictionary.general.see-large-map')
                                 </button>
                             </div>
                             <div class="row col-md-4">
