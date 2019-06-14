@@ -14,17 +14,17 @@ class CreateBooksCategoriesTable extends Migration
     public function up()
     {
         Schema::create('books_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('book_category_id');
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')
-                ->references('id')
-                ->on('books');
-            //  ->onDelete('cascade');
+                ->references('book_id')
+                ->on('books')
+                ->onDelete('cascade');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')
-                ->references('id')
-                ->on('categories');
-            //  ->onDelete('cascade');
+                ->references('category_id')
+                ->on('categories')
+                ->onDelete('cascade');
         });
     }
 

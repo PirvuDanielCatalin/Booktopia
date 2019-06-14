@@ -14,18 +14,19 @@ class CreateRequirementsTable extends Migration
     public function up()
     {
         Schema::create('requirements', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('requirement_id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
-            //  ->onDelete('cascade');
-            $table->integer('book_id')->unsigned();
+                ->on('users')
+                ->onDelete('cascade');
+            $table->integer('book_id')->unsigned()->nullable();
             $table->foreign('book_id')
-                ->references('id')
-                ->on('books');
-            //  ->onDelete('cascade');
+                ->references('book_id')
+                ->on('books')
+                ->onDelete('set null');
             $table->integer('increment');
+            $table->integer('status')->comment('0 = Neutral 1 = Accepted -1 = Denied');
         });
     }
 

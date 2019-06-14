@@ -14,10 +14,12 @@ class CreateInvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('invoice_id');
             $table->dateTime('date');
             $table->string('billing_address',201);
             $table->string('delivery_address',201);
+            $table->tinyInteger('withPoints');
+            $table->string('step',20);
         });
     }
 

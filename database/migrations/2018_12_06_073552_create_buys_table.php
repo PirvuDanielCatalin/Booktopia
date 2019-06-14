@@ -14,22 +14,22 @@ class CreateBuysTable extends Migration
     public function up()
     {
         Schema::create('buys', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('book_id')->unsigned();
+            $table->increments('buy_id');
+            $table->integer('book_id')->unsigned()->nullable();
             $table->foreign('book_id')
-                ->references('id')
-                ->on('books');
-            //  ->onDelete('cascade');
+                ->references('book_id')
+                ->on('books')
+                ->onDelete('set null');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
-            //  ->onDelete('cascade');
-            $table->integer('invoice_id')->unsigned();
+                ->on('users')
+                ->onDelete('cascade');
+            $table->integer('invoice_id')->unsigned()->nullable();
             $table->foreign('invoice_id')
-                ->references('id')
-                ->on('invoices');
-            //  ->onDelete('cascade');
+                ->references('invoice_id')
+                ->on('invoices')
+                ->onDelete('set null');
         });
     }
 

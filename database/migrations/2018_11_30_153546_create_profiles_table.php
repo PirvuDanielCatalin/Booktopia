@@ -14,15 +14,19 @@ class CreateProfilesTable extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('phone',20);
-            $table->text('adress');
-            $table->string('photo');
+            $table->increments('profile_id');
+            $table->string('first_name', 35)->nullable();
+            $table->string('last_name', 51)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->text('adress')->nullable();
+            $table->string('photo', 191)->nullable();
+            $table->integer('wallet')->nullable();
+            $table->string('wishlist', 191)->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
-            //  ->onDelete('cascade');
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -33,6 +37,6 @@ class CreateProfilesTable extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('profiles');
+        Schema::dropIfExists('profiles');
     }
 }

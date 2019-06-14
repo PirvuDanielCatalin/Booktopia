@@ -14,12 +14,12 @@ class CreateOffersTable extends Migration
     public function up()
     {
         Schema::create('offers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('offer_id');
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')
-                ->references('id')
-                ->on('books');
-            //  ->onDelete('cascade');
+                ->references('book_id')
+                ->on('books')
+                ->onDelete('cascade');
             $table->integer('value');
         });
     }
