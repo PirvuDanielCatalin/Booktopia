@@ -2,12 +2,12 @@
 
 @section('shop-scripts')
     <script type="text/javascript"
-            src="{{ asset('js/general/shop-products.js') }}" defer></script>
+            src="{{ secure_asset('js/general/shop-products.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/general/shop-products.css') }}">
+          href="{{ secure_asset('css/general/shop-products.css') }}">
 @endsection
 
 @section('scontent')

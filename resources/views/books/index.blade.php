@@ -6,7 +6,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/books/index.js') }}" defer></script>
+            src="{{ secure_asset('js/books/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/books/index.css') }}">
+          href="{{ secure_asset('css/books/index.css') }}">
 @endsection
 
 @section('content')
