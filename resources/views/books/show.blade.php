@@ -6,16 +6,16 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('libs/jquery.session.js') }}" defer></script>
+            src="{{ secure_asset('libs/jquery.session.js') }}" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/books/show.js') }}" defer></script>
+            src="{{ secure_asset('js/books/show.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/books/show.css') }}">
+          href="{{ secure_asset('css/books/show.css') }}">
 @endsection
 
 @section('scontent')
@@ -24,13 +24,13 @@
             @if(isset($book->photo))
                 <img alt="CoverPhoto"
                      class="book-image h-100"
-                     src="{{ asset("images/books-covers")."/".$book->photo }}"
+                     src="{{ secure_asset("images/books-covers")."/".$book->photo }}"
                      data-toggle="modal"
                      data-target="#showCoverModal">
             @else
                 <img alt="CoverPhoto"
                      class="book-image h-100"
-                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                     src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
             @endif
         </div>
         <div class="rating-bar-div card text-center">
@@ -94,13 +94,13 @@
                                 @if(isset($suggested_books[$i]->photo))
                                     <img alt="CoverPhoto"
                                          class="w-100"
-                                         src="{{ asset("images/books-covers")."/".$suggested_books[$i]->photo }}"
+                                         src="{{ secure_asset("images/books-covers")."/".$suggested_books[$i]->photo }}"
                                          data-toggle="modal"
                                          data-target="#showCoverModal">
                                 @else
                                     <img alt="CoverPhoto"
                                          class="w-100"
-                                         src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                         src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
                                 @endif
                                 <a role="button"
                                    class="btn btn-outline-info btn-block mt-1"
@@ -116,13 +116,13 @@
                                 @if(isset($suggested_books[$i]->photo))
                                     <img alt="CoverPhoto"
                                          class="w-100"
-                                         src="{{ asset("images/books-covers")."/".$suggested_books[$i]->photo }}"
+                                         src="{{ secure_asset("images/books-covers")."/".$suggested_books[$i]->photo }}"
                                          data-toggle="modal"
                                          data-target="#showCoverModal">
                                 @else
                                     <img alt="CoverPhoto"
                                          class="w-100"
-                                         src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                         src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
                                 @endif
                                 <a role="button"
                                    class="btn btn-outline-info btn-block mt-1"
@@ -249,7 +249,7 @@
                     <div class="modal-body m-auto">
                         <img alt="CoverPhoto"
                              class="book-image h-100"
-                             src="{{ asset("images/books-covers")."/".$book->photo }}">
+                             src="{{ secure_asset("images/books-covers")."/".$book->photo }}">
                     </div>
                 </div>
             </div>

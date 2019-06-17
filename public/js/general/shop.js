@@ -4,20 +4,18 @@ $(function () {
     $(".shopping-cart-products-nr").text(Object.keys(sessionStorage).length);
 
     $(".shopping-cart-div").on("click", function () {
-        window.location =
-            "/shopping-cart?session=" + btoa(JSON.stringify(sessionStorage)); // btoa = Base64 Encode
+        $form = $('<form method="post" action="/shopping-cart">' +
+            '<input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '">' +
+            '<input type="text" name="shopping_cart" value="' + escape(JSON.stringify(sessionStorage)) + '">' +
+            '</form>');
+        $('.form-surprise').append($form);
+        $form.submit();
     });
 
     $(".search-bar-div button").on("click", function () {
         console.log(Object.keys(sessionStorage));
         ////
         alert("Search functional la schimbarea textului");
-    });
-
-    $("#myModal").on("show.bs.modal", function () {
-        setTimeout(function () {
-            map.invalidateSize();
-        }, 10);
     });
 
     $("#find-the-nearest-shop-btn").on("click", function () {

@@ -4,7 +4,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/general/large-map.js') }}" defer></script>
+            src="{{ secure_asset('js/general/large-map.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')

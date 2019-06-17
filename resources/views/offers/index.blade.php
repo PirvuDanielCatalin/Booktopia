@@ -6,7 +6,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/offers/index.js') }}" defer></script>
+            src="{{ secure_asset('js/offers/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/offers/index.css') }}">
+          href="{{ secure_asset('css/offers/index.css') }}">
 @endsection
 
 @section('content')
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="small-view col-md-4">
-                            <img src="{{ asset("images/views-right-panels")."/Offers_Right_Panel.png" }}"
+                            <img src="{{ secure_asset("images/views-right-panels")."/Offers_Right_Panel.png" }}"
                                  alt="OffersPageRightPanel" class="offers_page_right_panel_img">
                             <div class="offers_page_right_panel">
                                 <div class="form">

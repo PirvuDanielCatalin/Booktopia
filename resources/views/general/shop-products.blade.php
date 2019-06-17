@@ -126,11 +126,11 @@
                         </div>
                         <div class="book-thumbnail-div">
                             @if(isset($book->photo))
-                                <img src="{{ asset("images/books-covers")."/".$book->photo }}"
+                                <img src="{{ secure_asset("images/books-covers")."/".$book->photo }}"
                                      alt="CoverPhoto"
                                      class="book-thumbnail-img">
                             @else
-                                <img src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}"
+                                <img src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}"
                                      alt="CoverPhoto"
                                      class="book-thumbnail-img">
                             @endif

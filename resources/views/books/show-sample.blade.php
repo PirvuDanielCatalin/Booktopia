@@ -4,7 +4,7 @@
     <script type="text/javascript"
             src="https://www.google.com/books/jsapi.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/books/show-sample.js') }}" defer></script>
+            src="{{ secure_asset('js/books/show-sample.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')

@@ -64,7 +64,7 @@ class ShopController extends Controller
                 ->join('categories', 'books_categories.category_id', '=', 'categories.category_id')
                 ->whereRaw($category_filter);
 
-                //->get()->unique('book_id')
+        //->get()->unique('book_id')
         $books = $books->inRandomOrder()->paginate(10);
 
         return view('general.shop-products',
@@ -81,7 +81,7 @@ class ShopController extends Controller
 
     public function shopping_cart(Request $request)
     {
-        $session = get_object_vars(json_decode(base64_decode($request->input('session'))));
+        $session = json_decode(rawurldecode($request->shopping_cart), true);
         $products = [];
         foreach (array_keys($session) as $product) {
             $id = preg_replace('/\D/', '', $product); // Extract the book id from session key
@@ -102,7 +102,7 @@ class ShopController extends Controller
                 ->from($email)
                 ->to('booktopia.contact@gmail.com', 'Booktopia');
         });
-        
+
         return back();
     }
 

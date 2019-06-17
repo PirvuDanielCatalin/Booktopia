@@ -4,14 +4,14 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/categories/index.js') }}" defer></script>
+            src="{{ secure_asset('js/categories/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/categories/index.css') }}">
+          href="{{ secure_asset('css/categories/index.css') }}">
 @endsection
 
 @section('content')
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="small-view">
-                            <img src="{{ asset("images/views-right-panels")."/Categories_Right_Panel.jpg" }}"
+                            <img src="{{ secure_asset("images/views-right-panels")."/Categories_Right_Panel.jpg" }}"
                                  alt="CategoriesPageRightPanel"
                                  class="categories_page_right_panel_img">
                             <div class="categories_page_right_panel">

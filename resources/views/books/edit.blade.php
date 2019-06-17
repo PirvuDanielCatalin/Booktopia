@@ -4,14 +4,14 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/books/create_edit.js') }}" defer></script>
+            src="{{ secure_asset('js/books/create_edit.js') }}" defer></script>
 @endsection
 
 @section('styles')
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/books/create_edit.css') }}">
+          href="{{ secure_asset('css/books/create_edit.css') }}">
 @endsection
 
 @section('content')
@@ -123,9 +123,9 @@
                                             @endif
                                             <div class="image-dropzone">
                                                 @if(isset($book->photo))
-                                                    <img src="{{ asset("images/books-covers")."/".$book->photo }}">
+                                                    <img src="{{ secure_asset("images/books-covers")."/".$book->photo }}">
                                                 @else
-                                                    <img src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                                    <img src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
                                                 @endif
                                             </div>
                                             <div class="w-50 p-4">@lang('dictionary.book.drag-and-drop.first-part')</div>

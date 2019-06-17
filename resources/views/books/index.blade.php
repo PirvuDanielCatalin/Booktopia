@@ -74,10 +74,10 @@
                                     <td>
                                         @if(isset($book->photo))
                                             <img class="book-thumbnail"
-                                                 src="{{ asset("images/books-covers")."/".$book->photo }}">
+                                                 src="{{ secure_asset("images/books-covers")."/".$book->photo }}">
                                         @else
                                             <img class="book-thumbnail"
-                                                 src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                                 src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
                                         @endif
                                     </td>
                                     <td>{{ $book->price }}</td>

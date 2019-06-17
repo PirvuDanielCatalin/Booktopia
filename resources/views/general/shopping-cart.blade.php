@@ -2,14 +2,14 @@
 
 @section('shop-scripts')
     <script type="text/javascript"
-            src="{{ asset('libs/jquery.session.js') }}" defer></script>
+            src="{{ secure_asset('libs/jquery.session.js') }}" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/general/shopping-cart.js') }}" defer></script>
+            src="{{ secure_asset('js/general/shopping-cart.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/general/shopping-cart.css') }}">
+          href="{{ secure_asset('css/general/shopping-cart.css') }}">
 @endsection
 
 @section('scontent')
@@ -17,12 +17,12 @@
         <h3>Your shopping cart:</h3>
     </div>
     <div class="col-md-12">
-        @if(empty($products))
-            <h5 class="no-products-h">
-                You don't have any product in the shopping cart!<br>
-                <a href="{{ url('/') }}" class="no-products-redirect">Go to Shop</a>
-            </h5>
-        @else
+        <h5 class="no-products-h" style="display: {{ (empty($products)) ? 'block' : 'none'}}">
+            @lang('dictionary.general.shopping-cart.nothing-in-cart')<br>
+            <a href="{{ url('/') }}"
+               class="no-products-redirect">@lang('dictionary.general.shopping-cart.go-to-shop')</a>
+        </h5>
+        @if(!empty($products))
             <table class="table table-responsive">
                 <thead>
                 <tr>
@@ -62,16 +62,24 @@
             </table>
             <div>
                 <div class="user-points-div">
-                    <div class="user-points-value-div"><b>Points:</b></div>
-                    <div class="user-points-value">
-                        <b>256</b>
+                    <div class="user-points-value-div">
+                        <b>@lang('dictionary.general.shopping-cart.fidelity-points')</b>
                     </div>
-                    <button class="btn btn-outline-secondary"
-                            data-placement="top"
-                            data-toggle="tooltip"
-                            title="@lang('dictionary.actions.use')">
-                        <i class="fas fa-certificate"></i>
-                    </button>
+                    @if(Auth::user())
+                        <div class="user-points-value">
+                            <b>10</b>
+                        </div>
+                        <button class="btn btn-outline-secondary"
+                                data-placement="top"
+                                data-toggle="tooltip"
+                                title="@lang('dictionary.actions.use')">
+                            <i class="fas fa-certificate"></i>
+                        </button>
+                    @else
+                        <div class="user-points-value">
+                            <b>@lang('dictionary.general.shopping-cart.use-points')</b>
+                        </div>
+                    @endif
                 </div>
                 <div class="products-total-price-div">
                     <div class="products-total-price-value-div"><b>Total:</b></div>
@@ -82,7 +90,7 @@
                         user-logged="{{ (Auth::user()) ? 'true' : 'false' }}">
                     <b>@lang('dictionary.actions.checkout')</b>
                 </button>
-                <form method="post" action="{{ route('books.store') }}">
+                <form method="post" action="{{ route('invoices.store') }}">
                     @csrf
                     <div class="card billing_address_card">
                         <div class="card-header text-center">

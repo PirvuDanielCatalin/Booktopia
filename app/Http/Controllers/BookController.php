@@ -19,8 +19,8 @@ class BookController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
-        $this->middleware('isAdminOrPartner')->except('show');
+        $this->middleware('auth')->except(['show', 'sample']);
+        $this->middleware('isAdminOrPartner')->except(['show', 'sample']);
         $this->middleware('isAdmin')->only(['edit', 'update', 'destroy']);
     }
 
@@ -156,7 +156,7 @@ class BookController extends Controller
 
         $suggested_books = Book::with('categories')
             ->where("books.book_id", '<>', $book->book_id)
-            ->where('books.inShop','=',1)
+            ->where('books.inShop', '=', 1)
             ->join('books_categories', 'books.book_id', '=', 'books_categories.book_id')
             ->join('categories', 'books_categories.category_id', '=', 'categories.category_id')
             ->whereRaw("categories.name in ('" . implode("', '", $book_categories) . "')")

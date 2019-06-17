@@ -6,7 +6,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/users/index.js') }}" defer></script>
+            src="{{ secure_asset('js/users/index.js') }}" defer></script>
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/users/index.css') }}">
+          href="{{ secure_asset('css/users/index.css') }}">
 @endsection
 
 @section('content')
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="small-view">
-                            <img src="{{ asset("images/views-right-panels")."/Users_Right_Panel.png" }}"
+                            <img src="{{ secure_asset("images/views-right-panels")."/Users_Right_Panel.png" }}"
                                  alt="UsersPageRightPanel" class="users_page_right_panel_img">
                             <div class="users_page_right_panel">
                                 <div class="form">

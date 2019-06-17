@@ -4,7 +4,7 @@
     <script type="text/javascript"
             src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/general/shop.js') }}" defer></script>
+            src="{{ secure_asset('js/general/shop.js') }}" defer></script>
     @yield('shop-scripts')
 @endsection
 
@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/general/shop.css') }}">
+          href="{{ secure_asset('css/general/shop.css') }}">
     @yield('shop-styles')
 @endsection
 
@@ -38,12 +38,13 @@
                             <div class="shopping-cart-div">
                                 <div class="shopping-cart-products-nr"></div>
                                 <i class="fas fa-shopping-cart"></i>
-                                <b>@lang('dictionary.general.shopping-cart')</b>
+                                <b>@lang('dictionary.general.shopping-cart.shopping-cart')</b>
                             </div>
                         </div>
                     </div>
                     <div class="card-body row">
                         @yield('scontent')
+                        <div class="d-none form-surprise"></div>
                     </div>
                     <div class="card-footer">
                         <div class="row">

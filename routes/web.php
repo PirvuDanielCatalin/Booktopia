@@ -15,7 +15,7 @@ Route::get('/home', function () {
 Route::get('/', 'ShopController@index')->name('shop');
 Route::post('shop/filters', 'ShopController@filters')->name('shop.filters');
 Route::get('shop/filters', 'ShopController@filters')->name('shop.filters');
-Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
+Route::post('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
 
 Route::get('control-panel', 'ShopController@control_panel')->name('control-panel');
 Route::post('contact-email', 'ShopController@contactemail')->name('contact-email');

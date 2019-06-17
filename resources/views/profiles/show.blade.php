@@ -4,14 +4,14 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
     <script type="text/javascript"
-            src="{{ asset('js/profiles/show.js') }}" defer></script>
+            src="{{ secure_asset('js/profiles/show.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/profiles/show.css') }}">
+          href="{{ secure_asset('css/profiles/show.css') }}">
 @endsection
 
 @section('scontent')
@@ -19,7 +19,7 @@
         <div class="profile-photo-div card">
             <img alt="ProfilePhoto"
                  class="profile-photo"
-                 src="{{ asset("images/helpers")."/MissingProfilePhoto.jpg" }}">
+                 src="{{ secure_asset("images/helpers")."/MissingProfilePhoto.jpg" }}">
         </div>
         <div class="wallet-points-div card border-0">
             @lang('dictionary.profile.wallet')<br>
@@ -103,10 +103,10 @@
                                         <div class="carousel-slide-item">
                                             @if(isset($wishlist[$i]->photo))
                                                 <img alt="" class="w-100 rounded"
-                                                     src="{{ asset("images/books-covers")."/".$wishlist[$i]->photo }}">
+                                                     src="{{ secure_asset("images/books-covers")."/".$wishlist[$i]->photo }}">
                                             @else
                                                 <img alt="" class="w-100 rounded"
-                                                     src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                                     src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
                                             @endif
                                             <a role="button"
                                                class="btn btn-outline-info btn-block mt-1"
@@ -125,10 +125,10 @@
                                                 <div class="carousel-slide-item">
                                                     @if(isset($wishlist[$i]->photo))
                                                         <img alt="" class="w-100 rounded"
-                                                             src="{{ asset("images/books-covers")."/".$wishlist[5 * $i + 5 + $j]->photo }}">
+                                                             src="{{ secure_asset("images/books-covers")."/".$wishlist[5 * $i + 5 + $j]->photo }}">
                                                     @else
                                                         <img alt="" class="w-100 rounded"
-                                                             src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                                                             src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
                                                     @endif
                                                     <a role="button"
                                                        class="btn btn-outline-info btn-block mt-1"

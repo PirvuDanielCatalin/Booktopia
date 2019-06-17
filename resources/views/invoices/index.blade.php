@@ -2,12 +2,12 @@
 
 @section('shop-scripts')
     <script type="text/javascript"
-            src="{{ asset('js/invoices/index.js') }}" defer></script>
+            src="{{ secure_asset('js/invoices/index.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/invoices/index.css') }}">
+          href="{{ secure_asset('css/invoices/index.css') }}">
 @endsection
 
 @section('scontent')

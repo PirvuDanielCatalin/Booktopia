@@ -2,12 +2,12 @@
 
 @section('scripts')
     <script type="text/javascript"
-            src="{{ asset('js/general/control-panel.js') }}" defer></script>
+            src="{{ secure_asset('js/general/control-panel.js') }}" defer></script>
 @endsection
 
 @section('styles')
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('css/general/control-panel.css') }}">
+          href="{{ secure_asset('css/general/control-panel.css') }}">
 @endsection
 
 @section('content')

@@ -2,7 +2,13 @@
 
 return [
     'general' => [
-        'shopping-cart' => 'Shopping Cart',
+        'shopping-cart' => [
+            'shopping-cart' => 'Shopping Cart',
+            'nothing-in-cart' => "You don't have any product in the shopping cart!",
+            'go-to-shop' => 'Go to Shop',
+            'fidelity-points' => 'Points',
+            'use-points' => 'You must be logged in to use points!',
+        ],
         'see-large-map' => 'See the large map',
         'find-the-closest-shop' => 'Find the closest shop',
         'send-email' => 'Send Email',
