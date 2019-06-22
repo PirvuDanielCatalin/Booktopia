@@ -38,10 +38,16 @@ $(function () {
     });
 
     $('.wishlist-div > div:first-child').on('click', function () {
-        alert('Wishlist')
+        $('.wishlist-sliding-panel').slideToggle();
     });
 
     $('.purchase-history-div > div:first-child').on('click', function () {
-        alert('Purchase history')
+        $('.purchase-history-sliding-panel').slideToggle();
+    });
+
+    $('.td.thrd-clmn span').on('click', function () {
+        $id = $(this).closest('.tr').find('input[type=hidden]').val();
+        var win = window.open('/invoices/' + $id, '_blank');
+        win.focus();
     });
 });

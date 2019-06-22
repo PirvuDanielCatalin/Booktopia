@@ -9,4 +9,13 @@ $(function () {
             $panel.slideUp();
         }
     });
+
+    $('.export-PDF').on('click', function () {
+        $form = $('<form method="post" action="/invoices/exportPDF" class="d-none">' +
+            '<input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '">' +
+            '<input type="text" name="invoice_id" value="' + $(this).attr('invoice-id') + '">' +
+            '</form>');
+        $(this).parent().append($form);
+        $form.submit();
+    });
 });

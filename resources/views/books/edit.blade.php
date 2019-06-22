@@ -26,7 +26,7 @@
                         <form method="post" action="{{ route('books.update', $book) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="card title_author_publiching_house_card">
+                            <div class="card title_author_publishing_house_card">
                                 <div class="card-header text-center">
                                     @lang('dictionary.book.title') && @lang('dictionary.book.author')
                                     && @lang('dictionary.book.publishing_house')

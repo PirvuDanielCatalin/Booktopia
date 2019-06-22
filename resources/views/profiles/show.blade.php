@@ -156,39 +156,34 @@
                 <span class="caret-down float-right">
                     <i class="fas fa-caret-down fa-2x"></i>
                 </span>
-                <span class="caret-up d-none float-right">
-                    <i class="fas fa-sort-up fa-2x"></i>
-                </span>
             </div>
         </div>
-        <div class="purchase-history-sliding-panel">
-            <div class="tr">
-                <div class="th frst-clmn">ID</div>
-                <div class="th scnd-clmn">@lang('dictionary.invoice.date')</div>
-                <div class="th thrd-clmn">@lang('dictionary.invoice.total_price')</div>
-            </div>
-            @for($i = 1;$i<=10;$i++)
-                <div class="tr data-tr">
-                    <input type="hidden" value="{{ $i }}">
-                    <div class="td frst-clmn">{{ $i }}</div>
-                    <div class="td scnd-clmn">20/01/2019</div>
-                    <div class="td thrd-clmn">{{ $i*2019 }}
-                        <div class="float-right up-down-arrows-panel">
-                            <span class="caret-down float-right">
-                                <i class="fas fa-caret-down fa-2x"></i>
+        @if(sizeof($invoices) != 0)
+            <div class="purchase-history-sliding-panel">
+                <div class="tr">
+                    <div class="th frst-clmn">ID</div>
+                    <div class="th scnd-clmn">@lang('dictionary.invoice.date')</div>
+                    <div class="th thrd-clmn">@lang('dictionary.invoice.total_price')</div>
+                </div>
+                @foreach($invoices as $invoice_id => $arr)
+                    <div class="tr data-tr">
+                        <input type="hidden" value="{{ $invoice_id }}">
+                        <div class="td frst-clmn">{{ $invoice_id }}</div>
+                        <div class="td scnd-clmn">{{ $arr['invoice']->date }}</div>
+                        <div class="td thrd-clmn">{{ $arr['price'] }}
+                            <div class="float-right up-down-arrows-panel">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle"></i>
                             </span>
-                            <span class="caret-up d-none float-right">
-                                <i class="fas fa-sort-up fa-2x"></i>
-                            </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="iframe-div">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ab accusamus asperiores aspernatur
-                        culpa cum doloremque nihil quis sed sequi similique, totam unde veritatis voluptatem voluptates.
-                        Excepturi natus officiis totam.
-                    </div>
-                </div>
-            @endfor
-        </div>
+                @endforeach
+            </div>
+        @else
+            <div class="col-md-12 p-3">
+                <h3><b>@lang('dictionary.profile.no-invoices')</b></h3>
+            </div>
+        @endif
     </div>
 @endsection

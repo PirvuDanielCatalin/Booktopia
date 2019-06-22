@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Buy;
+use App\Models\Invoice;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Auth;
@@ -37,8 +39,30 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        $wishlist = Book::whereRaw('books.book_id in ('.$profile->wishlist.')')->get();
-        return view('profiles.show', ['profile' => $profile, 'wishlist' => $wishlist]);
+        $invoices = [];
+        $buys = Buy::with('invoice')
+            ->where('user_id', '=', Auth::user()->id)
+            ->join('invoices', 'invoices.invoice_id', '=', 'buys.invoice_id')
+            ->get();
+
+        foreach ($buys as $buy) {
+            $invoices[$buy->invoice_id]['invoice'] = Invoice::find($buy->invoice_id);
+            $price = 0.0;
+            foreach ($invoices[$buy->invoice_id]['invoice']->buys as $b) {
+                $price += Book::find($b->book_id)->price * $b->quantity;
+                $price = round($price, 2);
+            }
+
+            $invoices[$buy->invoice_id]['price'] = $price;
+        }
+
+        $wishlist = Book::whereRaw('books.book_id in (' . $profile->wishlist . ')')->get();
+        return view('profiles.show',
+            [
+                'profile' => $profile,
+                'wishlist' => $wishlist,
+                'invoices' => $invoices,
+            ]);
     }
 
     /**

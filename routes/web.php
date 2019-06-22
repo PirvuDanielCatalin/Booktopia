@@ -15,7 +15,9 @@ Route::get('/home', function () {
 Route::get('/', 'ShopController@index')->name('shop');
 Route::post('shop/filters', 'ShopController@filters')->name('shop.filters');
 Route::get('shop/filters', 'ShopController@filters')->name('shop.filters');
+Route::get('shop/search','ShopController@search')->name('shop.search');
 Route::post('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
+Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
 
 Route::get('control-panel', 'ShopController@control_panel')->name('control-panel');
 Route::post('contact-email', 'ShopController@contactemail')->name('contact-email');
@@ -52,9 +54,11 @@ Route::post('profiles/add-to-wishlist', 'ProfileController@add_to_wishlist')->na
 
 // Invoices
 Route::resource('invoices', 'InvoiceController');
+Route::post('invoices/exportPDF', 'InvoiceController@exportPDF')->name('exportPDF');
 
 // Requirements
 Route::resource('requirements', 'RequirementController');
+Route::post('requirements/get-requirement', 'RequirementController@get_requirement')->name('categories.get-requirement');
 
 // Stocks
 Route::resource('stocks', 'StockController');

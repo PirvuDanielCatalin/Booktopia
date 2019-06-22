@@ -9,6 +9,10 @@ class Buy extends Model
     protected $primaryKey = 'buy_id';
     public $timestamps = false;
 
+    protected $fillable = [
+        'book_id', 'user_id', 'invoice_id', 'quantity'
+    ];
+
     // Buy(FK) M - 1 User
     public function users()
     {

@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <form method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="card title_author_publiching_house_card">
+                            <div class="card title_author_publishing_house_card">
                                 <div class="card-header text-center">
                                     @lang('dictionary.book.title') && @lang('dictionary.book.author')
                                     && @lang('dictionary.book.publishing_house')

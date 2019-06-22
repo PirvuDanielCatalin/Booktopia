@@ -74,6 +74,13 @@ class ShopController extends Controller
                 'category_filters' => $category_filters_panel]);
     }
 
+    public function search(Request $request)
+    {
+        $books = Book::where('inShop', '1')->where('title', 'like', '%' . $request->search . '%')->paginate(1000);
+        $categories = Category::all();
+        return view('general.shop-products', ['books' => $books, 'categories' => $categories]);
+    }
+
     public function control_panel()
     {
         return view('general.control-panel');
@@ -81,14 +88,33 @@ class ShopController extends Controller
 
     public function shopping_cart(Request $request)
     {
-        $session = json_decode(rawurldecode($request->shopping_cart), true);
+        $session_shop = $request->session()->get('shopping_cart');
+
+        $session_errors = $request->session()->get('errors');
+        if (isset($session_errors))
+            $session_errors = $session_errors->getBag('default');
+
+        $session = [];
+        if (isset($request->shopping_cart)) {
+            $session = json_decode(rawurldecode($request->shopping_cart), true);
+            $session_shop = $request->shopping_cart;
+        } else if (isset($session_shop)) {
+            $session = json_decode(rawurldecode($session_shop), true);
+        }
+
         $products = [];
         foreach (array_keys($session) as $product) {
             $id = preg_replace('/\D/', '', $product); // Extract the book id from session key
             $products[$id]['book'] = Book::find($id);
             $products[$id]['quantity'] = intval($session[$product]);
         }
-        return view('general.shopping-cart', ['products' => $products]);
+
+        return view('general.shopping-cart',
+            [
+                'products' => $products,
+                'shopping_cart' => $session_shop,
+                'errors' => $session_errors,
+            ]);
     }
 
     public function contactemail(Request $request)

@@ -2,6 +2,10 @@
 
 @section('shop-scripts')
     <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" defer></script>
+    <script type="text/javascript"
             src="{{ secure_asset('libs/jquery.session.js') }}" defer></script>
     <script type="text/javascript"
             src="{{ secure_asset('js/general/shopping-cart.js') }}" defer></script>
@@ -9,20 +13,31 @@
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <link rel="stylesheet" type="text/css"
           href="{{ secure_asset('css/general/shopping-cart.css') }}">
 @endsection
 
 @section('scontent')
+    @if(isset($errors) && count($errors) > 0)
+        <script defer>
+            window.onload = function () {
+                @foreach($errors->getMessages() as $key => $error)
+                toastr.error('{{ $error[0] }}');
+                @endforeach
+            };
+        </script>
+    @endif
     <div class="col-md-12">
         <h3>Your shopping cart:</h3>
     </div>
     <div class="col-md-12">
-        <h5 class="no-products-h" style="display: {{ (empty($products)) ? 'block' : 'none'}}">
+        <h5 class="no-products-h" style="display: {{ (count($products) == 0) ? 'block' : 'none'}}">
             @lang('dictionary.general.shopping-cart.nothing-in-cart')<br>
             <a href="{{ url('/') }}"
                class="no-products-redirect">@lang('dictionary.general.shopping-cart.go-to-shop')</a>
         </h5>
-        @if(!empty($products))
+        @if(count($products) > 0)
             <table class="table table-responsive">
                 <thead>
                 <tr>
@@ -44,6 +59,8 @@
                                     type="button">-1
                             </button>
                             <input class="form-control d-inline-block text-center"
+                                   max="{{ $product['book']->stock->amount }}"
+                                   min="1"
                                    type="number"
                                    value="{{ $product['quantity'] }}">
                             <button type="button"
@@ -63,21 +80,28 @@
             <div>
                 <div class="user-points-div">
                     <div class="user-points-value-div">
-                        <b>@lang('dictionary.general.shopping-cart.fidelity-points')</b>
+                        <b>@lang('dictionary.general.shopping-cart.fidelity-points'):</b>
                     </div>
                     @if(Auth::user())
                         <div class="user-points-value">
-                            <b>10</b>
+                            @if(Auth::user()->profile)
+                                <b>{{ Auth::user()->profile->wallet }}</b>
+                            @else
+                                <b>0</b>
+                            @endif
                         </div>
-                        <button class="btn btn-outline-secondary"
-                                data-placement="top"
-                                data-toggle="tooltip"
-                                title="@lang('dictionary.actions.use')">
-                            <i class="fas fa-certificate"></i>
-                        </button>
+                        <span data-toggle="modal"
+                              data-target="#usePointsModal">
+                            <button class="btn btn-outline-secondary user-points-btn"
+                                    data-placement="top"
+                                    data-toggle="tooltip"
+                                    title="@lang('dictionary.actions.use')">
+                                <i class="fas fa-certificate"></i>
+                            </button>
+                        </span>
                     @else
                         <div class="user-points-value">
-                            <b>@lang('dictionary.general.shopping-cart.use-points')</b>
+                            <b>@lang('dictionary.general.shopping-cart.login-use-points')</b>
                         </div>
                     @endif
                 </div>
@@ -92,6 +116,7 @@
                 </button>
                 <form method="post" action="{{ route('invoices.store') }}">
                     @csrf
+                    <input type="hidden" name="shopping_cart" value="{{ $shopping_cart }}">
                     <div class="card billing_address_card">
                         <div class="card-header text-center">
                             @lang('dictionary.invoice.billing_address')
@@ -103,25 +128,42 @@
                             </span>
                         </div>
                         <div class="card-body row">
-                            <div class="col-md-6">
-                                <label class="d-flex">
-                                    <input type="radio"
-                                           name="billing_address_radio"
-                                           value="">
-                                    <div class="w-100 under-radio-input">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit. Accusantium aliquam, dignissimos, harum incidunt molestiae
-                                        natus nisi numquam perferendis
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="d-flex">
-                                    <input type="radio" name="billing_address_radio">
-                                    <textarea rows="2"
-                                              class="form-control"></textarea>
-                                </label>
-                            </div>
+                            @if(isset(Auth::user()->profile->adress) && !empty(trim(Auth::user()->profile->adress)))
+                                <div class="col-md-6">
+                                    <label class="d-flex">
+                                        <input name="billing_address_radio"
+                                               required
+                                               type="radio"
+                                               value="1">
+                                        <div class="w-100 under-radio-input">
+                                            {{ Auth::user()->profile->adress }}
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="d-flex">
+                                        <input name="billing_address_radio"
+                                               required
+                                               type="radio"
+                                               value="2">
+                                        <textarea rows="2"
+                                                  name="billing_address_textarea"
+                                                  class="form-control"></textarea>
+                                    </label>
+                                </div>
+                            @else
+                                <div class="col-md-12">
+                                    <label class="d-flex">
+                                        <input name="billing_address_radio"
+                                               required
+                                               type="radio"
+                                               value="2">
+                                        <textarea rows="2"
+                                                  name="billing_address_textarea"
+                                                  class="form-control"></textarea>
+                                    </label>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="card delivery_address_card">
@@ -135,25 +177,42 @@
                             </span>
                         </div>
                         <div class="card-body row">
-                            <div class="col-md-6">
-                                <label class="d-flex">
-                                    <input type="radio"
-                                           name="delivery_address_radio"
-                                           value="">
-                                    <div class="w-100 under-radio-input">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit. Accusantium aliquam, dignissimos, harum incidunt molestiae
-                                        natus nisi numquam perferendis
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="d-flex">
-                                    <input type="radio" name="delivery_address_radio">
-                                    <textarea rows="2"
-                                              class="form-control"></textarea>
-                                </label>
-                            </div>
+                            @if(isset(Auth::user()->profile->adress) && !empty(trim(Auth::user()->profile->adress)))
+                                <div class="col-md-6">
+                                    <label class="d-flex">
+                                        <input name="delivery_address_radio"
+                                               required
+                                               type="radio"
+                                               value="1">
+                                        <div class="w-100 under-radio-input">
+                                            {{ Auth::user()->profile->adress }}
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="d-flex">
+                                        <input name="delivery_address_radio"
+                                               required
+                                               type="radio"
+                                               value="2">
+                                        <textarea rows="2"
+                                                  name="delivery_address_textarea"
+                                                  class="form-control"></textarea>
+                                    </label>
+                                </div>
+                            @else
+                                <div class="col-md-12">
+                                    <label class="d-flex">
+                                        <input name="delivery_address_radio"
+                                               required
+                                               type="radio"
+                                               value="2">
+                                        <textarea rows="2"
+                                                  name="delivery_address_textarea"
+                                                  class="form-control"></textarea>
+                                    </label>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="card payment_method_card">
@@ -169,9 +228,10 @@
                         <div class="card-body row">
                             <div class="col-md-6">
                                 <label class="d-flex">
-                                    <input type="radio"
-                                           name="payment_method_radio"
-                                           value="">
+                                    <input name="payment_method_radio"
+                                           required
+                                           type="radio"
+                                           value="1">
                                     <div class="w-100 under-radio-input">
                                         Ramburs
                                     </div>
@@ -179,7 +239,11 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="d-flex">
-                                    <input type="radio" name="payment_method_radio" disabled>
+                                    <input disabled
+                                           name="payment_method_radio"
+                                           required
+                                           type="radio"
+                                           value="2">
                                     <div class="w-100 under-radio-input">
                                         Card (PayU)
                                     </div>
@@ -198,10 +262,9 @@
                             </span>
                         </div>
                         <div class="card-body">
+                            <input type="hidden" name="user_used_points" value="false">
                             <div class="col-md-12 p-4">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid cum dolorem
-                                earum inventore molestiae nesciunt placeat quidem. Cumque dolor eligendi molestiae
-                                nostrum pariatur quas ratione sapiente soluta tenetur unde?
+
                             </div>
                             <div class="col-md-12">
                                 <input class="btn btn-success btn-block" type="submit">
@@ -211,5 +274,37 @@
                 </form>
             </div>
         @endif
+    </div>
+    <div aria-hidden="true"
+         aria-labelledby="usePointsModalLabel"
+         class="modal fade"
+         id="usePointsModal"
+         role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="usePointsModalLabel">
+                        @lang('dictionary.book.actions.delete')
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal">
+                        @lang('dictionary.actions.cancel')
+                    </button>
+                    <button type="button" class="btn btn-success" id="confirmUsePoints">
+                        @lang('dictionary.actions.use')
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

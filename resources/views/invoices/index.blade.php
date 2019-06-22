@@ -16,7 +16,7 @@
             @lang('dictionary.user.name')
         </div>
         <div class="form-control invoice-input">
-
+            {{ $invoice->user->first_name.' '.$invoice->user->last_name }}
         </div>
     </div>
     <div class="col-md-12 invoice-div">
@@ -24,7 +24,7 @@
             @lang('dictionary.invoice.billing_address')
         </div>
         <div class="form-control invoice-input">
-
+            {{ $invoice->billing_address }}
         </div>
     </div>
     <div class="col-md-12 invoice-div">
@@ -32,54 +32,83 @@
             @lang('dictionary.invoice.delivery_address')
         </div>
         <div class="form-control invoice-input">
-
+            {{ $invoice->delivery_address }}
         </div>
     </div>
     <div class="col-md-12 card border-0 invoice-div invoice-products-panel">
-        <div class="card-header">Produse</div>
+        <div class="card-header">@lang('dictionary.invoice.products')</div>
         <div class="products-table card-body">
-            @for($i=1;$i<=10;$i++)
+            @foreach($invoice->buys as $buy)
                 <div class="products-table-row">
                     <div class="product-name">
-                        nume carte
+                        {{ $buy->book->title }}
                     </div>
                     <div class="product-img">
-                        <img src="{{ asset("images/helpers")."/MissingBookCover.jpg" }}">
+                        @if(isset($buy->book->photo))
+                            <img class=""
+                                 src="{{ secure_asset("images/books-covers")."/".$buy->book->photo }}">
+                        @else
+                            <img class=""
+                                 src="{{ secure_asset("images/helpers")."/MissingBookCover.jpg" }}">
+                        @endif
                     </div>
                     <div class="product-quantity">
-                        4
+                        {{ $buy->quantity }}
                     </div>
                     <div class="product-price">
-                        2356
+                        {{ round($buy->quantity * $buy->book->price, 2) }}
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
     <div class="col-md-12 row invoice-div">
         <div class="left-panel col-md-4">
             <div class="p-3 col-md-12 row">
-                <div class="col-md-6">Data</div>
-                <div class="col-md-6">26/02/2019</div>
+                <div class="col-md-6">@lang('dictionary.invoice.date')</div>
+                <div class="col-md-6">{{ $invoice->date }}</div>
             </div>
             <div class="p-3 col-md-12 row">
-                <button class="btn btn-warning btn-block"
-                        data-placement="right"
-                        data-toggle="tooltip"
-                        title="@lang('dictionary.invoice.cancel_order_possible')">
-                    anuleaza comanda
+                <span data-placement="right"
+                      data-toggle="tooltip"
+                      @if(intval((new \DateTime($invoice->date))->diff(new \DateTime())->format('%h')) < 48)
+                      title="@lang('dictionary.invoice.cancel_order_possible',
+                      [
+                        'datetime' => (new \DateTime($invoice->date))
+                            ->add(new \DateInterval('PT48H'))
+                            ->format('Y-m-d H:i:s')
+                      ])"
+                      @else
+                      title="@lang('dictionary.invoice.cancel_order_not_possible')"
+                      @endif
+                >
+                    <button class="btn btn-warning btn-block"
+                           {{ (intval((new \DateTime($invoice->date))->diff(new \DateTime())->format('%h')) < 48)
+                            ? ''
+                            : 'disabled' }}
+                    >
+                    @lang('dictionary.invoice.cancel-order')
                 </button>
+                </span>
+                <span class="ml-2">
+                    <button class="btn btn-secondary export-PDF" invoice-id="{{ $invoice->invoice_id }}">Export PDF</button>
+                </span>
+
             </div>
         </div>
         <div class="col-md-3"></div>
         <div class="right-panel col-md-5">
             <div class="p-3 col-md-12 row">
-                <div class="col-md-6">puncte</div>
-                <div class="col-md-6">456</div>
+                <div class="col-md-6">@lang('dictionary.profile.fidelity-points')</div>
+                <div class="col-md-6">
+                    {{ ($invoice->withPoints == true) ? intval(ceil($invoice->total)) : 0 }}
+                </div>
             </div>
             <div class="p-3 col-md-12 row">
-                <div class="col-md-6">total</div>
-                <div class="col-md-6">78995</div>
+                <div class="col-md-6">@lang('dictionary.invoice.total_payment')</div>
+                <div class="col-md-6">
+                    {{ ($invoice->withPoints == true) ? 0 : $invoice->total }}
+                </div>
             </div>
         </div>
     </div>

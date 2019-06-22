@@ -2,15 +2,32 @@
 
 @section('shop-scripts')
     <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" defer></script>
+    <script type="text/javascript"
+            src="{{ secure_asset('libs/jquery.session.js') }}" defer></script>
+    <script type="text/javascript"
             src="{{ secure_asset('js/general/shop-products.js') }}" defer></script>
 @endsection
 
 @section('shop-styles')
     <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <link rel="stylesheet" type="text/css"
           href="{{ secure_asset('css/general/shop-products.css') }}">
 @endsection
 
 @section('scontent')
+    @if( session('success') )
+        <script defer>
+            window.onload = function () {
+                toastr.success('{{ session('success') }}');
+                $.session.clear();
+                $(".shopping-cart-products-nr").text(0);
+            };
+        </script>
+    @endif
     <div class="col-md-2 card p-0">
         <form method="post" action="{{ route('shop.filters') }}">
             @csrf
@@ -113,7 +130,9 @@
                             ->appends(['price_filters_panel' => $price_filters, 'category_filters_panel' => $category_filters])
                             ->links() }}
                         @else
-                            {{ $books->links() }}
+                            @if($books->links())
+                                {{ $books->links() }}
+                            @endif
                         @endif
                     </div>
                 </div>

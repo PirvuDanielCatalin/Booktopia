@@ -100,7 +100,7 @@
                             <div class="row col-md-4">
                                 <form class="row" action="{{ route('contact-email') }}" method="post">
                                     @csrf
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mt-2">
                                         <label for="subject">@lang('dictionary.general.footer.subject')</label>
                                         <input class="form-control"
                                                name="subject"
@@ -108,7 +108,7 @@
                                                required
                                                type="text">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mt-2">
                                         <label for="email">@lang('dictionary.general.footer.email')</label>
                                         <input class="form-control"
                                                name="email"

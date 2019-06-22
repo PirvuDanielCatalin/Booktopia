@@ -13,9 +13,10 @@ $(function () {
     });
 
     $(".search-bar-div button").on("click", function () {
-        console.log(Object.keys(sessionStorage));
-        ////
-        alert("Search functional la schimbarea textului");
+        $search_string = $(this).closest('.search-bar-div').find('input').val().trim();
+        if ($search_string !== '') {
+            window.location = '/shop/search?search=' + escape($search_string);
+        }
     });
 
     $("#find-the-nearest-shop-btn").on("click", function () {

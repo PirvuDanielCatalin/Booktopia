@@ -45,16 +45,12 @@
                                 <i class="fas fa-3x fa-tasks"></i><br>
                                 @lang('dictionary.control-panel.requirements')
                             </a>
-                            @if(Auth::user()->isAdmin())
-                                <a class="card panel" href="{{ route('offers.index') }}">
-                                    <i class="fas fa-3x fa-comments-dollar"></i><br>
-                                    @lang('dictionary.control-panel.offers')
-                                </a>
-                                <a class="card panel" href="{{ route('invoices.index') }}">
-                                    <i class="fas fa-3x fa-file-invoice"></i><br>
-                                    @lang('dictionary.control-panel.invoices')
-                                </a>
-                            @endif
+{{--                            @if(Auth::user()->isAdmin())--}}
+{{--                                <a class="card panel" href="{{ route('offers.index') }}">--}}
+{{--                                    <i class="fas fa-3x fa-comments-dollar"></i><br>--}}
+{{--                                    @lang('dictionary.control-panel.offers')--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
                         @else
                             <h1 class="text-center">
                                 <br>
