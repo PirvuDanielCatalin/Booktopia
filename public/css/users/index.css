@@ -26,3 +26,14 @@ th, td {
     width: 100%;
     height: 100%;
 }
+
+@media screen and (max-width: 400px) {
+    .card .card-body {
+        display: unset;
+    }
+
+    .big-view, .small-view {
+        border-left: unset;
+        width: 100%;
+    }
+}

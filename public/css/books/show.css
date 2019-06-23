@@ -78,3 +78,28 @@
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 400px) {
+    .give-me-a-sample-btn, .add-to-wishlist-btn {
+        width: 100%;
+        margin: unset !important;
+        margin-bottom: 10px !important;
+    }
+
+    .book-info {
+        text-align: center;
+    }
+
+    .carousel-slide-item {
+        width: unset;
+    }
+
+    .comment-div .comment-text {
+        width: 70%;
+        margin: unset;
+    }
+
+    .comment-div .comment-approvals, .comment-div .comment-cmd-panel {
+        width: unset;
+    }
+}

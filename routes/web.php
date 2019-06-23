@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -10,12 +11,16 @@ Route::get('/notAdmin', function () {
 Route::get('/home', function () {
     return redirect()->route('shop');
 });
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
 
 // Shop
 Route::get('/', 'ShopController@index')->name('shop');
 Route::post('shop/filters', 'ShopController@filters')->name('shop.filters');
 Route::get('shop/filters', 'ShopController@filters')->name('shop.filters');
-Route::get('shop/search','ShopController@search')->name('shop.search');
+Route::get('shop/search', 'ShopController@search')->name('shop.search');
 Route::post('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
 Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
 

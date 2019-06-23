@@ -71,3 +71,10 @@ form input[type=radio] {
     width: 50px;
     height: 30px;
 }
+
+@media screen and (max-width: 400px) {
+    .products-total-price-checkout-btn {
+        margin: unset;
+        width: unset;
+    }
+}

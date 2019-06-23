@@ -46,7 +46,7 @@
                         @yield('scontent')
                         <div class="d-none form-surprise"></div>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer shop-footer">
                         <div class="row">
                             <div class="col-md-4 row">
                                 <div class="col-md-12 footer-info-div">

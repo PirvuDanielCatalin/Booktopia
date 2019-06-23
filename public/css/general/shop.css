@@ -22,6 +22,10 @@
     margin-right: 0;
 }
 
+.shop-footer .col-md-4 {
+    margin: auto;
+}
+
 .leaflet-map-div {
     margin: 0 20px;
 }
@@ -32,4 +36,19 @@
 
 .footer-info-div {
     padding: 6px;
+}
+
+@media screen and (max-width: 400px) {
+    .search-bar-div {
+        margin-left: unset;
+    }
+
+    .search-bar .col-md-8 {
+        margin-top: 1rem;
+    }
+
+    .pagination-div .float-right {
+        float: unset !important;
+        overflow: hidden;
+    }
 }

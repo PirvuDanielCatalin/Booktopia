@@ -54,15 +54,13 @@
     width: 20%;
 }
 
-.invoice-div:last-child .left-panel {
-
-}
-
-.invoice-div:last-child .right-panel {
-
-}
-
 .invoice-div:last-child .left-panel .col-md-12.row .col-md-6:last-child,
 .invoice-div:last-child .right-panel .col-md-12.row .col-md-6:last-child {
     border-bottom: 1px solid #c7c7c7;
+}
+
+@media screen and (max-width: 400px) {
+    .invoice-div-title {
+        width: 100%;
+    }
 }

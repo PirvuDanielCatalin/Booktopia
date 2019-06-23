@@ -14,3 +14,13 @@ th, td {
     vertical-align: middle !important;
     cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+    #books-datatable_paginate {
+        float: left;
+    }
+
+    #books-datatable_wrapper .col-sm-12 {
+        overflow: auto;
+    }
+}

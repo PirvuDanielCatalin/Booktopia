@@ -123,7 +123,7 @@
     <div class="col-md-10 card flex-row flex-wrap">
         @if(sizeof($books))
             @if(sizeof($books) >= 8)
-                <div class="w-100 pt-3 h-auto">
+                <div class="w-100 pt-3 h-auto pagination-div">
                     <div class="float-right">
                         @if(isset($price_filters) || isset($category_filters))
                             {{ $books

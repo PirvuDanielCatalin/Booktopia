@@ -81,3 +81,9 @@
 .td.thrd-clmn span {
     cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+    .wishlist-div {
+        display: none;
+    }
+}
