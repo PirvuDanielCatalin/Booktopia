@@ -1,0 +1,30 @@
+﻿# HTTP / HTTPS
+# Port Default pt HTTP  = 80
+# Port Default pt HTTPS = 443
+# !!! Atentie la pus comentarii inline pt ca nu functioneaza si da eroare la pornirea Apache !!!
+
+# Booktopia
+<VirtualHost 127.0.0.3:80>
+    DocumentRoot "D:/Proiecte/Booktopia/public"
+    ServerName shop.booktopia
+    # http://shop.booktopia:80/
+
+    <Directory "D:/Proiecte/Booktopia/public">
+        Options All
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+# Proiecte - Acces la întregul folder de proiecte
+<VirtualHost 127.0.0.2:80>
+    DocumentRoot "D:/Proiecte/"
+    ServerName projects.folder
+    # http://projects.folder:80/
+
+    <Directory "D:/Proiecte/">
+        Options All
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
