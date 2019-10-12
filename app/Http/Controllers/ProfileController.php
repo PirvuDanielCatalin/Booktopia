@@ -56,7 +56,10 @@ class ProfileController extends Controller
             $invoices[$buy->invoice_id]['price'] = $price;
         }
 
-        $wishlist = Book::whereRaw('books.book_id in (' . $profile->wishlist . ')')->get();
+        $wishlist = [];
+        if (isset($profile->wishlist))
+            $wishlist = Book::whereRaw('books.book_id in (' . $profile->wishlist . ')')->get();
+
         return view('profiles.show',
             [
                 'profile' => $profile,

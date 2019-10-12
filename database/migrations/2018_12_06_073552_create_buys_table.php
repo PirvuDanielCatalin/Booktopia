@@ -30,6 +30,7 @@ class CreateBuysTable extends Migration
                 ->references('invoice_id')
                 ->on('invoices')
                 ->onDelete('set null');
+            $table->integer('quantity');
         });
     }
 
