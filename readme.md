@@ -1,65 +1,107 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Booktopia
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Mediu Windows
+Pentru rularea proiectului sunt necesare instalate pe masina locala urmatoarele: 
+1. **[XAMPP](https://www.apachefriends.org/ro/download.html)** - Utilizat pt acces usor la utilitare precum Apache, PHP, MariaDB si phpMyAdmin
+2. **[Composer](https://getcomposer.org/download/)** - Manager de dependinte pt PHP
+3. **[Laravel](https://laravel.com/docs/5.8/installation)** - Framework pt PHP
 
-## About Laravel
+## Configurare XAMPP
+1. In fisierul **httpd-xampp.conf**, ce poate fi accesat din dropdown-ul Config corespunzator serverului de Apache aflat in panoul principal, vom insera codul 
+```
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+    # Redirect /xampp folder to https
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{REQUEST_URI} xampp
+    RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    # Redirect /phpMyAdmin folder to https
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{REQUEST_URI} phpmyadmin
+    RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+    # Redirect /security folder to https
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{REQUEST_URI} security
+    RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
 
-## Learning Laravel
+    # Redirect /webalizer folder to https
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{REQUEST_URI} webalizer
+    RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+    # Redirect /folder_name folder to https
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{REQUEST_URI} folder_name
+    RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
+</IfModule>
+```
+Acest cod asigura redirectarea cererilor de tip HTTP catre HTTPS.
+Certificatul se gaseste in folderul **"\xampp\apache\conf\ssl.crt\server.crt"**.
+Cheia se gaseste in folderul **"\xampp\apache\conf\ssl.key\server.key"**.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+2. In fisierul **my.ini** , ce poate fi accesat din dropdown-ul Config corespunzator serverului de MySQL aflat in panoul principal, setam urmatoarele configurari:
+``` max_allowed_packet  = 64M ```
+``` bind-address = "127.0.0.4" ```
 
-## Laravel Sponsors
+3.  In fisierul **config.inc.php**, ce poate fi accesat din dropdown-ul Config corespunzator serverului de Apache aflat in panoul principal, setam urmatoarele configurari:
+- ``` $cfg['Servers'][$i]['auth_type']  =  'cookie'; ```
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+- ``` $cfg['Servers'][$i]['user']  =  'root'; ```
+- ``` $cfg['Servers'][$i]['password']  =  ''; ```
+- ``` $cfg['Servers'][$i]['AllowNoPassword']  =  true; ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
+- ``` $cfg['ForceSSL']  =  true; ```
+- ``` $cfg['Servers'][$i]['host']  =  '127.0.0.4'; ```
 
-## Contributing
+4. Pornim serverele de Apache si MySQL 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Ne conectam la **phpMyAdmin** accesand URL-ul [phpMyAdmin](https://127.0.0.4/phpMyAdmin).
+Mergem pe tabul **User accounts** si modificam parola userului **root** pt toate hosturile.
+Pentru a schimba parola accesam butonul **Edit privileges**, dupa care **Change password**, inseram o parola sau putem genera una (Atentie! Daca se genereaza pt un host atunci vom folosi aceeasi parola generata si pt celelalte hosturi), dupa care salvam prin actiunea butonului **Go**.
 
-## Security Vulnerabilities
+6. Oprim serverele de Apache si MySQL 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7. Dupa ce am setat parola administratorului de baza de date, putem reveni la configurarea phpMyAdmin adica fisierul de la pasul 3 si setam optiunea ``` $cfg['Servers'][$i]['AllowNoPassword']  =  false; ```
 
-## License
+8. Accesam cu drepturi de administrator fisierul **"C:\Windows\System32\drivers\etc\hosts"** si inseram un nou rand, ```127.0.0.3   shop.booktopia      # Booktopia```, ce mapeaza un ip intr-un domeniu
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+9. In interiorul folderului **"\xampp\apache\conf\extra"** cream un fisier **httpd-vhosts.conf** in care vom crea hosturi virtuale:
+```
+# Booktopia
+<VirtualHost 127.0.0.3:80>
+	DocumentRoot "{Directorul in care este descarcat proiectul}/Booktopia/public/"
+	ServerName shop.booktopia
+	# http://shop.booktopia/
+
+	<Directory "{Directorul in care este descarcat proiectul}/Booktopia/public/">
+		Options All
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
+
+# Booktopia
+<VirtualHost 127.0.0.3:443>
+	DocumentRoot "{Directorul in care este descarcat proiectul}/Booktopia/public/"
+	ServerName shop.booktopia
+	# https://shop.booktopia/
+
+	SSLEngine on
+	SSLCertificateFile "conf/ssl.crt/server.crt"
+	SSLCertificateKeyFile "conf/ssl.key/server.key"
+
+	<Directory "{Directorul in care este descarcat proiectul}/Booktopia/public/">
+		Options All
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
+```
+
+10. Pornim serverele de Apache si MySQL 
+
+11. Accesam phpMyAdmin si cream o baza de date numita **booktopia**. 
+
