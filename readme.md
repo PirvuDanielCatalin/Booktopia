@@ -148,4 +148,6 @@ Dependinte                     | vendor/		           | Librarii
 Fisier de configurare globala  | .env                      | Variabile de mediu
 Fisier de declarare dependinte | composer.json             | Declarare librarii noi ce trebuie incluse
 
-#
+## Virtual Box Ova
+Exista si optiunea de a descarca o imagine de Windows in care este totul configurat.
+Pentru asta este necesara instalarea **[VirtualBox](https://www.virtualbox.org/wiki/Downloads)**  si importarea imaginiii **[Windows&Booktopia](http://www.mediafire.com/file/hwifv7j5ei2o3v3/Windows%26Booktopia.ova)**.
