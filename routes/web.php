@@ -16,6 +16,8 @@ Route::get('/clear-cache', function () {
     return "Cache is cleared";
 });
 
+Route::get('/testpoza/{nume}/{nr}', 'ShopController@testPoza')->name('testpoza');
+
 // Shop
 Route::get('/', 'ShopController@index')->name('shop');
 Route::post('shop/filters', 'ShopController@filters')->name('shop.filters');
