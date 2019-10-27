@@ -26,6 +26,7 @@
     padding: 0 10px;
     width: 100%;
 }
+
 .profile-info input:focus {
     outline: none;
 }
@@ -76,6 +77,15 @@
 
 .purchase-history-sliding-panel .tr .thrd-clmn {
     width: 50%;
+}
+
+.thanks-for-purchases {
+    text-align: center;
+}
+
+.thanks-for-purchases img {
+    width: 150px;
+    height: 100px;
 }
 
 .td.thrd-clmn span {

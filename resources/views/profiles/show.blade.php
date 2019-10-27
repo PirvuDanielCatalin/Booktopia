@@ -186,4 +186,15 @@
             </div>
         @endif
     </div>
+    @if(sizeof($invoices) != 0)
+        <div class="col-md-12 card thanks-for-purchases">
+            <div class="my-2 p-2">
+                <button class="btn btn-outline-secondary float-right m-1 thank-you-for-purchases-reload">
+                    @lang('dictionary.profile.return-to-profile') <i class="fas fa-arrow-up"></i>
+                </button>
+                <b>@lang('dictionary.profile.thank-you-for-purchases')</b>
+                <img alt="{{ $Jerry }}" class="" src="{{ $Tom }}" step="{{ session('number') }}">
+            </div>
+        </div>
+    @endif
 @endsection

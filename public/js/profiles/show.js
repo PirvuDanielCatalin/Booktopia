@@ -45,9 +45,25 @@ $(function () {
         $('.purchase-history-sliding-panel').slideToggle();
     });
 
+    if ($('.thanks-for-purchases img').attr('alt') === "1")
+    {
+        $('.thanks-for-purchases img').on('click', function () {
+            alert("Surprise");
+            window.location = '/surprise';
+        })
+    }
+
+    $('.thank-you-for-purchases-reload').on('click', function () {
+        window.location = window.location.href;
+    });
+
     $('.td.thrd-clmn span').on('click', function () {
         $id = $(this).closest('.tr').find('input[type=hidden]').val();
         var win = window.open('/invoices/' + $id, '_blank');
         win.focus();
+    });
+
+    $('.shop-footer').on('hover', function () {
+       alert('dsds');
     });
 });

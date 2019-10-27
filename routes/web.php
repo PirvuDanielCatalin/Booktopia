@@ -8,6 +8,9 @@ Auth::routes();
 Route::get('/notAdmin', function () {
     return view('helpers.NotAdmin');
 });
+Route::get('/surprise', function () {
+    return view('helpers.Surprise');
+});
 Route::get('/home', function () {
     return redirect()->route('shop');
 });
@@ -15,8 +18,10 @@ Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     return "Cache is cleared";
 });
-
-Route::get('/testpoza/{nume}/{nr}', 'ShopController@testPoza')->name('testpoza');
+Route::get('/session-flush', function () {
+    \session()->flush();
+    return "Session is cleared";
+});
 
 // Shop
 Route::get('/', 'ShopController@index')->name('shop');

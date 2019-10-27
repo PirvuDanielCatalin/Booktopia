@@ -6,6 +6,7 @@ use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\CountPeople;
 use App\Http\Middleware\isAdminOrPartner;
 use App\Http\Middleware\isPartner;
+use App\Http\Middleware\thanks;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'isAdmin' => isAdmin::class,
         'isPartner' => isPartner::class,
         'CountPeople' => CountPeople::class,
+        'thanks' => thanks::class,
     ];
 }

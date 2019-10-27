@@ -169,6 +169,8 @@ return [
         'no-invoices' => "You don't have any orders registered!",
         'wallet' => 'Booktopia points',
         'purchase_history' => 'Purchase history',
+        'thank-you-for-purchases' => 'Thank you for your purchases on our website!',
+        'return-to-profile' => 'Return to profile info',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
         'phone' => 'Phone',

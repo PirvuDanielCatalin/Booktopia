@@ -30,4 +30,5 @@ return [
 
     'compiled' => realpath(storage_path('framework/views')),
 
+    'number' => 11,
 ];
