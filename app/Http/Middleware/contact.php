@@ -15,7 +15,7 @@ class contact
      */
     public function handle($request, Closure $next)
     {
-        if(!(preg_match('/^https:\/\/shop\.booktopia\/profiles\/([1-9][0-9]*)$/', session('_previous')['url']) && (session('number') == 0) && session('thanks')))
+        if(!(preg_match('/^https?:\/\/(shop\.booktopia|shop-booktopia.herokuapp.com)\/profiles\/([1-9][0-9]*)$/', session('_previous')['url']) && (session('number') == 0) && session('thanks')))
             abort(404);
         return $next($request);
     }
