@@ -8,9 +8,7 @@ Auth::routes();
 Route::get('/notAdmin', function () {
     return view('helpers.NotAdmin');
 });
-Route::get('/surprise', function () {
-    return view('helpers.Surprise');
-});
+
 Route::get('/home', function () {
     return redirect()->route('shop');
 });
@@ -30,7 +28,7 @@ Route::get('shop/filters', 'ShopController@filters')->name('shop.filters');
 Route::get('shop/search', 'ShopController@search')->name('shop.search');
 Route::post('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
 Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
-
+Route::get('contact', 'ShopController@contact')->name('contact');
 Route::get('control-panel', 'ShopController@control_panel')->name('control-panel');
 Route::post('contact-email', 'ShopController@contactemail')->name('contact-email');
 Route::get('large-map', 'ShopController@show_large_map')->name('large-map');

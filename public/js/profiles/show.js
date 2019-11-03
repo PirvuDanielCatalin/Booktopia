@@ -48,8 +48,7 @@ $(function () {
     if ($('.thanks-for-purchases img').attr('alt') === "1")
     {
         $('.thanks-for-purchases img').on('click', function () {
-            alert("Surprise");
-            window.location = '/surprise';
+            window.location = '/contact';
         })
     }
 
@@ -61,9 +60,5 @@ $(function () {
         $id = $(this).closest('.tr').find('input[type=hidden]').val();
         var win = window.open('/invoices/' + $id, '_blank');
         win.focus();
-    });
-
-    $('.shop-footer').on('hover', function () {
-       alert('dsds');
     });
 });

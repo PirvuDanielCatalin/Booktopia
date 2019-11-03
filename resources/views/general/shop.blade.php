@@ -52,6 +52,7 @@
                                 <div class="col-md-12 footer-info-div">
                                     <h5 class="d-inline">
                                         <b>@lang('dictionary.general.footer.program')</b>
+                                        <input type="checkbox" class="d-none" {{ (isset($alt) && $alt == 1) ? 'checked' : '' }} >
                                     </h5>
                                 </div>
                                 <div class="col-md-12 footer-info-div">

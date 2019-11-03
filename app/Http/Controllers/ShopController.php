@@ -13,13 +13,19 @@ class ShopController extends Controller
     {
         $this->middleware('auth')->only('control_panel');
         $this->middleware('isAdminOrPartner')->only('control-panel');
+        $this->middleware('contact')->only('contact');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $books = Book::where('inShop', '1')->inRandomOrder()->paginate(10);
         $categories = Category::all();
-        return view('general.shop-products', ['books' => $books, 'categories' => $categories]);
+        return view('general.shop-products',
+            [
+                'books' => $books,
+                'categories' => $categories,
+                'alt' => $request->alt
+            ]);
     }
 
     public function filters(Request $request)
@@ -117,6 +123,11 @@ class ShopController extends Controller
                 'shopping_cart' => $session_shop,
                 'errors' => $session_errors,
             ]);
+    }
+
+    public function contact(Request $request)
+    {
+        return view('helpers.Surprise');
     }
 
     public function contactemail(Request $request)

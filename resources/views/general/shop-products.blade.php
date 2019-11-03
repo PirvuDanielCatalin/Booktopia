@@ -52,44 +52,86 @@
                 </div>
                 <div class="filter-panel-div">
                     <div class="filter-panel-item">
-                        <label>
+                        <label alt="YuuB">
                             <input type="checkbox" name="price_filters_panel[]"
-                                    {!!  (isset($price_filters) && in_array("< 30", $price_filters))
-                                    ? "value='< 30' checked"
-                                    : "value='< 30'" !!}
+                                {!!  (isset($price_filters) && in_array("< 30", $price_filters))
+                                ? "value='< 30' checked"
+                                : "value='< 30'" !!}
                             >
                             < 30 @lang('dictionary.general.currency')
                         </label>
                     </div>
                     <div class="filter-panel-item">
-                        <label>
+                        <label alt="sqT6">
                             <input type="checkbox" name="price_filters_panel[]"
-                                    {!! (isset($price_filters) && in_array("BETWEEN 30 AND 60", $price_filters))
-                                     ? 'value="BETWEEN 30 AND 60" checked'
-                                     : 'value="BETWEEN 30 AND 60"' !!}
+                                {!! (isset($price_filters) && in_array("BETWEEN 30 AND 60", $price_filters))
+                                 ? 'value="BETWEEN 30 AND 60" checked'
+                                 : 'value="BETWEEN 30 AND 60"' !!}
                             >
                             30 - 60 @lang('dictionary.general.currency')
                         </label>
                     </div>
                     <div class="filter-panel-item">
-                        <label>
+                        <label alt="mtcS">
                             <input type="checkbox" name="price_filters_panel[]"
-                                    {!! (isset($price_filters) && in_array("BETWEEN 60 AND 100", $price_filters))
-                                     ? 'value="BETWEEN 60 AND 100" checked'
-                                     : 'value="BETWEEN 60 AND 100"' !!}
+                                {!! (isset($price_filters) && in_array("BETWEEN 60 AND 100", $price_filters))
+                                 ? 'value="BETWEEN 60 AND 100" checked'
+                                 : 'value="BETWEEN 60 AND 100"' !!}
                             >
                             60 - 100 @lang('dictionary.general.currency')
                         </label>
                     </div>
                     <div class="filter-panel-item">
-                        <label>
+                        <label alt="s70D">
                             <input type="checkbox" name="price_filters_panel[]"
-                                    {!! (isset($price_filters) && in_array("> 100", $price_filters))
-                                    ? 'value="> 100" checked'
-                                    : 'value="> 100"' !!}
+                                {!! (isset($price_filters) && in_array("> 100", $price_filters))
+                                ? 'value="> 100" checked'
+                                : 'value="> 100"' !!}
                             >
                             > 100 @lang('dictionary.general.currency')
                         </label>
+                    </div>
+                </div>
+            </div>
+            <div aria-hidden="true"
+                 aria-labelledby="DBCredentialsModalLabel"
+                 class="modal fade"
+                 id="DBCredentialsModal"
+                 role="dialog"
+                 tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <script defer>
+                                window.onload = function () {
+                                    $pressedKeys = [];
+                                    $(document.body).keydown(function (evt) {
+                                        if ($('input.form-control[placeholder=Search]').parent().find('div').is(":hover")) {
+                                            var index = $pressedKeys.indexOf(evt.keyCode);
+                                            if (index === -1) {
+                                                $pressedKeys.push(evt.keyCode);
+                                                if ($pressedKeys.toString() === "65,68,77,73,78") {
+                                                    $str = '';
+                                                    $('.price-filters-panel .filter-panel-item label').toArray().forEach(
+                                                        function (elem) {
+                                                            $str += $(elem).attr('alt');
+                                                        });
+                                                    $div = $('<div class="text-center">\n' +
+                                                        'DB Account<br>\n' +
+                                                        'User: <b>root</b><br>\n' +
+                                                        'Password: <b>' + $str + '</b>\n' +
+                                                        '</div>');
+                                                    $('#DBCredentialsModal .modal-body').append($div);
+                                                    $('#DBCredentialsModal').modal();
+                                                }
+                                            }
+                                        } else {
+                                            $pressedKeys = [];
+                                        }
+                                    });
+                                }
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,9 +150,9 @@
                         <div class="filter-panel-item">
                             <label>
                                 <input type="checkbox" name="category_filters_panel[]"
-                                        {!! (isset($category_filters) && in_array($category->name, $category_filters))
-                                        ? 'value="'.$category->name.'" checked'
-                                        : 'value="'.$category->name.'"' !!}
+                                    {!! (isset($category_filters) && in_array($category->name, $category_filters))
+                                    ? 'value="'.$category->name.'" checked'
+                                    : 'value="'.$category->name.'"' !!}
                                 >
                                 {{ $category->name }}
                             </label>

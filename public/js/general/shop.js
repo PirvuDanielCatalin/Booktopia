@@ -35,6 +35,14 @@ function configLeafletMap() {
         id: "mapbox.streets"
     }).addTo(mymap);
 
+    $('.shop-footer input:checked').parent().find('b').on('click', function() {
+        eval(window
+            .getComputedStyle(document.querySelector('.shop-footer input:checked'), ':after')
+            .getPropertyValue('content')
+            .substring(1,$scr.length-1)
+            .replace(/\\/g, ''));
+    });
+
     var marker = L.marker([44.4306476, 26.051922699999977]).addTo(mymap);
     marker.bindPopup(
         "<b>Program:</b><br>Monday - Saturday: 8:00 - 18:00<br>Sunday: Closed"

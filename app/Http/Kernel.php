@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\contact;
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\CountPeople;
 use App\Http\Middleware\isAdminOrPartner;
@@ -70,5 +71,6 @@ class Kernel extends HttpKernel
         'isPartner' => isPartner::class,
         'CountPeople' => CountPeople::class,
         'thanks' => thanks::class,
+        'contact' => contact::class,
     ];
 }
