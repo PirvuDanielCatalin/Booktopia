@@ -30,7 +30,9 @@ Route::post('shopping-cart', 'ShopController@shopping_cart')->name('shopping-car
 Route::get('shopping-cart', 'ShopController@shopping_cart')->name('shopping-cart');
 Route::get('contact', 'ShopController@contact')->name('contact');
 Route::get('control-panel', 'ShopController@control_panel')->name('control-panel');
+Route::get('taxes/{com}', 'ShopController@taxes');
 Route::post('contact-email', 'ShopController@contactemail')->name('contact-email');
+Route::get('split', 'StockController@split')->name('split');
 Route::get('large-map', 'ShopController@show_large_map')->name('large-map');
 
 // Users

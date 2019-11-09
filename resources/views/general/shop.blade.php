@@ -5,6 +5,8 @@
             src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" defer></script>
     <script type="text/javascript"
             src="{{ secure_asset('js/general/shop.js') }}" defer></script>
+    <script type="text/javascript"
+            src="{{ secure_asset('js/general/clasa.js') }}" defer></script>
     @yield('shop-scripts')
 @endsection
 
@@ -120,7 +122,7 @@
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label for="text">@lang('dictionary.general.footer.text')</label>
-                                        <textarea class="form-control"
+                                        <textarea class="form-control clasa"
                                                   maxlength="2000"
                                                   minlength="10"
                                                   name="text"
@@ -128,7 +130,7 @@
                                                   rows="6"></textarea>
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <button type="submit" class="btn btn-success btn-block">
+                                        <button type="submit" class="btn btn-success btn-block buton">
                                             <i class="far fa-paper-plane"></i> @lang('dictionary.general.send-email')
                                         </button>
                                     </div>

