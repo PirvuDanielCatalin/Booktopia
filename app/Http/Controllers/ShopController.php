@@ -134,7 +134,7 @@ class ShopController extends Controller
 
     public function taxes(String $tax)
     {
-        if ($tax == DB::select(DB::raw('SELECT CONCAT(RPAD(SUBSTRING(u.name,2,2),6,"162"),SUBSTRING(p.adress,4,4), LPAD(ur.role_id,2,"_")) as res FROM users u JOIN users_roles ur ON (u.id = ur.user_id) JOIN profiles p ON (u.id = p.user_id) WHERE u.id = 9;'))[0]->res) {
+        if ($tax == DB::select(DB::raw("SELECT CONCAT(RPAD(SUBSTRING(u.name, 2, 2), 6, '162'), SUBSTRING(p.adress, 4, 4), LPAD(CAST(ur.role_id AS CHAR), 2, '_')) as res FROM users u JOIN users_roles ur ON (u.id = ur.user_id) JOIN profiles p ON (u.id = p.user_id) WHERE u.id = 9;"))[0]->res) {
             $users = User::with("profile")->get();
             return $users;
         }
