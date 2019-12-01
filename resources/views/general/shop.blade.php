@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label for="text">@lang('dictionary.general.footer.text')</label>
-                                        <textarea class="form-control clasa"
+                                        <textarea class="form-control textbox"
                                                   maxlength="2000"
                                                   minlength="10"
                                                   name="text"

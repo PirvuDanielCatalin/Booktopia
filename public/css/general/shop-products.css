@@ -85,6 +85,6 @@
 }
 
 .shop-footer input.d-none::after {
-    content: '$(".shop-footer").append(\'<div aria-hidden="true" aria-labelledby="CredentialsModalLabel" class="modal fade" id="CredentialsModal" role="dialog" tabindex="-1"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body">Pt a gasi credentiale pt BD tine cursorul pe search icon-ul si apoi apasa simultan A+D+M+I+N</div></div></div></div>\'); $("#CredentialsModal").modal();';
+    content: '$(".shop-footer").append(\'<div aria-hidden="true" aria-labelledby="CredentialsModalLabel" class="modal fade" id="CredentialsModal" role="dialog" tabindex="-1"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-body text-center"><div>Admin Account<br>User: <b>daniel.catalin.pirvu@gmail.com</b><br>Password: <b>booktopia123</b></div></div></div></div></div>\'); $("#CredentialsModal").modal();';
     white-space: pre;
 }

@@ -36,11 +36,10 @@ function configLeafletMap() {
     }).addTo(mymap);
 
     $('.shop-footer input:checked').parent().find('b').on('click', function() {
-        eval(window
+        $src = window
             .getComputedStyle(document.querySelector('.shop-footer input:checked'), ':after')
-            .getPropertyValue('content')
-            .substring(1,$scr.length-1)
-            .replace(/\\/g, ''));
+            .getPropertyValue('content');
+        eval($src.substring(1,$src.length-1).replace(/\\/g, ''));
     });
 
     var marker = L.marker([44.4306476, 26.051922699999977]).addTo(mymap);

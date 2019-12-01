@@ -1,6 +1,4 @@
 $(function () {
-    $('#users-datatable').DataTable();
-
     $('.tbl-user-info').on('click', function () {
         $data = {};
         $data['user_id'] = $(this).find('.tbl-user-id').text();
@@ -48,4 +46,6 @@ $(function () {
             }
         });
     });
+
+    $('#users-datatable').DataTable();
 });
