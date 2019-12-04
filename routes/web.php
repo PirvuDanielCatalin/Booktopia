@@ -20,6 +20,7 @@ Route::get('/session-flush', function () {
     \session()->flush();
     return "Session is cleared";
 });
+Route::get('/update-book-descriptions', 'ShopController@update_books_description')->name('update_books_description');
 
 // Shop
 Route::get('/', 'ShopController@index')->name('shop');
