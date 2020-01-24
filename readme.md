@@ -150,4 +150,4 @@ Fisier de declarare dependinte | composer.json             | Declarare librarii 
 
 ## Virtual Box Ova
 Exista si optiunea de a descarca o imagine de Windows in care este totul configurat.
-Pentru asta este necesara instalarea **[VirtualBox](https://www.virtualbox.org/wiki/Downloads)**  si importarea imaginiii **[Windows&Booktopia](http://www.mediafire.com/file/hwifv7j5ei2o3v3/Windows%26Booktopia.ova)**.
+Pentru asta este necesara instalarea **[VirtualBox](https://www.virtualbox.org/wiki/Downloads)**  si importarea imaginiii **[Windows&Booktopia](http://www.mediafire.com/file/tkq2eth6zl16ned/Windows%2526Booktopia.ova/file)**.
